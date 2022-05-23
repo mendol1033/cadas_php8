@@ -23,7 +23,7 @@ class LoginModel extends Model
 	public function __construct()
 	{
 		$this->session = \Config\Services::session();
-		$this->db = \Config\Database::connect();
+		$this->db = \Config\Database::connect('default');
 		$this->cadas = \Config\Database::connect('cadas');
 	}
 
