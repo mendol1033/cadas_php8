@@ -262,7 +262,7 @@ class DokumenModel extends Model
 	public function getDataSptnp($tahun)
 	{
 		$builder = $this->dbpib->table('PIB_SPTNP');
-		$builder->select('SUM(TOTAL_BAYAR) AS PENERIMAAN');
+		$builder->select('SUM(PIB_SPTNP.TOTAL_BAYAR) AS PENERIMAAN');
 		$builder->join('PIB_HEADER', 'PIB_SPTNP.NO_AJU = PIB_HEADER.NO_AJU');
 		$builder->where('KODE_STATUS <>', '8');
 		$builder->where('TGL_LUNAS <>', null);
