@@ -753,7 +753,7 @@ class DokumenModel extends Model
 			2 => ['name' => 'M', 'y' => 0, 'colorIndex' => '#eb4242']
 		];
 
-		foreach ($low as $key => $value) {
+		foreach ($ibt as $key => $value) {
 			switch ($value['STATUS_JALUR']) {
 				case 'HH':
 				$ibtJalur[0]['y'] += (int)$value['JMLH_DOK'];
@@ -1221,6 +1221,7 @@ class DokumenModel extends Model
 		$builder->limit(10);
 
 		$query = $builder->get()->getResultArray();
+		$data =[];
 
 		foreach ($query as $key => $value) {
 			$data[] = [

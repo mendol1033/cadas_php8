@@ -599,6 +599,30 @@ class Dokumen extends BaseController
 				$pesan = 'test';
 				if ($type === 'header'){
 					for ($i = 1; $i < $lastRow; $i++){
+						if ($dataArray[$i][1] == null) {
+							$dataArray[$i][1] = $dataArray[$i-1][1];
+						}
+						if ($dataArray[$i][17] == null) {
+							$dataArray[$i][17] = 0;
+						}
+						if ($dataArray[$i][18] == null) {
+							$dataArray[$i][18] = 0;
+						}
+						if ($dataArray[$i][35] == null) {
+							$dataArray[$i][35] = 0;
+						}
+						if ($dataArray[$i][36] == null) {
+							$dataArray[$i][36] = 0;
+						}
+						if ($dataArray[$i][37] == null) {
+							$dataArray[$i][37] = 0;
+						}
+						if ($dataArray[$i][38] == null) {
+							$dataArray[$i][38] = 0;
+						}
+						if ($dataArray[$i][39] == null) {
+							$dataArray[$i][39] = 0;
+						}
 						if (array_key_exists($dataArray[$i][4], $sign)){
 							$data[$i] = [
 								'NO_AJU'          => $dataArray[$i][0],
@@ -654,7 +678,7 @@ class Dokumen extends BaseController
 								'PPNBMBY'         => floatval(str_replace(',', '', $dataArray[$i][46])),
 								'PPNBMBBS'        => floatval(str_replace(',', '', $dataArray[$i][47])),
 								'TOTAL_BM'		  => floatval(str_replace(',', '', $dataArray[$i][40])),
-								'TOTAL_BAYAR' 	  => floatval(str_replace(',', '', $dataArray[$i][50]))+floatval(str_replace(',', '', $dataArray[$i][51]))+floatval(str_replace(',', '', $dataArray[$i][52]))+floatval(str_replace(',', '', $dataArray[$i][43]))+floatval(str_replace(',', '', $dataArray[$i][44]))+floatval(str_replace(',', '', $dataArray[$i][46])),
+								'TOTAL_BAYAR' 	  => floatval(str_replace(',', '', $dataArray[$i][51]))+floatval(str_replace(',', '', $dataArray[$i][52]))+floatval(str_replace(',', '', $dataArray[$i][53]))+floatval(str_replace(',', '', $dataArray[$i][43]))+floatval(str_replace(',', '', $dataArray[$i][44]))+floatval(str_replace(',', '', $dataArray[$i][46])),
 								'NILAI_PABEAN'	  => floatval(str_replace(',', '', $dataArray[$i][56])),
 								'TAXBASE'         => floatval(str_replace(',', '', $dataArray[$i][48])),
 								'FL_AUDIT'        => $dataArray[$i][49],
@@ -765,7 +789,85 @@ class Dokumen extends BaseController
 					}
 				}
 				elseif ($type === 'sptnp'){
+
+					$columnName = $dataArray[1];
+
+					foreach ($columnName as $key=>$value) {
+						switch ($value) {
+							case "BMADBY":
+								$BMADBY = $key;
+								break;
+
+							case "BMBY":
+								$BMBY = $key;
+								break;
+
+							case "BMTPBY":
+								$BMTPBY = $key;
+								break;
+
+							case "BMTPSBY":
+								$BMTPSBY = $key;
+								break;
+
+							case "BUNGA":
+								$BUNGA = $key;
+								break;
+
+							case "DENDA":
+								$DENDA = $key;
+								break;
+
+							case "PPHBY":
+								$PPHBY = $key;
+								break;
+							
+							case "PPNBY":
+								$PPNBY = $key;
+								break;
+
+							case "PPNBMBY":
+								$PPNBMBY = $key;
+								break;
+
+							case "BMPBY":
+								$BMPBY = $key;
+								break;	
+
+							default:
+								// code...
+								break;
+						}
+					}
+
 					for ($i = 2; $i < $lastRow; $i++){
+						if ($dataArray[$i][14] == null) {
+							$dataArray[$i][14] = 0;
+						}
+						if ($dataArray[$i][15] == null) {
+							$dataArray[$i][15] = 0;
+						}
+						if ($dataArray[$i][16] == null) {
+							$dataArray[$i][16] = 0;
+						}
+						if ($dataArray[$i][17] == null) {
+							$dataArray[$i][17] = 0;
+						}
+						if ($dataArray[$i][18] == null) {
+							$dataArray[$i][18] = 0;
+						}
+						if ($dataArray[$i][19] == null) {
+							$dataArray[$i][19] = 0;
+						}
+						if ($dataArray[$i][20] == null) {
+							$dataArray[$i][20] = 0;
+						}
+						if ($dataArray[$i][21] == null) {
+							$dataArray[$i][21] = 0;
+						}
+						if ($dataArray[$i][22] == null) {
+							$dataArray[$i][22] = 0;
+						}
 						$data[] = [
 							'TGL_SPTNP'     => date('Y-m-d', strtotime($dataArray[$i][0])),
 							'NO_SPTNP'      => $dataArray[$i][1],
@@ -781,7 +883,7 @@ class Dokumen extends BaseController
 							'TGL_LUNAS'     => date('Y-m-d', strtotime($dataArray[$i][11])),
 							'KODE_STATUS'  	=> $dataArray[$i][12],
 							'URAIAN_STATUS'	=> $dataArray[$i][13],
-							'BMADBY'    		=> floatval(str_replace(',', '', $dataArray[$i][14])),
+							'BMADBY'    	=> floatval(str_replace(',', '', $dataArray[$i][14])),
 							'BMBY'  		=> floatval(str_replace(',', '', $dataArray[$i][15])),
 							'BMTPBY'		=> floatval(str_replace(',', '', $dataArray[$i][16])),
 							'BMTPSBY'		=> floatval(str_replace(',', '', $dataArray[$i][17])),
