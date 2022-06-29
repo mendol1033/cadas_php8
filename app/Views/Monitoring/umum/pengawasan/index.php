@@ -832,147 +832,147 @@
 			});
 	});
 
-function hidden (a){
-	if (a == "pelaksana") {
-		$("#tambah").removeClass('sr-only');
-	} else {
-		if (a != "admin") {
-			$("#tambah").addClass('sr-only');
-		} else {
+	function hidden (a){
+		if (a == "pelaksana") {
 			$("#tambah").removeClass('sr-only');
-		}
+		} else {
+			if (a != "admin") {
+				$("#tambah").addClass('sr-only');
+			} else {
+				$("#tambah").removeClass('sr-only');
+			}
 
+		}
 	}
-}
 
-$("#idPerusahaan").on("select2:selecting", function(e) {
-	console.log(e);
-	daftarAkses(e.params.args.data.id);
-});
+	$("#idPerusahaan").on("select2:selecting", function(e) {
+		console.log(e);
+		daftarAkses(e.params.args.data.id);
+	});
 
-function daftarAkses(id){
-	var linkEseal;
-	var userEseal;
-	var passEseal;
-	$("#akses").addClass('sr-only');
-	$("[name='alamat']").val("");
-	$("#linkCctv").removeAttr('href');
-	$("#linkIt").removeAttr('href');
-	$("#linkEseal").removeAttr('href');
-	$('[name="linkCctv"]').val("");
-	$('[name="linkIt"]').val("");
-	$('[name="linkEseal"]').val("");
-	$(".added").remove();
+	function daftarAkses(id){
+		var linkEseal;
+		var userEseal;
+		var passEseal;
+		$("#akses").addClass('sr-only');
+		$("[name='alamat']").val("");
+		$("#linkCctv").removeAttr('href');
+		$("#linkIt").removeAttr('href');
+		$("#linkEseal").removeAttr('href');
+		$('[name="linkCctv"]').val("");
+		$('[name="linkIt"]').val("");
+		$('[name="linkEseal"]').val("");
+		$(".added").remove();
 
-	$.ajax({
-		url: "Stakeholders/getStakeholdersMonum",
-		type: "GET",
-		dataType: "JSON",
-		data: {ID: id},
-		success: function(data){
-			if (data.cctv) {
-				var x = data.cctv.ALAMAT_AKSES.substring(0,4);
-				if ( x == "http") {
-					linkCctv = data.cctv.ALAMAT_AKSES;
+		$.ajax({
+			url: "Stakeholders/getStakeholdersMonum",
+			type: "GET",
+			dataType: "JSON",
+			data: {ID: id},
+			success: function(data){
+				if (data.cctv) {
+					var x = data.cctv.ALAMAT_AKSES.substring(0,4);
+					if ( x == "http") {
+						linkCctv = data.cctv.ALAMAT_AKSES;
+					} else {
+						linkCctv = "http://"+data.cctv.ALAMAT_AKSES;
+					}
+					userCctv = data.cctv.USERNAME;
+					passCctv = data.cctv.PASSWORD;
 				} else {
-					linkCctv = "http://"+data.cctv.ALAMAT_AKSES;
+					linkCctv = "#";
+					userCctv = "Data Tidak Ditemukan";
+					passCctv = "Data Tidak Ditemukan";
 				}
-				userCctv = data.cctv.USERNAME;
-				passCctv = data.cctv.PASSWORD;
-			} else {
-				linkCctv = "#";
-				userCctv = "Data Tidak Ditemukan";
-				passCctv = "Data Tidak Ditemukan";
-			}
 
-			if (data.it) {
-				var x = data.it.ALAMAT_AKSES.substring(0,4);
-				if ( x == "http") {
-					linkIt = data.it.ALAMAT_AKSES;
+				if (data.it) {
+					var x = data.it.ALAMAT_AKSES.substring(0,4);
+					if ( x == "http") {
+						linkIt = data.it.ALAMAT_AKSES;
+					} else {
+						linkIt = "http://"+data.it.ALAMAT_AKSES;
+					}
+					userIt = data.it.USERNAME;
+					passIt = data.it.PASSWORD;
 				} else {
-					linkIt = "http://"+data.it.ALAMAT_AKSES;
+					linkIt = "#";
+					userIt = "Data Tidak Ditemukan";
+					passIt = "Data Tidak Ditemukan";
 				}
-				userIt = data.it.USERNAME;
-				passIt = data.it.PASSWORD;
-			} else {
-				linkIt = "#";
-				userIt = "Data Tidak Ditemukan";
-				passIt = "Data Tidak Ditemukan";
-			}
 
-			if (data.eseal) {
-				var x = data.eseal.ALAMAT_AKSES.substring(0,4);
-				console.log(x);
-				if ( x == "http") {
-					linkEseal = data.eseal.ALAMAT_AKSES;
+				if (data.eseal) {
+					var x = data.eseal.ALAMAT_AKSES.substring(0,4);
+					console.log(x);
+					if ( x == "http") {
+						linkEseal = data.eseal.ALAMAT_AKSES;
+					} else {
+						linkEseal = "http://"+data.eseal.ALAMAT_AKSES;
+					}
+					userEseal = data.eseal.USERNAME;
+					passEseal = data.eseal.PASSWORD;
 				} else {
-					linkEseal = "http://"+data.eseal.ALAMAT_AKSES;
+					linkEseal = "#";
+					userEseal = "Data Tidak Ditemukan";
+					passEseal = "Data Tidak Ditemukan";
 				}
-				userEseal = data.eseal.USERNAME;
-				passEseal = data.eseal.PASSWORD;
-			} else {
-				linkEseal = "#";
-				userEseal = "Data Tidak Ditemukan";
-				passEseal = "Data Tidak Ditemukan";
+				$("#akses").removeClass('sr-only');
+				$("[name='alamat']").val(data.umum[2].data);
+				$("#linkCctv").attr('href', linkCctv);
+				$("#linkIt").attr('href', linkIt);
+				$("#linkEseal").attr('href', linkEseal);
+				$('[name="linkCctv"]').val(linkCctv);
+				$('[name="linkIt"]').val(linkIt);
+				$('[name="linkEseal"]').val(linkEseal);
+				$("#btnCctv").attr('data-clipboard-text', linkCctv);
+				$("#akses > tbody").append('<tr class="added"><td><strong>Username</strong></td><td class="text-center">'+userCctv+'</td><td class="text-center">'+userIt+'</td><td class="text-center">'+userEseal+'</td></tr>');
+				$("#akses > tbody").append('<tr class="added"><td><strong>Password</strong></td><td class="text-center">'+passCctv+'</td><td class="text-center">'+passIt+'</td><td class="text-center">'+passEseal+'</td></tr>');
 			}
-			$("#akses").removeClass('sr-only');
-			$("[name='alamat']").val(data.umum[2].data);
-			$("#linkCctv").attr('href', linkCctv);
-			$("#linkIt").attr('href', linkIt);
-			$("#linkEseal").attr('href', linkEseal);
-			$('[name="linkCctv"]').val(linkCctv);
-			$('[name="linkIt"]').val(linkIt);
-			$('[name="linkEseal"]').val(linkEseal);
-			$("#btnCctv").attr('data-clipboard-text', linkCctv);
-			$("#akses > tbody").append('<tr class="added"><td><strong>Username</strong></td><td class="text-center">'+userCctv+'</td><td class="text-center">'+userIt+'</td><td class="text-center">'+userEseal+'</td></tr>');
-			$("#akses > tbody").append('<tr class="added"><td><strong>Password</strong></td><td class="text-center">'+passCctv+'</td><td class="text-center">'+passIt+'</td><td class="text-center">'+passEseal+'</td></tr>');
-		}
-	})
-}
-
-function salin(a){
-	var success = true;
-	var range = document.createRange();
-	var selection;
-
-	if (window.clipboardData) {
-		console.log(window.clipboardData, true);
-		window.clipboardData.setData("text",$('[name="'+a+'"]').val());
-	} else {
-		console.log(window, false);
-		var tmpElem = $('<div>');
-		tmpElem.css({
-			position : 'absolute',
-			left: '-1000px',
-			top: '-1000px'
-		});
-		tmpElem.text($('[name="'+a+'"]').val());
-		$('body').append(tmpElem);
-		range.selectNodeContents(tmpElem.get(0));
-		selection = window.getSelection ();
-		selection.removeAllRanges ();
-		selection.addRange (range);
-
-		try {
-			success = document.execCommand("copy",false,null);
-		} catch(e) {
-			copyToClipboardFF($('[name="'+a+'"]').val());
-			console.log(e);
-		}
-
-		if (success) {
-			tmpElem.remove();
-		}
-		console.log(success);
+		})
 	}
-}
 
-$("#rekam").on('click',function(event) {
-	event.preventDefault();
-	/* Act on the event */
-	save_method = "add";
-	var curdate = "<?php echo date('Y-m-d'); ?>";
-	$("#formMonev")[0].reset();
+	function salin(a){
+		var success = true;
+		var range = document.createRange();
+		var selection;
+
+		if (window.clipboardData) {
+			console.log(window.clipboardData, true);
+			window.clipboardData.setData("text",$('[name="'+a+'"]').val());
+		} else {
+			console.log(window, false);
+			var tmpElem = $('<div>');
+			tmpElem.css({
+				position : 'absolute',
+				left: '-1000px',
+				top: '-1000px'
+			});
+			tmpElem.text($('[name="'+a+'"]').val());
+			$('body').append(tmpElem);
+			range.selectNodeContents(tmpElem.get(0));
+			selection = window.getSelection ();
+			selection.removeAllRanges ();
+			selection.addRange (range);
+
+			try {
+				success = document.execCommand("copy",false,null);
+			} catch(e) {
+				copyToClipboardFF($('[name="'+a+'"]').val());
+				console.log(e);
+			}
+
+			if (success) {
+				tmpElem.remove();
+			}
+			console.log(success);
+		}
+	}
+
+	$("#rekam").on('click',function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		save_method = "add";
+		var curdate = "<?php echo date('Y-m-d'); ?>";
+		$("#formMonev")[0].reset();
 	// $("#idPerusahaan").children().remove();
 	$(".modal-title").text('Form Laporan Monitoring Umum Pada Ruang Kendali (MONITORING ROOM)');
 	$("#modalForm").modal("show");
@@ -981,194 +981,233 @@ $("#rekam").on('click',function(event) {
 	$('input[value="N"]').prop('checked', true);
 });
 
-$("#modalForm").on('hidden.bs.modal',function(event) {
-	$("input[type='hidden']").remove();
-	$("#formMonev")[0].reset();
-	$('.select2').val(null).trigger('change');
-	$("#akses").addClass('sr-only');
-	$("[name='alamat']").val("");
-	$("#linkCctv").removeAttr('href');
-	$("#linkIt").removeAttr('href');
-	$("#linkEseal").removeAttr('href');
-	$('[name="linkCctv"]').val("");
-	$('[name="linkIt"]').val("");
-	$('[name="linkEseal"]').val("");
-	$(".added").remove();
-});
+	$("#modalForm").on('hidden.bs.modal',function(event) {
+		$("input[type='hidden']").remove();
+		$("#formMonev")[0].reset();
+		$('.select2').val(null).trigger('change');
+		$("#akses").addClass('sr-only');
+		$("[name='alamat']").val("");
+		$("#linkCctv").removeAttr('href');
+		$("#linkIt").removeAttr('href');
+		$("#linkEseal").removeAttr('href');
+		$('[name="linkCctv"]').val("");
+		$('[name="linkIt"]').val("");
+		$('[name="linkEseal"]').val("");
+		$(".added").remove();
+	});
 
-function selectedValue(a,b){
-	var data = [{id:a,text:b}];
-	var selectedVal = $("#idPerusahaan");
-	var option = new Option(b,a,true,true);
-	selectedVal.append(option).trigger('change');
+	function selectedValue(a,b){
+		var data = [{id:a,text:b}];
+		var selectedVal = $("#idPerusahaan");
+		var option = new Option(b,a,true,true);
+		selectedVal.append(option).trigger('change');
 
-	selectedVal.trigger({
-		type: "select2:select",
-		params: {
-			data: data
-		}
-	})
-}
-
-function edit(id){
-	save_method = "update";
-	$.ajax({
-		url: "Monitoring/ajax_edit_monum",
-		type: "GET",
-		dataType: "JSON",
-		data: {id: id},
-		success: function(d){
-			idEdit = id;
-			selectedValue(d.laporan.id_perusahaan, d.laporan.nama_perusahaan);
-			$('[name="alamat"]').val(d.laporan.alamat);
-			$('[name="tanggal"]').val(d.laporan.tanggalLaporan);
-			$("#modalForm").modal("show");
-			CKEDITOR.instances['kesimpulan'].setData(d.laporan.kesimpulan);
-			$(".modal-title").text('Form Laporan Monitoring Umum Pada Ruang Kendali (MONITORING ROOM)');
-
-			var isi = d.isi;
-			for (var i = 0; i < isi.length; i++) {
-				var textArea = "laporan"+isi[i].item;
-				CKEDITOR.instances[textArea].setData(isi[i].keterangan);
-			}
-
-			$("#statusCCTV_"+d.cctv.STATUS).attr('checked', '');
-			$("#kualitasCCTV_"+d.cctv.KUALITAS).attr('checked', '');
-			$("#lokasiCCTV_"+d.cctv.LOKASI).attr('checked', '');
-			$("#penempatanCCTV_"+d.cctv.PENEMPATAN).attr('checked', '');
-			$("#rekamanCCTV_"+d.cctv.REKAMAN).attr('checked', '');
-
-			$("#statusIT_"+d.it.STATUS).attr('checked', '');
-			$("#keterkaitanIT_"+d.it.KETERKAITAN).attr('checked', '');
-			$("#kewenanganIT_"+d.it.KEWENANGAN).attr('checked', '');
-			$("#laporanIT_"+d.it.LAPORAN).attr('checked', '');
-			$("#riwayatIT_"+d.it.RIWAYAT).attr('checked', '');
-			$("#subsistemIT_"+d.it.SUBSISTEM).attr('checked', '');
-			$("#traceabilityIT_"+d.it.TRACEABILITY).attr('checked', '');
-			$("#dataIT_"+d.it.DATA).attr('checked', '');
-			$("#accessIT_"+d.it.ACCESS).attr('checked', '');
-
-			$("#statusCEISA_"+d.ceisa.RIWAYAT).attr('checked', '');
-
-			$("#statusSEAL_"+d.seal.STATUS).attr('checked', '');
-			$("#riwayatSEAL_"+d.seal.RIWAYAT).attr('checked', '');
-			$("#notifikasiSEAL_"+d.seal.NOTIFIKASI).attr('checked', '');
-
-			$("#penimbunan_"+d.penimbunan.RIWAYAT).attr('checked', '');
-
-			$("#pemasukan_"+d.pemasukan.RIWAYAT).attr('checked', '');
-			daftarAkses(d.laporan.id_perusahaan);
-		}
-	})
-}
-
-function save() {
-	var url;
-	var data;
-	var form = $("#formMonev")[0];
-	data = new FormData(form);
-
-	if (save_method == "add") {
-		url = "Monitoring/ajax_add_monum";
-	}else{
-		url = "Monitoring/ajax_update_monum";
-		data.append('id',idEdit);
-	}
-
-	if ($('#formMonev')[0].checkValidity() === false ) {
-		play = document.getElementById('notification');
-		$("#formMonev").addClass('was-validated');
-		toastr.error('Isi Form Dengan Lengkap dan Benar','Gagal');
-		play.play();
-		delete play;
-	} else {
-		data.append('kesimpulan', CKEDITOR.instances['kesimpulan'].getData());
-		var ckedit = $('.cke');
-		$.each(ckedit, function(index, val) {
-			 /* iterate through array or object */
-			 var idCk = val.id
-			 var el = idCk.slice(4);
-			 if (idCk.slice(4, 8) == 'lapo') {
-				data.append('laporan[]', CKEDITOR.instances[el].getData());
-				// data.append('content[]', CKEDITOR.instances[el].getContents());
-			 }
-		});
-		$.ajax({
-			url: url,
-			type: 'POST',
-			dataType: 'JSON',
-			data: data,
-			contentType : false,
-			cache : false,
-			processData : false,
-			success: function(d){
-				play = document.getElementById('notification');
-				if (d.status == 'success') {
-					toastr.success(d.pesan,'Berhasil');
-				} else {
-					toastr.error(d.pesan,'Gagal');
-				}
-
-				play.play();
-				delete play;
-				$("#modalForm").modal('hide');
-				table.ajax.reload(null, false);
+		selectedVal.trigger({
+			type: "select2:select",
+			params: {
+				data: data
 			}
 		})
-		.done(function(){
-			$("#akses").addClass('sr-only');
-			$("[name='alamat']").val("");
-			$("#linkCctv").removeAttr('href');
-			$("#linkIt").removeAttr('href');
-			$("#linkEseal").removeAttr('href');
-			$('[name="linkCctv"]').val("");
-			$('[name="linkIt"]').val("");
-			$('[name="linkEseal"]').val("");
-			$(".added").remove();
-		})
 	}
-}
 
-function deleteItem(id){
-	if (confirm("data monev akan dihapus?")) {
+	function edit(id){
+		save_method = "update";
 		$.ajax({
-			url: "Monitoring/ajax_delete_monum",
+			url: "Monitoring/ajax_edit_monum",
 			type: "GET",
 			dataType: "JSON",
-			data: {ID: id},
+			data: {id: id},
 			success: function(d){
-				alert(d);
-				table.ajax.reload(null, false);
+				idEdit = id;
+				selectedValue(d.laporan.id_perusahaan, d.laporan.nama_perusahaan);
+				$('[name="alamat"]').val(d.laporan.alamat);
+				$('[name="tanggal"]').val(d.laporan.tanggalLaporan);
+				$("#modalForm").modal("show");
+				CKEDITOR.instances['kesimpulan'].setData(d.laporan.kesimpulan);
+				$(".modal-title").text('Form Laporan Monitoring Umum Pada Ruang Kendali (MONITORING ROOM)');
+
+				var isi = d.isi;
+				for (var i = 0; i < isi.length; i++) {
+					var textArea = "laporan"+isi[i].item;
+					CKEDITOR.instances[textArea].setData(isi[i].keterangan);
+				}
+
+				if (d.cctv != null) {
+					$("#statusCCTV_"+d.cctv.STATUS).attr('checked', '');
+					$("#kualitasCCTV_"+d.cctv.KUALITAS).attr('checked', '');
+					$("#lokasiCCTV_"+d.cctv.LOKASI).attr('checked', '');
+					$("#penempatanCCTV_"+d.cctv.PENEMPATAN).attr('checked', '');
+					$("#rekamanCCTV_"+d.cctv.REKAMAN).attr('checked', '');
+				} else {
+					$("#statusCCTV_N").attr('checked', '');
+					$("#kualitasCCTV_N").attr('checked', '');
+					$("#lokasiCCTV_N").attr('checked', '');
+					$("#penempatanCCTV_N").attr('checked', '');
+					$("#rekamanCCTV_N").attr('checked', '');
+				}
+
+				if (d.it != null) {
+					$("#statusIT_"+d.it.STATUS).attr('checked', '');
+					$("#keterkaitanIT_"+d.it.KETERKAITAN).attr('checked', '');
+					$("#kewenanganIT_"+d.it.KEWENANGAN).attr('checked', '');
+					$("#laporanIT_"+d.it.LAPORAN).attr('checked', '');
+					$("#riwayatIT_"+d.it.RIWAYAT).attr('checked', '');
+					$("#subsistemIT_"+d.it.SUBSISTEM).attr('checked', '');
+					$("#traceabilityIT_"+d.it.TRACEABILITY).attr('checked', '');
+					$("#dataIT_"+d.it.DATA).attr('checked', '');
+					$("#accessIT_"+d.it.ACCESS).attr('checked', '');
+				} else {
+					$("#statusIT_N").attr('checked', '');
+					$("#keterkaitanIT_N").attr('checked', '');
+					$("#kewenanganIT_N").attr('checked', '');
+					$("#laporanIT_N").attr('checked', '');
+					$("#riwayatIT_N").attr('checked', '');
+					$("#subsistemIT_N").attr('checked', '');
+					$("#traceabilityIT_N").attr('checked', '');
+					$("#dataIT_N").attr('checked', '');
+					$("#accessIT_N").attr('checked', '');
+				}
+
+				if (d.ceisa != null) {
+					$("#statusCEISA_"+d.ceisa.RIWAYAT).attr('checked', '');
+				} else {
+					$("#statusCEISA_N").attr('checked', '');
+				}
+				
+				if (d.seal != null) {
+					$("#statusSEAL_"+d.seal.STATUS).attr('checked', '');
+					$("#riwayatSEAL_"+d.seal.RIWAYAT).attr('checked', '');
+					$("#notifikasiSEAL_"+d.seal.NOTIFIKASI).attr('checked', '');
+				} else {
+					$("#statusSEAL_N").attr('checked', '');
+					$("#riwayatSEAL_N").attr('checked', '');
+					$("#notifikasiSEAL_N").attr('checked', '');
+				}
+				
+				if (d.penimbunan != null) {
+					$("#penimbunan_"+d.penimbunan.RIWAYAT).attr('checked', '');
+				} else {
+					$("#penimbunan_N").attr('checked', '');
+				}
+				
+				if (d.pemasukan != null) {
+					$("#pemasukan_"+d.pemasukan.RIWAYAT).attr('checked', '');
+				} else {
+					$("#pemasukan_N").attr('checked', '');
+				}
+				
+				daftarAkses(d.laporan.id_perusahaan);
 			}
 		})
 	}
-}
 
-$("#button02").on('click', function(event) {
-	event.preventDefault();
-	/* Act on the event */
-	$.ajax({
-		url: 'Monitoring/getPerhitungan',
-		type: 'GET',
-		dataType: 'JSON',
-		data: {persetujuan: 'S-638/WBC.09/KPP.MP.07/2020'},
-		success: function(d){
-			console.log(d);
+	function save() {
+		var url;
+		var data;
+		var form = $("#formMonev")[0];
+		data = new FormData(form);
+
+		if (save_method == "add") {
+			url = "Monitoring/ajax_add_monum";
+		}else{
+			url = "Monitoring/ajax_update_monum";
+			data.append('id',idEdit);
 		}
-	})        
-});
 
-function printItem(id){
-	$.ajax({
-		url: "Monitoring/ajax_print_monum",
-		type: "GET",
-		dataType: "JSON",
-		data: {id: id},
-		success: function(data){
-			if (data[0] == 'success') {
-				$("#iframeDoc").removeAttr('src');
-				$("#iframeDoc").attr('src', data[1]);
-				$('.modal-title').text(data[2]);
+		if ($('#formMonev')[0].checkValidity() === false ) {
+			play = document.getElementById('notification');
+			$("#formMonev").addClass('was-validated');
+			toastr.error('Isi Form Dengan Lengkap dan Benar','Gagal');
+			play.play();
+			delete play;
+		} else {
+			data.append('kesimpulan', CKEDITOR.instances['kesimpulan'].getData());
+			var ckedit = $('.cke');
+			$.each(ckedit, function(index, val) {
+				/* iterate through array or object */
+				var idCk = val.id
+				var el = idCk.slice(4);
+				if (idCk.slice(4, 8) == 'lapo') {
+					data.append('laporan[]', CKEDITOR.instances[el].getData());
+				// data.append('content[]', CKEDITOR.instances[el].getContents());
+			}
+		});
+			$.ajax({
+				url: url,
+				type: 'POST',
+				dataType: 'JSON',
+				data: data,
+				contentType : false,
+				cache : false,
+				processData : false,
+				success: function(d){
+					play = document.getElementById('notification');
+					if (d.status == 'success') {
+						toastr.success(d.pesan,'Berhasil');
+					} else {
+						toastr.error(d.pesan,'Gagal');
+					}
+
+					play.play();
+					delete play;
+					$("#modalForm").modal('hide');
+					table.ajax.reload(null, false);
+				}
+			})
+			.done(function(){
+				$("#akses").addClass('sr-only');
+				$("[name='alamat']").val("");
+				$("#linkCctv").removeAttr('href');
+				$("#linkIt").removeAttr('href');
+				$("#linkEseal").removeAttr('href');
+				$('[name="linkCctv"]').val("");
+				$('[name="linkIt"]').val("");
+				$('[name="linkEseal"]').val("");
+				$(".added").remove();
+			})
+		}
+	}
+
+	function deleteItem(id){
+		if (confirm("data monev akan dihapus?")) {
+			$.ajax({
+				url: "Monitoring/ajax_delete_monum",
+				type: "GET",
+				dataType: "JSON",
+				data: {ID: id},
+				success: function(d){
+					alert(d);
+					table.ajax.reload(null, false);
+				}
+			})
+		}
+	}
+
+	$("#button02").on('click', function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		$.ajax({
+			url: 'Monitoring/getPerhitungan',
+			type: 'GET',
+			dataType: 'JSON',
+			data: {persetujuan: 'S-638/WBC.09/KPP.MP.07/2020'},
+			success: function(d){
+				console.log(d);
+			}
+		})        
+	});
+
+	function printItem(id){
+		$.ajax({
+			url: "Monitoring/ajax_print_monum",
+			type: "GET",
+			dataType: "JSON",
+			data: {id: id},
+			success: function(data){
+				if (data[0] == 'success') {
+					$("#iframeDoc").removeAttr('src');
+					$("#iframeDoc").attr('src', data[1]);
+					$('.modal-title').text(data[2]);
 				// $("#btn_close").attr('value',data[1]);
 				$("#modalDoc").modal("show");
 			} else {
@@ -1177,89 +1216,89 @@ function printItem(id){
 			
 		}
 	})
-}
+	}
 
-function validateItem(id){
-	var swalWithBootstrapButtons = Swal.mixin(
-	{
-		customClass:
+	function validateItem(id){
+		var swalWithBootstrapButtons = Swal.mixin(
 		{
-			confirmButton: "btn btn-primary",
-			cancelButton: "btn btn-danger mr-2"
-		},
-		buttonsStyling: false
-	});
-	swalWithBootstrapButtons
-	.fire(
-	{
-		title: "Laporan Monitoring Umum Akan di Validasi?",
-		text: "Anda Tidak Akan Dapat Merubah atau Menghapus Laporan Monitoring Umum Yang Sudah Divalidasi",
-		type: "warning",
-		showCancelButton: true,
-		confirmButtonText: "Ya, Validasi Laporan!",
-		cancelButtonText: "Tidak, Batalkan!",
-		reverseButtons: true
-	})
-	.then(function(result)
-	{
-		if (result.value)
-		{   
-			$.ajax({
-				url: 'Monitoring/ajax_validate_monum',
-				type: 'POST',
-				dataType: 'JSON',
-				data: {ID: id, Flag: 1},
-				success: function(d){
-					if (d[0] == 1) {
-						swalWithBootstrapButtons.fire(
-							"Laporan Berhasil Divalidasi!",
-							"Data Laporan Monitoring Umum Sudah Tervalidasi",
-							"success"
-							);
-						table.ajax.reload(null, false);
-					} else {
-						swalWithBootstrapButtons.fire(
-							"Telah Terjadi Kesalahan!",
-							"Data Laporan Monitoring Umum Gagal Divalidasi <br> Harap Menghubungi Administrator",
-							"error"
-							);
-					}
+			customClass:
+			{
+				confirmButton: "btn btn-primary",
+				cancelButton: "btn btn-danger mr-2"
+			},
+			buttonsStyling: false
+		});
+		swalWithBootstrapButtons
+		.fire(
+		{
+			title: "Laporan Monitoring Umum Akan di Validasi?",
+			text: "Anda Tidak Akan Dapat Merubah atau Menghapus Laporan Monitoring Umum Yang Sudah Divalidasi",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonText: "Ya, Validasi Laporan!",
+			cancelButtonText: "Tidak, Batalkan!",
+			reverseButtons: true
+		})
+		.then(function(result)
+		{
+			if (result.value)
+			{   
+				$.ajax({
+					url: 'Monitoring/ajax_validate_monum',
+					type: 'POST',
+					dataType: 'JSON',
+					data: {ID: id, Flag: 1},
+					success: function(d){
+						if (d[0] == 1) {
+							swalWithBootstrapButtons.fire(
+								"Laporan Berhasil Divalidasi!",
+								"Data Laporan Monitoring Umum Sudah Tervalidasi",
+								"success"
+								);
+							table.ajax.reload(null, false);
+						} else {
+							swalWithBootstrapButtons.fire(
+								"Telah Terjadi Kesalahan!",
+								"Data Laporan Monitoring Umum Gagal Divalidasi <br> Harap Menghubungi Administrator",
+								"error"
+								);
+						}
 						// console.log(d);
 					}
 				})
-		}
-		else if (
+			}
+			else if (
 			 // Read more about handling dismissals
 			 result.dismiss === Swal.DismissReason.cancel
 			 )
-		{
-			swalWithBootstrapButtons.fire(
-				"Proses Validasi Dibatalkan",
-				"Data Laporan Monitoring Umum Batal Divalidasi",
-				"error"
-				);
-		}
-	});
-}
+			{
+				swalWithBootstrapButtons.fire(
+					"Proses Validasi Dibatalkan",
+					"Data Laporan Monitoring Umum Batal Divalidasi",
+					"error"
+					);
+			}
+		});
+	}
 
-$('#modalDoc').on('hidden.bs.modal',  function(event) {
-	var filePath = $('#iframeDoc').attr('src');
-	$.ajax({
-		url: 'Monitoring/ajax_delete_pdf_monum',
-		type: 'POST',
-		dataType: 'JSON',
-		data: {fileName: filePath},
-	})
-	.done(function() {
-		console.log("success");
-	})
-	.fail(function() {
-		console.log("error");
-	})
-	.always(function() {
-		console.log("complete");
+	$('#modalDoc').on('hidden.bs.modal',  function(event) {
+		var filePath = $('#iframeDoc').attr('src');
+		$.ajax({
+			url: 'Monitoring/ajax_delete_pdf_monum',
+			type: 'POST',
+			dataType: 'JSON',
+			data: {fileName: filePath},
+		})
+		.done(function() {
+			console.log("success");
+		})
+		.fail(function() {
+			console.log("error");
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
 	});
-	
-});
 
 </script>
