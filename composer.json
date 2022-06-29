@@ -12,7 +12,8 @@
         "soundasleep/html2text": "^2.0",
         "ext-curl": "*",
         "ext-intl": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "html2text/html2text": "^4.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",

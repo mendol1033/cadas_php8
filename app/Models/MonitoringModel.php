@@ -417,10 +417,22 @@ class MonitoringModel extends Model
 	public function getMonumById(){
 		$data1 = $this->monev->table('monev_moncer_detail')->where('id', $_GET['id'])->get()->getRowArray();
 		$data2 = $this->monev->table('monev_moncer_isi')->where('idLaporan', $_GET['id'])->get()->getResultArray();
+		$data3 = $this->monev->table('logbook_cctv')->where('ID_MONEV', $_GET['id'])->get()->getRowArray();
+		$data4 = $this->monev->table('logbook_it')->where('ID_MONEV', $_GET['id'])->get()->getRowArray();
+		$data5 = $this->monev->table('logbook_ceisa')->where('ID_MONEV', $_GET['id'])->get()->getRowArray();
+		$data6 = $this->monev->table('logbook_eseal')->where('ID_MONEV', $_GET['id'])->get()->getRowArray();
+		$data7 = $this->monev->table('logbook_penimbunan')->where('ID_MONEV', $_GET['id'])->get()->getRowArray();
+		$data8 = $this->monev->table('logbook_pemasukan')->where('ID_MONEV', $_GET['id'])->get()->getRowArray();
 
 		$data = array(
 			"laporan" => $data1,
 			"isi" => $data2,
+			"cctv"=> $data3,
+			"it"=> $data4,
+			"ceisa"=> $data5,
+			"seal"=> $data6,
+			"penimbunan"=> $data7,
+			"pemasukan"=> $data8
 		);
 
 		return $data;
@@ -458,62 +470,87 @@ class MonitoringModel extends Model
 
 		$this->monev->table('monev_moncer_isi')->insertBatch($isiLaporan);
 
-		// foreach ($isiLaporan as $key => $value) {
-		// 	switch ($value['item']) {
-		// 		case 1:
-		// 		$logbook = array(
-		// 			'idMonev' => $insert_id,
-		// 			'type' => 1,
-		// 			'idPerusahaan' => $_POST['idPerusahaan'],
-		// 			'tglLaporan' => $_POST['tanggal'],
-		// 			'kondisi' => 'M',
-		// 			'isiLaporan' => $value['keterangan'],
-		// 			'ptgsRekam' => $_SESSION['NipUser'],
-		// 		);
-		// 		$this->peloro->insert('logbook', $logbook);
-		// 		break;
-		// 		case 2:
-		// 		$logbook = array(
-		// 			'idMonev' => $insert_id,
-		// 			'type' => 2,
-		// 			'idPerusahaan' => $_POST['idPerusahaan'],
-		// 			'tglLaporan' => $_POST['tanggal'],
-		// 			'kondisi' => 'M',
-		// 			'isiLaporan' => $value['keterangan'],
-		// 			'ptgsRekam' => $_SESSION['NipUser'],
-		// 		);
-		// 		$this->peloro->insert('logbook', $logbook);
-		// 		break;
-		// 		case 3:
-		// 		$logbook = array(
-		// 			'idMonev' => $insert_id,
-		// 			'type' => 4,
-		// 			'idPerusahaan' => $_POST['idPerusahaan'],
-		// 			'tglLaporan' => $_POST['tanggal'],
-		// 			'kondisi' => 'M',
-		// 			'isiLaporan' => $value['keterangan'],
-		// 			'ptgsRekam' => $_SESSION['NipUser'],
-		// 		);
-		// 		$this->peloro->insert('logbook', $logbook);
-		// 		break;
-		// 		case 4:
-		// 		$logbook = array(
-		// 			'idMonev' => $insert_id,
-		// 			'type' => 3,
-		// 			'idPerusahaan' => $_POST['idPerusahaan'],
-		// 			'tglLaporan' => $_POST['tanggal'],
-		// 			'kondisi' => 'M',
-		// 			'isiLaporan' => $value['keterangan'],
-		// 			'ptgsRekam' => $_SESSION['NipUser'],
-		// 		);
-		// 		$this->peloro->insert('logbook', $logbook);
-		// 		break;
-		// 		default:
+		foreach ($isiLaporan as $key => $value) {
+			switch ($value['item']) {
+				case 1:
+				$logbook = array(
+					'ID_MONEV' => $insert_id,
+					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+					'URAIAN' => $value['keterangan'],
+					'PETUGAS_REKAM' => $_SESSION['NipUser'],
+					'STATUS' => $_POST['cctv']['Status'],
+					'REKAMAN'  => $_POST['cctv']['Rekaman'],
+					'KUALITAS'  => $_POST['cctv']['Kualitas'],
+					'LOKASI'  => $_POST['cctv']['Lokasi'],
+					'PENEMPATAN'  => $_POST['cctv']['Penempatan']
+				);
+				$this->monev->table('logbook_cctv')->insert($logbook);
+				break;
+				case 2:
+				$logbook = array(
+					'ID_MONEV' => $insert_id,
+					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+					'URAIAN' => $value['keterangan'],
+					'PETUGAS_REKAM' => $_SESSION['NipUser'],
+					'STATUS' => $_POST['it']['Status'],
+					'SUBSISTEM' => $_POST['it']['subSistem'],
+					'DATA' => $_POST['it']['Data'],
+					'LAPORAN' => $_POST['it']['Laporan'],
+					'RIWAYAT' => $_POST['it']['Riwayat'],
+					'TRACEABILITY' => $_POST['it']['Traceability'],
+					'ACCESS' => $_POST['it']['Access'],
+					'KEWENANGAN' => $_POST['it']['Kewenangan'],
+					'KETERKAITAN' => $_POST['it']['Keterkaitan']
+				);
+				$this->monev->table('logbook_it')->insert($logbook);
+				break;
+				case 3:
+				$logbook = array(
+					'ID_MONEV' => $insert_id,
+					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+					'URAIAN' => $value['keterangan'],
+					'PETUGAS_REKAM' => $_SESSION['NipUser'],
+					'RIWAYAT' => $_POST['ceisa']['Status']
+				);
+				$this->monev->table('logbook_ceisa')->insert($logbook);
+				break;
+				case 4:
+				$logbook = array(
+					'ID_MONEV' => $insert_id,
+					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+					'URAIAN' => $value['keterangan'],
+					'PETUGAS_REKAM' => $_SESSION['NipUser'],
+					'STATUS' => $_POST['seal']['Status'],
+					'RIWAYAT' => $_POST['seal']['Riwayat'],
+					'NOTIFIKASI' => $_POST['seal']['Notifikasi']
+				);
+				$this->monev->table('logbook_eseal')->insert($logbook);
+				break;
+				case 5:
+					$logbook = array(
+						'ID_MONEV' => $insert_id,
+						'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+						'URAIAN' => $value['keterangan'],
+						'PETUGAS_REKAM' => $_SESSION['NipUser'],
+						'RIWAYAT' => $_POST['penimbunan']['Status'],
+					);
+					$this->monev->table('logbook_penimbunan')->insert($logbook);
+					break;
+				case 6:
+					$logbook = array(
+						'ID_MONEV' => $insert_id,
+						'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+						'URAIAN' => $value['keterangan'],
+						'PETUGAS_REKAM' => $_SESSION['NipUser'],
+						'RIWAYAT' => $_POST['pemasukan']['Status'],
+					);
+					$this->monev->table('logbook_pemasukan')->insert($logbook);
+					break;
+				default:
 
-		// 		break;
-		// 	}
-
-		// }
+				break;
+			}
+		}
 
 		if ($this->monev->transStatus() === FALSE) {
 			$this->monev->transRollback();
@@ -548,38 +585,97 @@ class MonitoringModel extends Model
 		unset($isi['linkIt']);
 		unset($isi['linkEseal']);
 		$dataIsi = $this->monev->table('monev_moncer_isi')->where('idLaporan', $_POST['id'])->get()->getResultArray();
-
+		$dataLaporan = [];
 		for ($i = 0; $i < count($isi['laporan']); $i++) {
-			$isiLaporan = array(
+			$isiLaporan = [
 				'idLaporan' => $_POST['id'],
 				'item' => $i + 1,
 				'keterangan' => $isi['laporan'][$i],
-			);
+			];
+			$dataLaporan[] = $isiLaporan;
 			$this->monev->table('monev_moncer_isi')->where('id', $dataIsi[$i]['id'])->update($isiLaporan);
 		}
 
-		// $idMonev = $_POST['id'];
-		// for ($i = 1; $i < 5; $i++) {
-		// 	switch ($i) {
-		// 		case 3:
-		// 		$type = 4;
-		// 		break;
-		// 		case 4:
-		// 		$type = 3;
-		// 		break;
+		$idMonev = $_POST['id'];
+		foreach ($dataLaporan as $key => $value) {
+			switch ($value['item']) {
+				case 1:
+				$logbook = array(
+					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+					'URAIAN' => $value['keterangan'],
+					'PETUGAS_REKAM' => $_SESSION['NipUser'],
+					'STATUS' => $_POST['cctv']['Status'],
+					'REKAMAN'  => $_POST['cctv']['Rekaman'],
+					'KUALITAS'  => $_POST['cctv']['Kualitas'],
+					'LOKASI'  => $_POST['cctv']['Lokasi'],
+					'PENEMPATAN'  => $_POST['cctv']['Penempatan']
+				);
+				$this->monev->table('logbook_cctv')->where('ID_MONEV',$idMonev)->update($logbook);
+				break;
+				case 2:
+				$logbook = array(
+					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+					'URAIAN' => $value['keterangan'],
+					'PETUGAS_REKAM' => $_SESSION['NipUser'],
+					'STATUS' => $_POST['it']['Status'],
+					'SUBSISTEM' => $_POST['it']['subSistem'],
+					'DATA' => $_POST['it']['Data'],
+					'LAPORAN' => $_POST['it']['Laporan'],
+					'RIWAYAT' => $_POST['it']['Riwayat'],
+					'TRACEABILITY' => $_POST['it']['Traceability'],
+					'ACCESS' => $_POST['it']['Access'],
+					'KEWENANGAN' => $_POST['it']['Kewenangan'],
+					'KETERKAITAN' => $_POST['it']['Keterkaitan']
+				);
+				$this->monev->table('logbook_it')->where('ID_MONEV',$idMonev)->update($logbook);
+				break;
+				case 3:
+				$logbook = array(
+					'ID_MONEV' => $idMonev,
+					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+					'URAIAN' => $value['keterangan'],
+					'PETUGAS_REKAM' => $_SESSION['NipUser'],
+					'RIWAYAT' => $_POST['ceisa']['Status']
+				);
+				$this->monev->table('logbook_ceisa')->where('ID_MONEV',$idMonev)->update($logbook);
+				break;
+				case 4:
+				$logbook = array(
+					'ID_MONEV' => $idMonev,
+					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+					'URAIAN' => $value['keterangan'],
+					'PETUGAS_REKAM' => $_SESSION['NipUser'],
+					'STATUS' => $_POST['seal']['Status'],
+					'RIWAYAT' => $_POST['seal']['Riwayat'],
+					'NOTIFIKASI' => $_POST['seal']['Notifikasi']
+				);
+				$this->monev->table('logbook_eseal')->where('ID_MONEV',$idMonev)->update($logbook);
+				break;
+				case 5:
+				$logbook = array(
+					'ID_MONEV' => $idMonev,
+					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+					'URAIAN' => $value['keterangan'],
+					'PETUGAS_REKAM' => $_SESSION['NipUser'],
+					'RIWAYAT' => $_POST['penimbunan']['Status'],
+				);
+				$this->monev->table('logbook_penimbunan')->where('ID_MONEV',$idMonev)->update($logbook);
+				break;
+				case 6:
+				$logbook = array(
+					'ID_MONEV' => $idMonev,
+					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
+					'URAIAN' => $value['keterangan'],
+					'PETUGAS_REKAM' => $_SESSION['NipUser'],
+					'RIWAYAT' => $_POST['pemasukan']['Status'],
+				);
+				$this->monev->table('logbook_pemasukan')->where('ID_MONEV',$idMonev)->update($logbook);
+				break;
+				default:
 
-		// 		default:
-		// 		$type = $i;
-		// 		break;
-		// 	}
-		// 	$logbook = array(
-		// 		'isiLaporan' => $_POST['laporan' . $i],
-		// 		'ptgsUpdate' => $this->session->userdata('NipUser'),
-		// 	);
-			// $this->peloro->where('idMonev', $idMonev);
-			// $this->peloro->where('type', $type);
-			// $this->peloro->update('logbook', $logbook);
-		// }
+				break;
+			}
+		}
 
 		if ($this->monev->transStatus() === FALSE) {
 			$this->monev->transRollback();
@@ -629,19 +725,19 @@ class MonitoringModel extends Model
 
     // MONEV UMUM SECTION
 
-    public function uploadApi($data){
-    	$this->peloro->transBegin();
+	public function uploadApi($data){
+		$this->peloro->transBegin();
 
-    	$this->peloro->table('testapi')->insertBatch($data);
+		$this->peloro->table('testapi')->insertBatch($data);
 
-    	if ($this->peloro->transStatus() === FALSE) {
-    		$this->peloro->transRollback();
+		if ($this->peloro->transStatus() === FALSE) {
+			$this->peloro->transRollback();
 
-    		return 'FALSE';
-    	} else {
-    		$this->peloro->transCommit();
-    	
-    		return 'TRUE';
-    	}
-    }
+			return 'FALSE';
+		} else {
+			$this->peloro->transCommit();
+			
+			return 'TRUE';
+		}
+	}
 }

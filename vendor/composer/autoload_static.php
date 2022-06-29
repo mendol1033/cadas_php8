@@ -64,6 +64,10 @@ class ComposerStaticInit3bab3416fbe4dc118819a29520ca2f3e
         array (
             'Kint\\' => 5,
         ),
+        'H' => 
+        array (
+            'Html2Text\\' => 10,
+        ),
         'F' => 
         array (
             'Faker\\' => 6,
@@ -168,6 +172,11 @@ class ComposerStaticInit3bab3416fbe4dc118819a29520ca2f3e
         'Kint\\' => 
         array (
             0 => __DIR__ . '/..' . '/kint-php/kint/src',
+        ),
+        'Html2Text\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/html2text/html2text/src',
+            1 => __DIR__ . '/..' . '/html2text/html2text/test',
         ),
         'Faker\\' => 
         array (

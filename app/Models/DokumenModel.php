@@ -230,7 +230,7 @@ class DokumenModel extends Model
 
 	public function getJumlahDokumen($tahun)
 	{
-		$builder = $this->dbpib->table('PIB_DETAIL');
+		$builder = $this->dbpib->table('PIB_HEADER');
 		$builder->select('COUNT(DISTINCT(NO_AJU)) AS JUMLAH_PIB , MAX(TGL_PIB) AS PIB_AKHIR');
 		$builder->where('YEAR(TGL_PIB)', $tahun);
 		if ($_GET['risk'] === 'ibt') {

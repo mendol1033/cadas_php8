@@ -187,8 +187,9 @@
 					<table class="table table-bordered table-responsive table-hover table-striped">
 						<thead>
 							<th style="text-align: center; vertical-align: middle; width: 5%;"><b>NO</b></th>
-							<th style="text-align: center; vertical-align: middle; width: 20%"><b>KEGIATAN</b></th>
+							<th style="text-align: center; vertical-align: middle; width: 15%"><b>KEGIATAN</b></th>
 							<th style="text-align: center; vertical-align: middle; width: 40%;"><b>URAIAN KEGIATAN</b></th>
+							<th style="text-align: center; vertical-align: middle; width: 40%;"><b>KESESUAIAN DENGAN PERATURAN</b></th>
 						</thead>
 						<tbody>
 							<!-- START POIN 1 -->
@@ -221,9 +222,80 @@
 										Catat hasil pengamatan terhadap CCTV jika ada hal yang mencurigakan dan dilakukan konfirmasi jika ada hal yang mencurigakan.
 									</i>
 								</td>
+								<td style="text-align: left; vertical-align: top; width: 50%;">
+									<div class="form-group">
+										<label class="form-label">Status CCTV</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="statusCCTV_Y" name="cctv[Status]" value="Y">
+												<label class="custom-control-label" for="statusCCTV_Y">Aktif</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="statusCCTV_N" name="cctv[Status]" value="N" >
+												<label class="custom-control-label" for="statusCCTV_N">Tidak Aktif</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="form-label">Rekaman CCTV</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="rekamanCCTV_Y" name="cctv[Rekaman]" value="Y">
+												<label class="custom-control-label" for="rekamanCCTV_Y">Minimal 7 hari atau lebih</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="rekamanCCTV_N" name="cctv[Rekaman]" value="N" >
+												<label class="custom-control-label" for="rekamanCCTV_N">Kurang dari 7 hari</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="form-label">Kualitas Gambar CCTV</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="kualitasCCTV_Y" name="cctv[Kualitas]" value="Y">
+												<label class="custom-control-label" for="kualitasCCTV_Y">Kualitas Gambar Bagus</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="kualitasCCTV_N" name="cctv[Kualitas]" value="N" >
+												<label class="custom-control-label" for="kualitasCCTV_N">Kualitas Gambar Jelek / Pecah / Blur</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-group">
+											<label class="form-label">Lokasi CCTV Terpasang minimal 6 titik sesuai PER-19/BC/2018</label>
+											<div class="frame-wrap">
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="lokasiCCTV_Y" name="cctv[Lokasi]" value="Y">
+													<label class="custom-control-label" for="lokasiCCTV_Y">Ya</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="lokasiCCTV_N" name="cctv[Lokasi]" value="N" >
+													<label class="custom-control-label" for="lokasiCCTV_N">Tidak - Jelaskan dalam hasil pengamatan</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-group">
+											<label class="form-label">CCTV dipasang sedemikian rupa sehingga atas setiap kendaraan pengangkut barang yang masuk dan keluar Kawasan Beriakt dapat dilihat dan diketahui gambarang yang menunjukkan spesifikasi kendaraan dan tanda pengaman</label>
+											<div class="frame-wrap">
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="penempatanCCTV_Y" name="cctv[Penempatan]" value="Y">
+													<label class="custom-control-label" for="penempatanCCTV_Y">Ya</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="penempatanCCTV_N" name="cctv[Penempatan]" value="N" >
+													<label class="custom-control-label" for="penempatanCCTV_N">Tidak - Jelaskan dalam hasil pengamatan</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="4">
 									<div class="d-flex align-items-center justify-content-center"><h2 class="text-center">Hasil Pengamatan</h2></div>
 									<textarea class="form-control" name="laporan1" id="laporan1" style="width: 100%" rows="15"></textarea>
 								</td>
@@ -268,9 +340,140 @@
 										Catat hasil analisis terhadap <i>IT Inventory</i> perusahaan jika ada yang mencurigakan.
 									</i>
 								</td>
+								<td style="text-align: left; vertical-align: top; width: 50%;">
+									<div class="form-group">
+										<label class="form-label">Status IT Inventory</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="statusIT_Y" name="it[Status]" value="Y">
+												<label class="custom-control-label" for="statusIT_Y">Aktif</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="statusIT_N" name="it[Status]" value="N" >
+												<label class="custom-control-label" for="statusIT_N">Tidak Aktif</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="form-label">IT Inventory Subsistem dengan Aplikasi Pencatatan Keuangan</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="subsistemIT_Y" name="it[subSistem]" value="Y">
+												<label class="custom-control-label" for="subsistemIT_Y">Subsistem Golongan A/B</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="subsistemIT_N" name="it[subSistem]" value="N" >
+												<label class="custom-control-label" for="subsistemIT_N">Tidak Subsistem</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="form-label">Data pada IT Inventory Kontinu dan <i>Realtime</i> sesuai SPI</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="dataIT_Y" name="it[Data]" value="Y">
+												<label class="custom-control-label" for="dataIT_Y">Data Kontinu dan <i>Realtime</i></label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="dataIT_N" name="it[Data]" value="N" >
+												<label class="custom-control-label" for="dataIT_N">Data Tidak Kontinu / Tidak <i>Realtime</i></label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-group">
+											<label class="form-label">Dapat Menghasilkan Laporan Yang dapat diakses online dari kantor pabean dan dari kantor pajak sesuai PER-19/BC/2018</label>
+											<div class="frame-wrap">
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="laporanIT_Y" name="it[Laporan]" value="Y">
+													<label class="custom-control-label" for="laporanIT_Y">Ya</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="laporanIT_N" name="it[Laporan]" value="N" >
+													<label class="custom-control-label" for="laporanIT_N">Tidak - Jelaskan dalam hasil pengamatan</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-group">
+											<label class="form-label">Dapat Mencatat riwayat perekaman dan penelusuran kegiatan pengguna</label>
+											<div class="frame-wrap">
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="riwayatIT_Y" name="it[Riwayat]" value="Y">
+													<label class="custom-control-label" for="riwayatIT_Y">Ya</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="riwayatIT_N" name="it[Riwayat]" value="N" >
+													<label class="custom-control-label" for="riwayatIT_Y">Tidak</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-group">
+											<label class="form-label">Memiliki kemampuan untuk penelusuran posisi barang (<i>traceablity</i>)</label>
+											<div class="frame-wrap">
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="traceabilityIT_Y" name="it[Traceability]" value="Y">
+													<label class="custom-control-label" for="traceabilityIT_Y">Ya</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="traceabilityIT_N" name="it[Traceability]" value="N" >
+													<label class="custom-control-label" for="traceabilityIT_N">Tidak</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-group">
+											<label class="form-label">Pencatatan hanya dapat dilakukan oleh orang yang memiliki akses khusus (<i>authorized access</i>)</label>
+											<div class="frame-wrap">
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="accessIT_Y" name="it[Access]" value="Y">
+													<label class="custom-control-label" for="accessIT_Y">Ya</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="accessIT_N" name="it[Access]" value="N" >
+													<label class="custom-control-label" for="accessIT_N">Tidak</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-group">
+											<label class="form-label">Perubahan Pencatatan dan/atau perubahan data hanya dapat dilakukan oleh orang yang sesuai dengan kewenangannya</label>
+											<div class="frame-wrap">
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="kewenanganIT_Y" name="it[Kewenangan]" value="Y">
+													<label class="custom-control-label" for="kewenanganIT_Y">Ya</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="kewenanganIT_N" name="it[Kewenangan]" value="N" >
+													<label class="custom-control-label" for="kewenanganIT_N">Tidak</label>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-group">
+											<label class="form-label">IT Inventory dapat menggambarkan keterkaitan dengan dokumen kepabeanan</label>
+											<div class="frame-wrap">
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="keterkaitanIT_Y" name="it[Keterkaitan]" value="Y">
+													<label class="custom-control-label" for="keterkaitanIT_Y">Ya</label>
+												</div>
+												<div class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input" id="keterkaitanIT_N" name="it[Keterkaitan]" value="N" >
+													<label class="custom-control-label" for="keterkaitanIT_N">Tidak</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="4">
 									<div class="d-flex align-items-center justify-content-center"><h2 class="text-center">Hasil Pengamatan</h2></div>
 									<textarea class="form-control" name="laporan2" id="laporan2" style="width: 100%" rows="15"></textarea>
 								</td>
@@ -285,7 +488,7 @@
 									<ul>
 										<li>Unduh data pada CEISA sebagai pembanding untuk keandalan IT Inventory</li>
 										<li>
-											Gunakan dapat pada SKP sebagai sumber database pola bisnis yang dilakukan perusahaan, misalnya:
+											Gunakan data pada SKP sebagai sumber database pola bisnis yang dilakukan perusahaan, misalnya:
 											<ul>
 												<li>pembelian yang dilakukan</li>
 												<li>pekerjaa sub kontrak yang ada, dilakukan oleh siapa saja?</li>
@@ -295,7 +498,7 @@
 												<li>penggunaan perusahaan jasa transportasi/sarana pengangkut</li>
 											</ul>
 										</li>
-										<li>Unduh data BC 2.3 khusus barang modal, barang contoh, dan barang lainnya yang memerlukan atensi untuk dilakukan pengawasan lebih lanjut <br> Atens:</li>
+										<li>Unduh data BC 2.3 khusus barang modal, barang contoh, dan barang lainnya yang memerlukan atensi untuk dilakukan pengawasan lebih lanjut <br> Atensi:</li>
 										<li>Dokumen BC 2.5 yang besar dan tidak wajar sesuai komposisi penjualan lokal yang ada pada umumnya</li>
 										<li>Kondisi barang yang diluar kebiasaan dari pola bisnis perusahaan TPB</li>
 										<li>Dalam hal sistem transaksi tidak biasa dalam aplikasi monitoring dan evaluasi belum tersedia secara elektronik, pengawasan dapat dilakukan secara manual</li>
@@ -305,9 +508,24 @@
 										Catat hasil analisis terhadap <i>CEISA TPB</i> perusahaan jika ada yang mencurigakan.
 									</i>
 								</td>
+								<td style="text-align: left; vertical-align: top; width: 50%;">
+									<div class="form-group">
+										<label class="form-label">Status CEISA</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="statusCEISA_Y" name="ceisa[Status]" value="Y">
+												<label class="custom-control-label" for="statusCEISA_Y">Aktif</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="statusCEISA_N" name="ceisa[Status]" value="N" >
+												<label class="custom-control-label" for="statusCEISA_N">Tidak Aktif</label>
+											</div>
+										</div>
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="4">
 									<div class="d-flex align-items-center justify-content-center"><h2 class="text-center">Hasil Pengamatan</h2></div>
 									<textarea class="form-control" name="laporan3" id="laporan3" style="width: 100%" rows="15"></textarea>
 								</td>
@@ -332,9 +550,50 @@
 										Catat hasil analisis terhadap <i>e-seal</i> perusahaan jika ada yang mencurigakan.
 									</i>
 								</td>
+								<td style="text-align: left; vertical-align: top; width: 50%;">
+									<div class="form-group">
+										<label class="form-label">Status E-Seal</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="statusSEAL_Y" name="seal[Status]" value="Y">
+												<label class="custom-control-label" for="statusSEAL_Y">Aktif</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="statusSEAL_N" name="seal[Status]" value="N" >
+												<label class="custom-control-label" for="statusSEAL_N">Tidak Aktif</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="form-label">Aplikasi E-Seal dapat menampilkan riwayat perjalanan yang sedang berjalan atau telah selesai</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="riwayatSEAL_Y" name="seal[Riwayat]" value="Y">
+												<label class="custom-control-label" for="riwayatSEAL_Y">Iya</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="riwayatSEAL_N" name="seal[Riwayat]" value="N" >
+												<label class="custom-control-label" for="riwayatSEAL_Y">Tidak</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="form-label">E-Seal dapat memberikan notifikasi apabila terjadi hal yang diluar kewajaran</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="notifikasiSEAL_Y" name="seal[Notifikasi]" value="Y">
+												<label class="custom-control-label" for="notifikasiSEAL_Y">Iya</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="notifikasiSEAL_N" name="seal[Notifikasi]" value="N" >
+												<label class="custom-control-label" for="notifikasiSEAL_N">Tidak</label>
+											</div>
+										</div>
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="4">
 									<div class="d-flex align-items-center justify-content-center"><h2 class="text-center">Hasil Pengamatan</h2></div>
 									<textarea class="form-control" name="laporan4" id="laporan4" style="width: 100%" rows="15"></textarea>
 								</td>
@@ -350,9 +609,24 @@
 										Cukup dicentang jika data yang ada masih sama seperti data pada arsip
 									</i>
 								</td>
+								<td style="text-align: left; vertical-align: top; width: 50%;">
+									<div class="form-group">
+										<label class="form-label">Dalam 6 bulan terakhir apakah GB/PLB pernah memasukkan barang yang tidak sesuai dengan SKEP</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="penimbunan_Y" name="penimbunan[Status]" value="Y">
+												<label class="custom-control-label" for="penimbunan_Y">Iya</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="penimbunan_N" name="penimbunan[Status]" value="N" >
+												<label class="custom-control-label" for="penimbunan_N">Tidak</label>
+											</div>
+										</div>
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="4">
 									<div class="d-flex align-items-center justify-content-center"><h2 class="text-center">Hasil Pengamatan</h2></div>
 									<textarea class="form-control" name="laporan5" id="laporan5" style="width: 100%" rows="15"></textarea>
 								</td>
@@ -368,19 +642,34 @@
 										Cukup dicentang jika data yang ada masih sama seperti data pada arsip
 									</i>
 								</td>
+								<td style="text-align: left; vertical-align: top; width: 50%;">
+									<div class="form-group">
+										<label class="form-label">Dalam 6 bulan terakhir apakah KB pernah memasukkan barang yang tidak berhubungan dengan Hasil Produksinya</label>
+										<div class="frame-wrap">
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="pemasukan_Y" name="pemasukan[Status]" value="Y">
+												<label class="custom-control-label" for="pemasukan_Y">Iya</label>
+											</div>
+											<div class="custom-control custom-radio custom-control-inline">
+												<input type="radio" class="custom-control-input" id="pemasukan_N" name="pemasukan[Status]" value="N" >
+												<label class="custom-control-label" for="pemasukan_N">Tidak</label>
+											</div>
+										</div>
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="4">
 									<div class="d-flex align-items-center justify-content-center"><h2 class="text-center">Hasil Pengamatan</h2></div>
 									<textarea class="form-control" name="laporan6" id="laporan6" style="width: 100%" rows="15"></textarea>
 								</td>
 							</tr>
 							<!-- END POIN 6 -->
 							<tr>
-								<td colspan="3"><div class="d-flex align-items-center justify-content-center"><h2 class="text-center">KESIMPULAN</h2></div></td>
+								<td colspan="4"><div class="d-flex align-items-center justify-content-center"><h2 class="text-center">KESIMPULAN</h2></div></td>
 							</tr>
 							<tr>
-								<td colspan="3"><textarea class="form-control" name="kesimpulan" style="width: 100%; height: 200px;"></textarea></td>
+								<td colspan="4"><textarea class="form-control" name="kesimpulan" style="width: 100%; height: 200px;"></textarea></td>
 							</tr>
 						</tbody>
 					</table>
@@ -688,6 +977,8 @@ $("#rekam").on('click',function(event) {
 	$(".modal-title").text('Form Laporan Monitoring Umum Pada Ruang Kendali (MONITORING ROOM)');
 	$("#modalForm").modal("show");
 	$("#tanggal").val(curdate);
+	$('input').removeProp('checked');
+	$('input[value="N"]').prop('checked', true);
 });
 
 $("#modalForm").on('hidden.bs.modal',function(event) {
@@ -732,15 +1023,40 @@ function edit(id){
 			$('[name="alamat"]').val(d.laporan.alamat);
 			$('[name="tanggal"]').val(d.laporan.tanggalLaporan);
 			$("#modalForm").modal("show");
-			$('[name="kesimpulan"]').val(d.laporan.kesimpulan);
+			CKEDITOR.instances['kesimpulan'].setData(d.laporan.kesimpulan);
 			$(".modal-title").text('Form Laporan Monitoring Umum Pada Ruang Kendali (MONITORING ROOM)');
 
 			var isi = d.isi;
 			for (var i = 0; i < isi.length; i++) {
-				var textArea = $("#laporan"+isi[i].item);
-				textArea.val(isi[i].keterangan);
+				var textArea = "laporan"+isi[i].item;
+				CKEDITOR.instances[textArea].setData(isi[i].keterangan);
 			}
-			console.log(d.laporan.id_perusahaan);
+
+			$("#statusCCTV_"+d.cctv.STATUS).attr('checked', '');
+			$("#kualitasCCTV_"+d.cctv.KUALITAS).attr('checked', '');
+			$("#lokasiCCTV_"+d.cctv.LOKASI).attr('checked', '');
+			$("#penempatanCCTV_"+d.cctv.PENEMPATAN).attr('checked', '');
+			$("#rekamanCCTV_"+d.cctv.REKAMAN).attr('checked', '');
+
+			$("#statusIT_"+d.it.STATUS).attr('checked', '');
+			$("#keterkaitanIT_"+d.it.KETERKAITAN).attr('checked', '');
+			$("#kewenanganIT_"+d.it.KEWENANGAN).attr('checked', '');
+			$("#laporanIT_"+d.it.LAPORAN).attr('checked', '');
+			$("#riwayatIT_"+d.it.RIWAYAT).attr('checked', '');
+			$("#subsistemIT_"+d.it.SUBSISTEM).attr('checked', '');
+			$("#traceabilityIT_"+d.it.TRACEABILITY).attr('checked', '');
+			$("#dataIT_"+d.it.DATA).attr('checked', '');
+			$("#accessIT_"+d.it.ACCESS).attr('checked', '');
+
+			$("#statusCEISA_"+d.ceisa.RIWAYAT).attr('checked', '');
+
+			$("#statusSEAL_"+d.seal.STATUS).attr('checked', '');
+			$("#riwayatSEAL_"+d.seal.RIWAYAT).attr('checked', '');
+			$("#notifikasiSEAL_"+d.seal.NOTIFIKASI).attr('checked', '');
+
+			$("#penimbunan_"+d.penimbunan.RIWAYAT).attr('checked', '');
+
+			$("#pemasukan_"+d.pemasukan.RIWAYAT).attr('checked', '');
 			daftarAkses(d.laporan.id_perusahaan);
 		}
 	})
@@ -766,14 +1082,15 @@ function save() {
 		play.play();
 		delete play;
 	} else {
+		data.append('kesimpulan', CKEDITOR.instances['kesimpulan'].getData());
 		var ckedit = $('.cke');
-		console.log(ckedit);
 		$.each(ckedit, function(index, val) {
 			 /* iterate through array or object */
 			 var idCk = val.id
 			 var el = idCk.slice(4);
 			 if (idCk.slice(4, 8) == 'lapo') {
 				data.append('laporan[]', CKEDITOR.instances[el].getData());
+				// data.append('content[]', CKEDITOR.instances[el].getContents());
 			 }
 		});
 		$.ajax({

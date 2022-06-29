@@ -55,6 +55,15 @@
             'reference' => 'd7f08a622b3346766325488aa32ddc93ccdecc75',
             'dev_requirement' => true,
         ),
+        'html2text/html2text' => array(
+            'pretty_version' => '4.3.1',
+            'version' => '4.3.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../html2text/html2text',
+            'aliases' => array(),
+            'reference' => '61ad68e934066a6f8df29a3d23a6460536d0855c',
+            'dev_requirement' => false,
+        ),
         'kint-php/kint' => array(
             'pretty_version' => '4.1.2',
             'version' => '4.1.2.0',
