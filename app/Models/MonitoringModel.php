@@ -601,6 +601,7 @@ class MonitoringModel extends Model
 			switch ($value['item']) {
 				case 1:
 				$logbook = array(
+					'ID_MONEV' => $idMonev,
 					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
 					'URAIAN' => $value['keterangan'],
 					'PETUGAS_REKAM' => $_SESSION['NipUser'],
@@ -610,10 +611,17 @@ class MonitoringModel extends Model
 					'LOKASI'  => $_POST['cctv']['Lokasi'],
 					'PENEMPATAN'  => $_POST['cctv']['Penempatan']
 				);
-				$this->monev->table('logbook_cctv')->where('ID_MONEV',$idMonev)->update($logbook);
+				$cek = $this->monev->table('logbook_cctv')->where('ID_MONEV', $idMonev)->get()->getResultArray();
+				if (count($cek) > 0) {
+					$this->monev->table('logbook_cctv')->where('ID_MONEV',$idMonev)->update($logbook);
+				} else {
+					$this->monev->table('logbook_cctv')->insert($logbook);
+				}
+				
 				break;
 				case 2:
 				$logbook = array(
+					'ID_MONEV' => $idMonev,
 					'ID_PERUSAHAAN' => $_POST['idPerusahaan'],
 					'URAIAN' => $value['keterangan'],
 					'PETUGAS_REKAM' => $_SESSION['NipUser'],
@@ -627,7 +635,12 @@ class MonitoringModel extends Model
 					'KEWENANGAN' => $_POST['it']['Kewenangan'],
 					'KETERKAITAN' => $_POST['it']['Keterkaitan']
 				);
-				$this->monev->table('logbook_it')->where('ID_MONEV',$idMonev)->update($logbook);
+				$cek = $this->monev->table('logbook_it')->where('ID_MONEV', $idMonev)->get()->getResultArray();
+				if (count($cek) > 0) {
+					$this->monev->table('logbook_it')->where('ID_MONEV',$idMonev)->update($logbook);
+				} else {
+					$this->monev->table('logbook_it')->insert($logbook);
+				}
 				break;
 				case 3:
 				$logbook = array(
@@ -637,7 +650,12 @@ class MonitoringModel extends Model
 					'PETUGAS_REKAM' => $_SESSION['NipUser'],
 					'RIWAYAT' => $_POST['ceisa']['Status']
 				);
-				$this->monev->table('logbook_ceisa')->where('ID_MONEV',$idMonev)->update($logbook);
+				$cek = $this->monev->table('logbook_ceisa')->where('ID_MONEV', $idMonev)->get()->getResultArray();
+				if (count($cek) > 0) {
+					$this->monev->table('logbook_ceisa')->where('ID_MONEV',$idMonev)->update($logbook);
+				} else {
+					$this->monev->table('logbook_ceisa')->insert($logbook);
+				}
 				break;
 				case 4:
 				$logbook = array(
@@ -649,7 +667,12 @@ class MonitoringModel extends Model
 					'RIWAYAT' => $_POST['seal']['Riwayat'],
 					'NOTIFIKASI' => $_POST['seal']['Notifikasi']
 				);
-				$this->monev->table('logbook_eseal')->where('ID_MONEV',$idMonev)->update($logbook);
+				$cek = $this->monev->table('logbook_eseal')->where('ID_MONEV', $idMonev)->get()->getResultArray();
+				if (count($cek) > 0) {
+					$this->monev->table('logbook_eseal')->where('ID_MONEV',$idMonev)->update($logbook);
+				} else {
+					$this->monev->table('logbook_eseal')->insert($logbook);
+				}
 				break;
 				case 5:
 				$logbook = array(
@@ -659,7 +682,12 @@ class MonitoringModel extends Model
 					'PETUGAS_REKAM' => $_SESSION['NipUser'],
 					'RIWAYAT' => $_POST['penimbunan']['Status'],
 				);
-				$this->monev->table('logbook_penimbunan')->where('ID_MONEV',$idMonev)->update($logbook);
+				$cek = $this->monev->table('logbook_penimbunan')->where('ID_MONEV', $idMonev)->get()->getResultArray();
+				if (count($cek) > 0) {
+					$this->monev->table('logbook_penimbunan')->where('ID_MONEV',$idMonev)->update($logbook);
+				} else {
+					$this->monev->table('logbook_penimbunan')->insert($logbook);
+				}
 				break;
 				case 6:
 				$logbook = array(
@@ -669,7 +697,12 @@ class MonitoringModel extends Model
 					'PETUGAS_REKAM' => $_SESSION['NipUser'],
 					'RIWAYAT' => $_POST['pemasukan']['Status'],
 				);
-				$this->monev->table('logbook_pemasukan')->where('ID_MONEV',$idMonev)->update($logbook);
+				$cek = $this->monev->table('logbook_pemasukan')->where('ID_MONEV', $idMonev)->get()->getResultArray();
+				if (count($cek) > 0) {
+					$this->monev->table('logbook_pemasukan')->where('ID_MONEV',$idMonev)->update($logbook);
+				} else {
+					$this->monev->table('logbook_pemasukan')->insert($logbook);
+				}
 				break;
 				default:
 
