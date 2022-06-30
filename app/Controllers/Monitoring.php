@@ -595,11 +595,11 @@ class Monitoring extends BaseController
 
 			$templateProcessor->saveAs($report);
 
-			shell_exec('libreoffice --headless --convert-to pdf:writer_pdf_Export --outdir /var/www/cadas.com/public/assets/report/monev /var/www/cadas.com/writable/report/monev/' . $fileName . '.docx');
+			shell_exec('libreoffice --headless --convert-to pdf --outdir /var/www/cadas.com/public/assets/report/monev /var/www/cadas.com/writable/report/monev/' . $fileName . '.docx');
 
 			$pdfFile = $dirPdf . $fileName . '.pdf';
 
-			unlink(WRITEPATH . 'report/monev/' . $fileName . '.docx');
+			// unlink(WRITEPATH . 'report/monev/' . $fileName . '.docx');
 		}
 		catch (\BadMethodCallException $e)
 		{
@@ -665,6 +665,6 @@ class Monitoring extends BaseController
 		$pdfFile = $dirPdf . $fileName . '.pdf';
 
 		// unlink(WRITEPATH . 'report/monev/' . $fileName . '.docx');
-		
+
 	}
 }
