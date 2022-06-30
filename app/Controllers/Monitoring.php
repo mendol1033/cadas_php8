@@ -630,4 +630,41 @@ class Monitoring extends BaseController
 			}
 		}
 	}
+
+	public function test_phpword(){
+		$data     = $this->model->getMonumById(60);
+		$template = WRITEPATH . 'report/monev/template/template_monev_umum_moncer.docx';
+		$dirDocx  = $dirPdf = 'assets/report/monev/';
+		$thick    = mb_convert_encoding('&#x2714;', 'UTF-8', 'HTML-ENTITIES');
+		// $fileDir = 'C:\xampp\htdocs\DashboardTPB\assets\upload\monev\report_docx\\';
+
+		$headerLaporan = $data['laporan'];
+		$isiLaporan    = $data['isi'];
+
+		// \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
+		$templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor($template);
+		$templateProcessor->setValue('nama_perusahaan', $headerLaporan['nama_perusahaan']);
+		$templateProcessor->setValue('alamat', $headerLaporan['alamat']);
+		$templateProcessor->setValue('tanggal', date('d-m-Y', strtotime($headerLaporan['tanggalLaporan'])));
+		$templateProcessor->setValue('kesimpulan', $headerLaporan['kesimpulan']);
+		$templateProcessor->setValue('nama', $headerLaporan['NamaPegawai']);
+
+		for ($i = 0; $i < count($isiLaporan); $i++)
+		{
+			$templateProcessor->setValue('ket' . $isiLaporan[$i]['item'], $isiLaporan[$i]['keterangan']);
+		}
+
+		$fileName = 'Laporan_Moncer_' . $headerLaporan['idPerusahaan'] . '_' . date('d-m-Y', strtotime($headerLaporan['tanggalLaporan']));
+
+		$report = WRITEPATH . 'report/monev/' . $fileName . '.docx';
+
+		$templateProcessor->saveAs($report);
+
+		shell_exec('libreoffice --headless --convert-to pdf:writer_pdf_Export --outdir /var/www/cadas.com/public/assets/report/monev /var/www/cadas.com/writable/report/monev/' . $fileName . '.docx');
+
+		$pdfFile = $dirPdf . $fileName . '.pdf';
+
+		// unlink(WRITEPATH . 'report/monev/' . $fileName . '.docx');
+		
+	}
 }
