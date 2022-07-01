@@ -620,7 +620,7 @@ class Monitoring extends BaseController
 	{
 		if (! empty($_POST))
 		{
-			if (unlink('/var/www/cadas.com/public/assets/report/monev' . $_POST['fileName']))
+			if (unlink('/var/www/cadas.com/public/' . $_POST['fileName']))
 			{
 				echo json_encode('file berhasil dihapus');
 			}
