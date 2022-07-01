@@ -595,7 +595,7 @@ class Monitoring extends BaseController
 
 			$templateProcessor->saveAs($report);
 
-			shell_exec('HOME=/home/cadaswww && libreoffice --headless --convert-to pdf --outdir /var/www/cadas.com/public/assets/report/monev /var/www/cadas.com/writable/report/monev/' . $fileName . '.docx');
+			shell_exec('export HOME=/tmp && libreoffice --headless --convert-to pdf --outdir /var/www/cadas.com/public/assets/report/monev /var/www/cadas.com/writable/report/monev/' . $fileName . '.docx');
 
 			$pdfFile = $dirPdf . $fileName . '.pdf';
 
@@ -660,7 +660,7 @@ class Monitoring extends BaseController
 
 		$templateProcessor->saveAs($report);
 
-		shell_exec('libreoffice --headless --convert-to pdf:writer_pdf_Export --outdir /var/www/cadas.com/public/assets/report/monev /var/www/cadas.com/writable/report/monev/' . $fileName . '.docx');
+		shell_exec('export HOME=/tmp && libreoffice --headless --convert-to pdf:writer_pdf_Export --outdir /var/www/cadas.com/public/assets/report/monev /var/www/cadas.com/writable/report/monev/' . $fileName . '.docx');
 
 		$pdfFile = $dirPdf . $fileName . '.pdf';
 
