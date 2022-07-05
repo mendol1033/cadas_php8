@@ -235,16 +235,62 @@
                 $("#simpan").val(id);
                 $('[name="NIP"]').val(data.NIPPegawai);
                 $('[name="Nama"]').val(data.NamaPegawai);
-                $('[name="Gol"]').val(data.GolPegawai);
-                $('[name="Seksi"]').val(data.Seksi);
-                $('[name="Eselon"]').val(data.Eselon);
-                $('[name="Jabatan"]').val(data.JabatanPegawai);
+                selectedValue(data.GolPegawai, "Gol", "#golPegawai");
+                selectedValue(data.Seksi, "Seksi", '[name="Seksi"]');
+                selectedValue(data.Eselon, "Eselon", '[name="Eselon"]');
+                selectedValue(data.JabatanPegawai, "Jabatan", '[name="Jabatan"]');
                 $('[name="Status"]').val(data.Status);
                 $('.select2').trigger('change');
                 $('.modal-title').text('Ubah Data Pegawai');
                 $('#modalForm').modal('show');
             }
         })       
+    }
+
+    function selectedValue(a,b,c){
+
+        switch (b) {
+            case "Gol":
+                url = "Pegawai/getListPangkat";
+                break;
+            case "Seksi":
+                url = "Pegawai/getListSeksi";
+                break;
+            case "Eselon":
+                url = "Pegawai/getListEselon";
+                break;
+            case "Jabatan":
+                url = "Pegawai/getListJabatan";
+            default:
+                // statements_def
+                break;
+        }
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'JSON',
+            data: {param1: 'value1'},
+            success: function(d){
+                var opt = [];
+                $.each(d.results, function(index, val) {
+                     opt[val.id] = val.text;
+                });
+                console.log(a, opt[a]);
+                var data = [{id:a,text:opt[a]}];
+                var selectedVal = $(c);
+                var option = new Option(opt[a],a,true,true);
+                selectedVal.append(option).trigger('change');
+
+                selectedVal.trigger({
+                    type: "select2:select",
+                    params: {
+                        data: data
+                    }
+                })
+            }
+        })
+
     }
 
     function tambah(){

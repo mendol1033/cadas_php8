@@ -66,6 +66,17 @@
                                 <label for="Pangkat" class="form-label">Pangkat</label>                     
                                 <div class="col-xl-12">
                                     <select name="Pangkat" id="Pangkat" class="form-control select2" style="width:100%;" disabled>
+                                        <option value="0">PILIH PANGKAT PEGAWAI</option>
+                                        <option value="21">PENGATUR MUDA / II.a</option>
+                                        <option value="22">PENGATUR MUDA TK.I / II.a</option>
+                                        <option value="23">PENGATUR / II.c</option>
+                                        <option value="24">PENGATUR TK.I / II.d</option>
+                                        <option value="31">PENATA MUDA / III.a</option>
+                                        <option value="32">PENATA MUDA TK.I / III.b</option>
+                                        <option value="33">PENATA / III.c</option>
+                                        <option value="34">PENATA TK.I / III.d</option>
+                                        <option value="41">PEMBINA / IV.a</option>
+                                        <option value="42">PEMBINA TK.I / IV.b</option>
                                     </select>
                                     <span class="help-block"></span>
                                 </div>
@@ -551,8 +562,8 @@ function edit(id){
             $('#NIP').append('<option value="'+data.NIPPegawai+'">'+data.NamaPegawai+'</option>');
             $('[name="NIP"]').val(data.NIPPegawai);
             $('[name="NipPegawai"]').val(data.NIPPegawai);
-            $('[name="Pangkat"]').val(data.GolPegawai);
-            $('[name="Unit"]').val(data.Seksi);
+            $('[name="Pangkat"]').val(data.Gol);
+            $('[name="Unit"]').val(data.SeksiPegawai);
             $('[name="Jabatan"]').val(data.JabatanPegawai);
             $('[name="Uname"]').val(data.NmUser);
             $('[name="GrupMenu"]').val(data.GrupMenu);
