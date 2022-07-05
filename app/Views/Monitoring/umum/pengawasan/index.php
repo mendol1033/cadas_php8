@@ -14,11 +14,11 @@
 					<label class="form-label">Tanggal</label>
 				</div>
 				<div class="col-xl-3">
-					<input type="text" id="tanggalMulai" name="tanggalMulai" class="form-control shadow-inset-2 form-control" placeholder="yyyy-mm-dd">
+					<input type="text" id="tanggalMulai" name="tanggalMulai" class="form-control shadow-inset-2 tanggal" placeholder="yyyy-mm-dd">
 				</div>
 				<div class="col-xl-1"><span class="form-label">s.d.</span></div>
 				<div class="col-xl-3">
-					<input type="text" id="tanggalAkhir" name="tanggalAkhir" class="form-control shadow-inset-2 form-control" placeholder="yyyy-mm-dd">
+					<input type="text" id="tanggalAkhir" name="tanggalAkhir" class="form-control shadow-inset-2 tanggal" placeholder="yyyy-mm-dd">
 				</div>
 				<div class="col-xl-4">
 					<button type="button" class="btn btn btn-outline-primary waves-effect waves-themed" id="cari">
@@ -131,7 +131,7 @@
 								<label class="control-label">Tanggal Pelaksanaan</label>
 							</td>
 							<td>
-								<input class="form-control" type="text" name="tanggal" id="tanggal" required>
+								<input class="form-control tanggal" type="text" name="tanggal" id="tanggal" required>
 								<div class="invalid-feedback">
 									Kalom Tanggal Pelaksanaan Tidak Boleh Kosong.
 								</div>
