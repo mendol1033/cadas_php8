@@ -9,7 +9,7 @@
                     <div class="panel-toolbar flex-row-reverse">
                         <button id="btnFullscreen" class="btn btn-warning btn-pills btn-xs waves-effect waves-themed" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen" style="width: 90;">Fullscreen</button>
                         <button type="button" class="btn btn-xs btn-primary waves-effect waves-themed" id="newKontrak" style="margin-right: 10px;" onclick="tambah()"><span class="fas fa-plus-circle"></span> Tambah Pegawai</button>
-                        <button type="button" class="btn btn-xs btn-danger waves-effect waves-themed" id="statusPegawai" style="margin-right: 10px;" onclick="pegawaiTidakAktif()"><span class="fas fa-plus-circle"></span> Pegawai Tidak Aktif</button>
+                        <button type="button" class="btn btn-xs btn-danger waves-effect waves-themed" id="statusPegawai" style="margin-right: 10px;" onclick="setStatus()"><span class="fas fa-plus-circle"></span> Pegawai Tidak Aktif</button>
                     </div>
                 </div>
             </div>
@@ -117,7 +117,8 @@
     </div>
 </div>
 <script type="text/javascript">
-    var statusPegawai = "N";
+    var statusPegawai = "Y";
+    var tabel;
     $(document).ready(function() {
         $("#golPegawai").select2({
             placeholder: '--PILIH PANGKAT PEGAWAI--',
@@ -258,7 +259,7 @@
         tabel.ajax.reload(null,false);
     }
 
-    function getStatusPegawai(){
+    function setStatus(){
         if (statusPegawai == "Y") {
             statusPegawai = "N";
             $("#statusPegawai").empty().append("Pegawai Aktif");
@@ -266,6 +267,10 @@
             statusPegawai = "Y";
             $("#statusPegawai").empty().append("Pegawai Tidak Aktif");
         }
+        tabel.ajax.reload(null,false);
+    }
+
+    function getStatusPegawai(){
         return statusPegawai;
     }
 
