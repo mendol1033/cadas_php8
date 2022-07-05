@@ -712,7 +712,7 @@
 			prefix: 'Rp '
 		});
 		$('.tanggal').datepicker({
-			format: 'dd/mm/yyyy',
+			format: 'yyyy-mm-dd',
 			todayHighLight: true,
 			orientation: "top right"
 		});
