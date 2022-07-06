@@ -38,6 +38,19 @@ class KuisionerModel extends Model
 		return $query->getResultArray();
 	}
 
+	public function getRefKantor(){
+		$builder = $this->cadas->table('referensi_kantor_pabean');
+		$builder->select('URAIAN_KANTOR');
+		$query = $builder->get();
+		$data = $query->getResultArray();
+
+		foreach ($data as $key => $value) {
+			$RefKantor[] = ["id" => $value['URAIAN_KANTOR'], "text" => $value['URAIAN_KANTOR']];
+		}
+
+		return ["results" => $RefKantor];
+	}
+
 	public function getProvinsi($search) {
 		$builder = $this->cadas->table('inf_lokasi');
 		$builder->where('lokasi_kabupatenkota', 00);
@@ -156,6 +169,7 @@ class KuisionerModel extends Model
 			'JENIS_INVESTASI' => $_POST['II-jenisInvestasi'],
 			'TAHUN_FASILITAS' => $_POST['II-tahunFasilitas'],
 			'TUJUAN_PENJUALAN' => $_POST['II-tujuanPenjualan'],
+			'KPPBC_PENGAWASAN' => $_POST['II-kppbcpengawasan'],
 			'JENIS_PRODUKSI' => $_POST['II-jenisProduksi'],
 			'PROVINSI_PERUSAHAAN' => $_POST['II-provinsi'],
 			'KOTA_PERUSAHAAN' => $_POST['II-kota'],
@@ -164,12 +178,20 @@ class KuisionerModel extends Model
 			'NAMA_JALAN_PERUSAHAAN' => $_POST['II-namaJalan'],
 			'FLAG_TPB_LAIN' => $_POST['II-kbLain'],
 			'PPH_BADAN' => $_POST['VII-pphBadan'],
+			'PERIODE_LK' => $_POST['VI-periodeLaporanKeuangan'],
 			'LABA' => $_POST['VI-labaSebelumPajak'],
-			'PAJAK_DAERAH' => $_POST['VIII-pajakDaerah'],
-			'BEBAN_GAJI' => $_POST['VIII-bebanUpah'],
-			'DEPRESIASI' => $_POST['VIII-depresiasi'],
-			'PAJAK_TIDAK_LANGSUNG' => $_POST['VIII-pajakTidakLangsung']
+			'PAJAK_DAERAH' => $_POST['IX-pajakDaerah'],
+			'BEBAN_GAJI' => $_POST['IX-bebanUpah'],
+			'DEPRESIASI' => $_POST['IX-depresiasi'],
+			'PAJAK_TIDAK_LANGSUNG' => $_POST['IX-pajakTidakLangsung']
 		];
+
+		if ($_POST['VII-alasanPphBadan'] === "Lainnya") {
+			$dataProfil['ALASAN_PPH_BADAN'] = $_POST['VII-alasanPphBadan-input'];
+		} else {
+			$dataProfil['ALASAN_PPH_BADAN'] = $_POST['VII-alasanPphBadan'];
+		}
+
 		$this->kuisioner->table('profil_perusahaan')->insert($dataProfil);
 
 		// INSERT TABLE PERUSAHAAN SEKITAR
@@ -294,14 +316,14 @@ class KuisionerModel extends Model
 		// INSERT TABLE JARINGAN INDUSTRI
 		$jaringanIndustri = [
 			'ID_MASTER' => $ID_MASTER,
-			'FASILITAS' => $_POST['IX-jaringanFasilitas'],
-			'NON_FASILITAS' => $_POST['IX-jaringanNonFasilitas']
+			'FASILITAS' => $_POST['X-jaringanFasilitas'],
+			'NON_FASILITAS' => $_POST['X-jaringanNonFasilitas']
 		];
 		$this->kuisioner->table('jaringan_industri')->insert($jaringanIndustri);
 
 		$jaringanFasilitas = [];
-		if (isset($_POST['IX-detailJaringanFasilitas'])) {
-			foreach ($_POST['IX-detailJaringanFasilitas'] as $key=>$value) {
+		if (isset($_POST['X-detailJaringanFasilitas'])) {
+			foreach ($_POST['X-detailJaringanFasilitas'] as $key=>$value) {
 				$jaringanFasilitas[] = [
 					'ID_MASTER' => $ID_MASTER,
 					'KODE' => 'F',
@@ -312,8 +334,8 @@ class KuisionerModel extends Model
 		}
 
 		$jaringanNonFasilitas = [];
-		if (isset($_POST['IX-detailjaringanNonFasilitas'])) {
-			foreach ($_POST['IX-detailjaringanNonFasilitas'] as $key => $value) {
+		if (isset($_POST['X-detailjaringanNonFasilitas'])) {
+			foreach ($_POST['X-detailjaringanNonFasilitas'] as $key => $value) {
 				$jaringanNonFasilitas[] = [
 					'ID_MASTER' => $ID_MASTER,
 					'KODE' => 'N',
@@ -325,11 +347,11 @@ class KuisionerModel extends Model
 		}
 
 		$dataTKJaringan= [];
-		$jaringanSeri = json_decode($_POST['IX-jaringanSeri'], true);
-		$jaringanNama = json_decode($_POST['IX-jaringanNama'], true);
-		$jaringanNpwp = json_decode($_POST['IX-jaringanNpwp'], true);
-		$jaringanJumlah = json_decode($_POST['IX-jaringanJumlah'], true);
-		if (isset($_POST['IX-jaringanSeri'])) {
+		$jaringanSeri = json_decode($_POST['X-jaringanSeri'], true);
+		$jaringanNama = json_decode($_POST['X-jaringanNama'], true);
+		$jaringanNpwp = json_decode($_POST['X-jaringanNpwp'], true);
+		$jaringanJumlah = json_decode($_POST['X-jaringanJumlah'], true);
+		if (isset($_POST['X-jaringanSeri'])) {
 			for ($i = 0; $i < count($jaringanSeri); $i++) {
 				$dataTKJaringan[] = array(
 					'ID_MASTER' => $ID_MASTER,
@@ -345,50 +367,56 @@ class KuisionerModel extends Model
 		// INSERT TABLE PELAKU USAHA
 		$dataPelakuUsaha = [
 			'ID_MASTER' => $ID_MASTER,
-			'DAGANG_RT' => $_POST['X-dagangRumah'],
-			'DAGANG_KCL' => $_POST['X-dagangKecil'],
-			'DAGANG_SDG' => $_POST['X-dagangSedang'],
-			'DAGANG_BSR' => $_POST['X-dagangBesar'],
-			'AKOMODASI_RT' => $_POST['X-akomodasiRumah'],
-			'AKOMODASI_KCL' => $_POST['X-akomodasiKecil'],
-			'AKOMODASI_SDG' => $_POST['X-akomodasiSedang'],
-			'AKOMODASI_BSR' => $_POST['X-akomodasiBesar'],
-			'MAKANAN_RT' => $_POST['X-makananRumah'],
-			'MAKANAN_KCL' => $_POST['X-makananKecil'],
-			'MAKANAN_SDG' => $_POST['X-makananSedang'],
-			'MAKANAN_BSR' => $_POST['X-makananBesar'],
-			'TRANSPORT_RT' => $_POST['X-transportRumah'],
-			'TRANSPORT_KCL' => $_POST['X-transportKecil'],
-			'TRANSPORT_SDG' => $_POST['X-transportSedang'],
-			'TRANSPORT_BSR' => $_POST['X-transportBesar']
+			'DAGANG_RT' => $_POST['XI-dagangRumah'],
+			'DAGANG_KCL' => $_POST['XI-dagangKecil'],
+			'DAGANG_SDG' => $_POST['XI-dagangSedang'],
+			'DAGANG_BSR' => $_POST['XI-dagangBesar'],
+			'AKOMODASI_RT' => $_POST['XI-akomodasiRumah'],
+			'AKOMODASI_KCL' => $_POST['XI-akomodasiKecil'],
+			'AKOMODASI_SDG' => $_POST['XI-akomodasiSedang'],
+			'AKOMODASI_BSR' => $_POST['XI-akomodasiBesar'],
+			'MAKANAN_RT' => $_POST['XI-makananRumah'],
+			'MAKANAN_KCL' => $_POST['XI-makananKecil'],
+			'MAKANAN_SDG' => $_POST['XI-makananSedang'],
+			'MAKANAN_BSR' => $_POST['XI-makananBesar'],
+			'TRANSPORT_RT' => $_POST['XI-transportRumah'],
+			'TRANSPORT_KCL' => $_POST['XI-transportKecil'],
+			'TRANSPORT_SDG' => $_POST['XI-transportSedang'],
+			'TRANSPORT_BSR' => $_POST['XI-transportBesar']
 		];
 		$this->kuisioner->table('pelaku_usaha')->insert($dataPelakuUsaha);
 
 		// INSERT TABLE PERTANYAAN UMUM
 		$dataUmum = [
 			'ID_MASTER' => $ID_MASTER,
-			'UMUM_1' => $_POST['XI-umum1'],
-			'UMUM_1_JELAS' => $_POST['XI-umum1-jelas'],
-			'UMUM_2_A' => $_POST['XI-umum2-a'],
-			'UMUM_2_B' => $_POST['XI-umum2-b'],
-			'UMUM_2_C' => $_POST['XI-umum2-c'],
-			'UMUM_3' => $_POST['XI-umum3'],
-			'UMUM_4' => $_POST['XI-umum4'],
-			'UMUM_5_A' => $_POST['XI-umum5'],
-			'UMUM_5_B' => $_POST['XI-umum5-jelas'],
-			'UMUM_5_C' => $_POST['XI-umum-5-kelebihan'],
-			'UMUM_6_A' => $_POST['XI-umum6'],
-			'UMUM_6_B' => $_POST['XI-umum6-jelas'],
-			'UMUM_7' => $_POST['XI-umum7'],
-			'UMUM_9' => $_POST['XI-umum9'],
-			'UMUM_10' => $_POST['XI-umum10'],
-			'UMUM_11' => $_POST['XI-umum11']
+			'UMUM_1' => $_POST['XII-umum1'],
+			'UMUM_1_JELAS' => $_POST['XII-umum1-jelas'],
+			'UMUM_2_A' => $_POST['XII-umum2-a'],
+			'UMUM_2_B' => $_POST['XII-umum2-b'],
+			'UMUM_2_C' => $_POST['XII-umum2-c'],
+			'UMUM_3' => $_POST['XII-umum3'],
+			'UMUM_4' => $_POST['XII-umum4'],
+			'UMUM_5_A' => $_POST['XII-umum5'],
+			'UMUM_5_B' => $_POST['XII-umum5-jelas'],
+			'UMUM_5_C' => $_POST['XII-umum-5-kelebihan'],
+			'UMUM_6_A' => $_POST['XII-umum6'],
+			'UMUM_6_B' => $_POST['XII-umum6-jelas'],
+			'UMUM_7' => $_POST['XII-umum7'],
+			'UMUM_9' => $_POST['XII-umum9'],
+			'UMUM_10' => $_POST['XII-umum10'],
+			'UMUM_11' => $_POST['XII-umum11']
 		];
 		if (!empty($_POST['XI-umum8-a'])) {
-			$dataUmum['UMUM_8_A'] = $_POST['XI-umum8-a'];
-			$dataUmum['UMUM_8_B'] = $_POST['XI-umum8-b'];
-			$dataUmum['UMUM_8_C'] = $_POST['XI-umum8-c'];
+			$dataUmum['UMUM_8_A'] = $_POST['XII-umum8-a'];
+			$dataUmum['UMUM_8_B'] = $_POST['XII-umum8-b'];
+			$dataUmum['UMUM_8_C'] = $_POST['XII-umum8-c'];
 		}
+
+		// INSERT TABLE PERPAJAKAN
+		$dataPerpajakan = [
+			'ID_MASTER' => $ID_MASTER,
+			'PPh21Y1' => $_POST['VIII-PPh21Y1']
+		];
 		$this->kuisioner->table('umum')->insert($dataUmum);
 
 

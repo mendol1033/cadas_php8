@@ -126,36 +126,38 @@ class Kuisioner extends Controller
 
 	public function submitKuisioner(){
 		if (!empty($_POST)) {
-			$uploadPath = ROOTPATH."public/assets/uploads/image";
-			$link = 'assets/uploads/image/';
-			foreach ($_FILES as $key => $value) {
-				$name = basename($value['name']);
-				$fileData = [];
-				if (move_uploaded_file($value['tmp_name'], $uploadPath."/".date('Y-m-d')."_".$name)) {
-					$fileData[] = [
-						'ID_MASTER' => $ID_MASTER,
-						'NAMA_FOTO' => $name,
-						'PATH_FOTO' => $uploadPath."/".$name,
-						'LINK_FOTO' => $link.$name
-					];
-				} else {
-					$statusUpload = "Kuisioner Gagal Disubmit, Error Upload File";
+			// $uploadPath = ROOTPATH."public/assets/uploads/image";
+			// $link = 'assets/uploads/image/';
+			// foreach ($_FILES as $key => $value) {
+			// 	$name = basename($value['name']);
+			// 	$fileData = [];
+			// 	if (move_uploaded_file($value['tmp_name'], $uploadPath."/".date('Y-m-d')."_".$name)) {
+			// 		$fileData[] = [
+			// 			'ID_MASTER' => $ID_MASTER,
+			// 			'NAMA_FOTO' => $name,
+			// 			'PATH_FOTO' => $uploadPath."/".$name,
+			// 			'LINK_FOTO' => $link.$name
+			// 		];
+			// 	} else {
+			// 		$statusUpload = "Kuisioner Gagal Disubmit, Error Upload File";
 
-					echo json_encode(['status' => 'Gagal', 'pesan' => $statusUpload]);
-					exit;
-				}
+			// 		echo json_encode(['status' => 'Gagal', 'pesan' => $statusUpload]);
+			// 		exit;
+			// 	}
 
-				$status = $this->kuisioner->submitKuisioner($fileData);
-				exit;
-			}
+			// 	$status = $this->kuisioner->submitKuisioner($fileData);
+			// 	exit;
+			// }
 
-			if ($status == "sukses") {
-				$pesan = "Kuisioner Berhasil Di Submit, Data Sudah Kami Terima";
-			} else {
-				$pesan = "Kuisioner Gagal Di Submit, Harap Hubungi Administrator";
-			}
+			// if ($status == "sukses") {
+			// 	$pesan = "Kuisioner Berhasil Di Submit, Data Sudah Kami Terima";
+			// } else {
+			// 	$pesan = "Kuisioner Gagal Di Submit, Harap Hubungi Administrator";
+			// }
 
-			echo json_encode(['status' => $status, 'pesan' => $pesan]);
+			// echo json_encode(['status' => $status, 'pesan' => $pesan]);
+
+			echo json_encode([$_POST, $_FILES]);
 		}
 	}
 
@@ -176,6 +178,12 @@ class Kuisioner extends Controller
 
 			echo json_encode($data);	
 		}
+	}
+
+	public function getRefKantor() {
+		$data = $this->kuisioner->getRefKantor();
+
+		echo json_encode($data);
 	}
 
 	public function getProvinsi() {

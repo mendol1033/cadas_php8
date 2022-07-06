@@ -27,8 +27,9 @@
 						<li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#tab-10" role="tab" aria-selected="false">Bagian 9</a></li>
 						<li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#tab-11" role="tab" aria-selected="false">Bagian 10</a></li>
 						<li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#tab-12" role="tab" aria-selected="false">Bagian 11</a></li>
-						<li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#tab-13" role="tab" aria-selected="false">Foto</a></li>
-						<li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#tab-14" role="tab" aria-selected="false">Pernyataan</a></li>
+						<li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#tab-13" role="tab" aria-selected="false">Bagian 12</a></li>
+						<li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#tab-14" role="tab" aria-selected="false">Foto</a></li>
+						<li class="nav-item"><a class="nav-link disabled" data-toggle="tab" href="#tab-15" role="tab" aria-selected="false">Pernyataan</a></li>
 					</ul>
 					<div class="tab-content p-3">
 						<div class="tab-pane fade active show" id="tab-1" role="tabpanel">
@@ -49,17 +50,29 @@
 										Data jumlah tenaga kerja tahun pengukuran (<?php echo (date('Y')-1)?>) (tenaga kerja asing, tenaga kerja lokal, tenaga kerja terdidik, tenaga kerja tidak terdidik, tenaga kerja laki-laki, dan tenaga kerja perempuan)
 									</li>
 									<li>
-										Data laporan keuangan meliputi nilai ekuitas, beban pajak daerah, beban pajak tidak langsung, beban gaji, beban depresiasi, dan laba/rugi perusahaan tahun pengukuran (<?php echo (date('Y')-1)?>)
+										Data laporan keuangan meliputi nilai ekuitas, beban pajak daerah, beban pajak tidak langsung, beban gaji, beban depresiasi dan laba/rugi perusahaan <b>tahun (<?php echo (date('Y')-1)?>) untuk perusahaan dengan periode laporan keuangan Januari-Desember atau data laporan keuangan tahun terakhir untuk perusahaan dengan periode laporan keuangan lainnya.</b>
 									</li>
 									<li>
-										Data jumlah industri terkait (seperti vendor, distributor, dll) baik pengguna fasilitas Kawasan Berikat maupun non-pengguna fasilitas Kawasan Berikat, untuk memenuhi data jaringan usaha
+										Data pembayaran Pajak tahun <?php echo (date('Y')-1);?> (Januari s.d. Desember) dan <?php echo date('Y');?> (Januari s.d. April) meliputi PPh Pasal 21, PPh Pasal 22 Impor, PPh Pasal 22 Selain Dalam Rangka Impor, PPh Pasal 23, PPh Pasal 26, PPh Pasal 4 ayat (2), PPN Kurang/(Lebih) Bayar, dan PBB sesuai Surat Setoran Pajak (SSP) terkait atau senilai yang disetorkan ke negara. Nilai PPN Masukan dan PPN Keluaran Tahun 2020 dan Tahun 2021 sesuai SPT Masa PPN terkait.
+									</li>
+									<li>
+										Data SPT PPh Badan Perusahaan yaitu PPh Badan Pasal 25 dan Pasal 29 tahun <?php echo (date('Y')-1);?> untuk periode laporan keuangan Januari s.d. Desember, atau SPT PPh Badan tahun terakhir untuk periode laporan keuangan selain Januari s.d. Desember.
+									</li>
+									<li>
+										Data jumlah industri terkait (seperti vendor, distributor, dll) baik pengguna fasilitas Kawasan Berikat, KITE, atau KITE IKM maupun non-pengguna fasilitas Kawasan Berikat, KITE,KITE IKM untuk memenuhi data jaringan usaha.
 									</li>
 									<li>
 										Data jumlah usaha di sekitar pabrik meliputi bidang perdangan, akomodasi, makanan, dan transportasi
 									</li>
+									<li>
+										Dalam hal perusahaan memiliki beberapa lokasi pabrik yang menggunakan fasilitas kepabeanan dan laporan keuangan yang terpisah atas masing-masing lokasi maka perusahaan harus mengisi kuisioner sebanyak laporan keuangannya
+									</li>
+									<li>
+										Kuisioner ini merupakan panduan untuk pengisian data di google form pada tautan yang sudah disediakan oleh masing-masing KWBC dan KPPBC.
+									</li>
 								</ol>
 								<p>
-									Semua data keuangan diisikan dalam mata uang rupiah. Bila nilai masih dalam bentuk mata uang asing, mohon dikonversi terlebih dahulu ke mata uang rupiah berdasarkan kurs 31 Desember di tahun (<?php echo (date('Y')-1)?>).
+									Semua data keuangan diisikan dalam mata uang rupiah. Bila nilai masih dalam bentuk mata uang asing, mohon dikonversi terlebih dahulu ke mata uang rupiah berdasarkan kurs 31 Desember di tahun tersebut.
 								</p>
 								<p>
 									Isikan terlebih dahulu <b>alamat "email pribadi"</b> pengisi kuisioner pada form di atas
@@ -98,14 +111,6 @@
 										<div class="custom-control custom-checkbox custom-control-inline">
 											<input type="checkbox" class="custom-control-input" name="I-fasilitas[]" value="Kawasan Berikat" id="checkboxKB">
 											<label class="custom-control-label" for="checkboxKB">Kawasan Berikat</label>
-										</div>
-										<div class="custom-control custom-checkbox custom-control-inline">
-											<input type="checkbox" class="custom-control-input" name="I-fasilitas[]" value="Gudang Berikat" id="checkboxGB">
-											<label class="custom-control-label" for="checkboxGB">Gudang Berikat</label>
-										</div>
-										<div class="custom-control custom-checkbox custom-control-inline">
-											<input type="checkbox" class="custom-control-input" name="I-fasilitas[]" value="Pusat Logistik Berikat" id="checkboxPLB">
-											<label class="custom-control-label" for="checkboxPLB">Pusat Logistik Berikat</label>
 										</div>
 										<div class="custom-control custom-checkbox custom-control-inline">
 											<input type="checkbox" class="custom-control-input" name="I-fasilitas[]" value="KITE Pembebasan" id="checkboxKiteBebas">
@@ -205,6 +210,12 @@
 										<option value="Job Order Maklon">Job Order Maklon</option>
 										<option value="Job Order Non Maklon">Job Order Non Maklon</option>
 										<option value="Job Order Gabungan (Maklon dan Non Maklon)">Job Order Gabungan (Maklon dan Non Maklon)</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="kppbcpengawasan">KPPBC Pengawasan</label>
+									<select class="form-control select2" name="II-kppbcpengawasan" id="kppbcpengawasan" required>
+										
 									</select>
 								</div>
 								<div class="form-group">
@@ -413,11 +424,14 @@
 						<div class="tab-pane fade" id="tab-6" role="tabpanel">
 							<div class="panel-tag" style="font-size: 20px;">
 								<b>BAGIAN V DATA PENAMBAHAN INVESTASI</b><br>
-								<p>
-									Dihitung berdasarkan jumlah nilai yang digunakan perusahaan untuk melakukan penambahan barang modal meliputi pengadaan, pembuatan, pembelian barang modal baru dari dalam negeri dan barang modal  baru maupun bekas dari luar negeri (termasuk perbaikan besar, transfer atau barter barang modal). Nilai tersebut dikurangi dengan penjualan barang modal (termasuk barang modal yang ditransfer atau barter kepada pihak lain). Barang modal yang dimaksud adalah yang mempunyai umur pemakaian lebih dari satu tahun dan tidak merupakan barang konsumsi. Dapat dilihat di laporan arus kas pada laporan keuangan atau dikonfirmasi ke bagian akuntansi masing-masing.
-									<br><br>
-									Isikan data dengan mata uang rupiah (kurs untuk tahun 2019, 1 USD = Rp 13.901,00)
-								</p>
+								<ul>
+									<li>
+										Dihitung berdasarkan jumlah nilai yang digunakan perusahaan untuk melakukan penambahan barang modal meliputi pengadaan, pembuatan, pembelian barang modal baru dari dalam negeri dan barang modal  baru maupun bekas dari luar negeri (termasuk perbaikan besar, transfer atau barter barang modal). Nilai tersebut dikurangi dengan penjualan barang modal (termasuk barang modal yang ditransfer atau barter kepada pihak lain). Barang modal yang dimaksud adalah yang mempunyai umur pemakaian lebih dari satu tahun dan tidak merupakan barang konsumsi. Dapat dilihat di laporan arus kas pada laporan keuangan atau dikonfirmasi ke bagian akuntansi masing-masing.
+									</li>
+									<li>
+										Isikan data dengan mata uang rupiah (kurs untuk tahun <?php echo (date("Y")-1)?>, 1 USD = Rp 14.294,00). Jika nilai investasi pada laporan keuangan ada nilai dibelakang koma, maka nilai investasi tersebut dituliskan dengan pembulatan ke bawah. Sebagai contoh : 1500987,80 atau 1500987,00 penulisannya dibulatkan menjadi 1500987.
+									</li>
+								</ul>
 							</div>
 							<br>
 							<form class="needs-validation" id="form5" enctype="multipart/form-data" novalidate>
@@ -476,21 +490,33 @@
 								<b>BAGIAN VI LABA SEBELUM PAJAK</b><br>
 								<ul>
 									<li>
-										Bila nilai masih dalam bentuk mata uang Asing, mohon dikonversi terlebih dahulu ke mata uang rupiah berdasarkan kurs tanggal 31 desember tahun <?php echo (date('Y')-1)?>.
+										Laba / Rugi sebelum pajak dapat dilihat pada laporan keuangan atau SPT 1771 Formulir 1771-I kolom 3-Jumlah Penghasilan Neto Komersial (Tahun <?php echo (date('Y')-1)?> untuk periode laporan keuangan Januari s.d. Desember atau tahun terakhir untuk periode laporan keuangan selain Januari s.d. Desember).
 									</li>
 									<li>
-										Laba / Rugi dapat dilihat pada laporan keuangan
+										Jika laba, cukup tulis nominal laba dalam satuan rupiah pada bagian pengisian nilai Laba Tahun <?php echo (date('Y')-1)?>/tahun buku terakhir. Jika rugi, cukup tulis nominal rugi dalam rupiah pada bagian pengisian Rugi Tahun <?php echo (date('Y')-1)?>/tahun buku terakhir
 									</li>
 									<li>
-										kurs untuk tahun <?php echo (date('Y')-1)?>, 1 USD = Rp 13.901,00
+										Diisi dalam mata uang rupiah dan tanpa tanda titik, tanpa tanda koma, dan tanpa lambang mata uang. Contoh: Untuk menuliskan nilai Rp. 1.500.000.000 cukup ditulis dengan 1500000000
+									</li>
+									<li>
+										Jika nilai Laba pada laporan keuangan/SPT ada nilai dibelakang koma, maka nilai laba tersebut dituliskan dengan pembulatan ke bawah. Sebagai contoh : 1500987,80 atau 1500987,00 penulisannya dibulatkan menjadi 1500987
+									</li>
+									<li>
+										Bila nilai masih dalam bentuk mata uang Asing, mohon dikonversi terlebih dahulu ke mata uang rupiah berdasarkan kurs tanggal 31 desember ditahun tersebut. kurs untuk tahun <?php echo (date('Y')-1)?>, 1 USD = Rp 14.294,00
 									</li>
 								</ul>
 							</div>
 							<br>
 							<form class="needs-validation" id="form6" novalidate enctype="multipart/form-data">
 								<div class="form-group">
-									<label class="form-label" for="labaSebelumPajak">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
-									<input type="text" class="form-control rupiah" id="labaSebelumPajak" name="VI-labaSebelumPajak-mask" required>
+									<label class="form-label" for="periodeLaporanKeuangan">Periode Laporan Keuangan</label><br>
+									<label class="form-label" for="periodeLaporanKeuangan">Contoh : Januari s.d. Desember, April s.d. Maret, dll</label>
+									<input type="text" class="form-control" name="VI-periodeLaporanKeuangan">
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="labaSebelumPajak">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label><br>
+									<label class="form-label">Apabila rugi tulis dengan angka negatif contoh -1500000000 </label>
+									<input type="text" class="form-control rupiah" id="labaSebelumPajak" name="VI-labaSebelumPajak-mask">
 								</div>
 							</form>
 							<div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row-reverse">
@@ -503,21 +529,47 @@
 								<b>BAGIAN VII PPH BADAN</b><br>
 								<ul>
 									<li>
-										Besar PPh Badan Perusahaan adalah total PPh badan Pasal 25 dan Pasal 29, bisa dilihat d SPT pada kolom   "Total PPh terutang" atau dapat juga dilihat di laporan keuangan.
+										Besar PPh Badan Perusahaan adalah total PPh badan Pasal 25 dan Pasal 29, bisa dilihat d SPT pada kolom   "Total PPh terutang" (Formulir SPT 1771 Bagian B nomor 6) atau dapat juga dilihat di laporan keuangan (Tahun <?php echo (date('Y')-1)?> untuk periode laporan keuangan Januari s.d. Desember atau tahun terakhir untuk periode laporan keuangan selain Januari s.d. Desember).
+									</li>
+									<li>
+										Diisi dalam mata uang rupiah dan tanpa tanda titik, tanpa tanda koma, dan tanpa lambang mata uang. Contoh: Untuk menuliskan nilai Rp. 1.500.000.000  ditulis 1500000000
+									</li>
+									<li>
+										Jika nilai PPh Badan pada SPT atau laporan keuangan/SPT ada nilai dibelakang koma, maka nilai PPh Badan tersebut dituliskan dengan pembulatan ke bawah. Sebagai contoh : 1500987,80 atau 1500987,00 penulisannya dibulatkan menjadi 1500987
 									</li>
 									<li>
 										Bila nilai masih dalam bentuk mata uang Asing, mohon dikonversi terlebih dahulu ke mata uang rupiah berdasarkan kurs tanggal 31 desember tahun <?php echo (date('Y')-1)?>.
 									</li>
 									<li>
-										kurs untuk tahun <?php echo (date('Y')-1)?>, 1 USD = Rp 13.901,00
+										kurs untuk tahun <?php echo (date('Y')-1)?>, 1 USD = Rp 14.294,00
 									</li>
 								</ul>
 							</div>
 							<br>
 							<form class="needs-validation" id="form7" novalidate enctype="multipart/form-data">
 								<div class="form-group">
-									<label class="form-label" for="pphBadan">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
+									<label>⮚	Nilai PPh Badan (Pasal 25/29) Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
 									<input type="text" class="form-control rupiah" id="pphBadan" name="VII-pphBadan-mask" required>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="alasanPphBadan">Apabila nilai PPh Badan nol “0”, sertakan alasannya :</label>
+									<div class="custom-control custom-radio">
+										<input type="radio" class="custom-control-input" id="alasanPph_1" name="VII-alasanPphBadan" value="belum lapor SPT PPh Badan">
+										<label class="custom-control-label" for="alasanPph_1">belum lapor SPT PPh Badan</label>
+									</div>
+									<div class="custom-control custom-radio">
+										<input type="radio" class="custom-control-input" id="alasanPph_2" name="VII-alasanPphBadan" value="masih dalam pemeriksaan pajak">
+										<label class="custom-control-label" for="alasanPph_2">masih dalam pemeriksaan pajak</label>
+									</div>
+									<div class="custom-control custom-radio">
+										<input type="radio" class="custom-control-input" id="alasanPph_3" name="VII-alasanPphBadan" value="mengalami kerugian pada tahun 2020">
+										<label class="custom-control-label" for="alasanPph_3">mengalami kerugian pada tahun 2020</label>
+									</div>
+									<div class="custom-control custom-radio">
+										<input type="radio" class="custom-control-input" id="alasanPph_4" name="VII-alasanPphBadan" value="Lainnya">
+										<label class="custom-control-label" for="alasanPph_4">Lainnya</label>
+										<input type="text" class="form-control" style="width: 40%;" name="VII-alasanPphBadan-input">
+									</div>
 								</div>
 							</form>
 							<div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row-reverse">
@@ -527,7 +579,104 @@
 						</div>
 						<div class="tab-pane fade" id="tab-9" role="tabpanel">
 							<div class="panel-tag" style="font-size: 20px;">
-								<b>BAGIAN VIII PENGELUARAN</b><br>
+								<b>BAGIAN VIII PERPAJAKAN</b><br>
+								<ul>
+									<li>
+										Besar nilai pajak terkait Pajak Penghasilan (PPh Pasal 21, PPh Pasal 22, PPh Pasal 23, PPh Pasal 26, PPh Pasal 4 ayat (2) adalah total nilai pajak yang dibayar atau disetor ke kas negara dalam satu tahun di Tahun 2020 dan Semester 1 Tahun 2021 (sesuai jumlah pajak yang disetorkan dalam Surat Setoran Pajak/SSP selama tahun <?php echo (date('Y')-1)?> dan bulan Januari s.d. April <?php echo (date('Y'))?>)
+									</li>
+									<li>
+										Besar nilai pajak terkait PPN adalah total nilai Pajak Masukan dan Pajak Keluaran dalam satu tahun di tahun <?php echo (date('Y')-1)?> dan Semester 1 Tahun <?php echo (date('Y'))?> (dapat dilihat pada kolom SPT Masa Januari s.d. Desember <?php echo (date('Y')-1)?> dan Masa Januari s.d. April <?php echo (date('Y'))?>) dan total Nilai PPN Kurang/Lebih Bayar tahun <?php echo (date('Y')-1)?> dan Semester  1 Tahun <?php echo (date('Y'))?> (sesuai jumlah PPN yang disetorkan dalam Surat Setoran Pajak/SSP selama tahun <?php echo (date('Y')-1)?> dan bulan Januari s.d. April <?php echo (date('Y'))?>)
+									</li>
+									<li>
+										Nilai Pajak bumi dan bangunan adalah total nilai PBB selain yang termasuk pajak daerah antara lain PBB Kehutanan, Pertambangan, dll.
+									</li>
+									<li>
+										Diisi dalam mata uang rupiah dan tanpa tanda titik, tanpa tanda koma, dan tanpa lambang mata uang. Contoh: Untuk menuliskan nilai Rp. 1.500.000.000  ditulis 1500000000
+									</li>
+								</ul>
+							</div>
+							<br>
+							<form class="needs-validation" id="form14" novalidate enctype="multipart/form-data">
+								<div class="form-group">
+									<label class="form-label">PPh Pasal 21</label><br>
+									<label class="form-label" for="pph21Y1">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph21Y1" name="VIII-pph21Y1-mask"><br>
+									<label class="form-label" for="pph21Y0">Tahun <?php echo (date('Y'))?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph21Y0" name="VIII-pph21Y0-mask">
+								</div>
+								<div class="form-group">
+									<label class="form-label">PPh Pasal 22</label><br>
+									<label class="form-label" for="pph22Y1">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph22Y1" name="VIII-pph22Y1-mask"><br>
+									<label class="form-label" for="pph22Y0">Tahun <?php echo (date('Y'))?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph22Y0" name="VIII-pph22Y0-mask">
+								</div>
+								<div class="form-group">
+									<label class="form-label">PPh Pasal 22 Selain Dalam Rangka Impor</label><br>
+									<label class="form-label" for="pph22Y1nonImpor">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph22Y1nonImpor" name="VIII-pph22Y1nonImpor-mask"><br>
+									<label class="form-label" for="pph22Y0nonImpor">Tahun <?php echo (date('Y'))?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph22Y0nonImpor" name="VIII-pph22Y0nonImpor-mask">
+								</div>
+								<div class="form-group">
+									<label class="form-label">PPh Pasal 23</label><br>
+									<label class="form-label" for="pph23Y1">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph23Y1" name="VIII-pph23Y1-mask"><br>
+									<label class="form-label" for="pph23Y0">Tahun <?php echo (date('Y'))?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph23Y0" name="VIII-pph23Y0-mask">
+								</div>
+								<div class="form-group">
+									<label class="form-label">PPh Pasal 26</label><br>
+									<label class="form-label" for="pph26Y1">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph26Y1" name="VIII-pph26Y1-mask"><br>
+									<label class="form-label" for="pph26Y0">Tahun <?php echo (date('Y'))?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph26Y0" name="VIII-pph26Y0-mask">
+								</div>
+								<div class="form-group">
+									<label class="form-label">PPh Pasal 4 Ayat 2</label><br>
+									<label class="form-label" for="pph42Y1">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph42Y1" name="VIII-pph42Y1-mask"><br>
+									<label class="form-label" for="pph42Y0">Tahun <?php echo (date('Y'))?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pph42Y0" name="VIII-pph42Y0-mask">
+								</div>
+								<div class="form-group">
+									<label class="form-label">PPN Masukan</label><br>
+									<label class="form-label" for="ppnMasukan1">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="ppnMasukan1" name="VIII-ppnMasukan1-mask"><br>
+									<label class="form-label" for="ppnMasukan0">Tahun <?php echo (date('Y'))?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="ppnMasukan0" name="VIII-ppnMasukan0-mask">
+								</div>
+								<div class="form-group">
+									<label class="form-label">PPN Keluaran</label><br>
+									<label class="form-label" for="ppnKeluaran1">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="ppnKeluaran1" name="VIII-ppnKeluaran1-mask"><br>
+									<label class="form-label" for="ppnKeluaran0">Tahun <?php echo (date('Y'))?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="ppnKeluaran0" name="VIII-ppnKeluaran0-mask">
+								</div>
+								<div class="form-group">
+									<label class="form-label">PPN Kurang / Lebih Bayar</label><br>
+									<label class="form-label"><b>jika lebih bayar mohon didahului dengan tanda minus “-“</b></label><br>
+									<label class="form-label" for="ppnSelisih1">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="ppnSelisih1" name="VIII-ppnSelisih1-mask"><br>
+									<label class="form-label" for="ppnSelisih0">Tahun <?php echo (date('Y'))?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="ppnSelisih0" name="VIII-ppnSelisih0-mask">
+								</div>
+								<div class="form-group">
+									<label class="form-label">PBB (Pajak Bumi dan Bangunan)</label><br>
+									<label class="form-label" for="pbb1">Tahun <?php echo (date('Y')-1)?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pbb1" name="VIII-pbb1-mask"><br>
+									<label class="form-label" for="pbb0">Tahun <?php echo (date('Y'))?> (Rupiah)</label>
+									<input type="text" class="form-control rupiah" id="pbb0" name="VIII-pbb0-mask">
+								</div>
+							</form>
+							<div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row-reverse">
+								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form14', 'tab-9', '#pajakDaerah')" type="button">Berikutnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-9')" type="button" style="margin-right:15px;">Sebelumnya</button>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="tab-10" role="tabpanel">
+							<div class="panel-tag" style="font-size: 20px;">
+								<b>BAGIAN IX PENGELUARAN</b><br>
 								<ul>
 									<li>
 										Bila nilai masih dalam bentuk mata uang Asing, mohon dikonversi terlebih dahulu ke mata uang rupiah berdasarkan kurs tanggal 31 desember tahun <?php echo (date('Y')-1)?>.
@@ -541,35 +690,35 @@
 							<form class="needs-validation" id="form8" novalidate enctype="multipart/form-data">
 								<div class="form-group">
 									<label class="form-label" for="pajakDaerah">Total pengeluaran perusahaan untuk pajak daerah dan retribusi daerah</label>
-									<input type="text" class="form-control rupiah" id="pajakDaerah" name="VIII-pajakDaerah-mask" required>
+									<input type="text" class="form-control rupiah" id="pajakDaerah" name="IX-pajakDaerah-mask" required>
 									<span>jenis-jenis pajak daerah dan retribusi daerah dapat dilihat pada link berikut: <a href="http://bit.ly/JenisPDRD" target="_blank">http://bit.ly/JenisPDRD</a></span>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="bebanUpah">Beban Upah/Gaji Tahun (<?php echo date('Y')-1?>)</label> <br>
 									<label class="form-label">Meliputi beban gaji yang dikeluarkan perusahaan yang tercatat dalam laporan keuangan</label>
-									<input type="text" class="form-control rupiah" id="bebanUpah" name="VIII-bebanUpah-mask" required>
+									<input type="text" class="form-control rupiah" id="bebanUpah" name="IX-bebanUpah-mask" required>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="depresiasi">Depresiasi atau Penyusutan Tahun (<?php echo date('Y')-1?>)</label> <br>
 									<label class="form-label">Meliputi beban depresiasi yang dikeluarkan perusahaan yang tercatat dalam laporan keuangan</label>
-									<input type="text" class="form-control rupiah" id="depresiasi" name="VIII-depresiasi-mask" required>
+									<input type="text" class="form-control rupiah" id="depresiasi" name="IX-depresiasi-mask" required>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="pajakTidakLangsung">Pajak Tidak Langsung Tahun (<?php echo date('Y')-1?>)</label> <br>
 									<p>Cukup tuliskan total dari pajak tidak langsung.
 										Pajak tidak langsung adalah pajak yang dikenakan kepada wajib pajak pada saat tertentu / terjadi suatu peristiwa kena pajak seperti misalnya pajak pertambahan nilai (PPN), pajak bea balik nama kendaraan bermotor (BBNKB), PPN, PPn-BM/pajak penjualan atas barang mewah , BeaMaterai(BM), Cukai, Bea Masuk dll. <br>
 									Isikan dengan mata uang rupiah (kurs untuk tahun 2019, 1 USD = Rp 13.901)</p>
-									<input type="text" class="form-control rupiah" id="pajakTidakLangsung" name="VIII-pajakTidakLangsung-mask" required>
+									<input type="text" class="form-control rupiah" id="pajakTidakLangsung" name="IX-pajakTidakLangsung-mask" required>
 								</div>
 							</form>
 							<div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row-reverse">
-								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form8', 'tab-9', '#jaringanFasilitas')" type="button">Berikutnya</button>
-								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-9')" type="button" style="margin-right:15px;">Sebelumnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form8', 'tab-10', '#jaringanFasilitas')" type="button">Berikutnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-10')" type="button" style="margin-right:15px;">Sebelumnya</button>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="tab-10" role="tabpanel">
+						<div class="tab-pane fade" id="tab-11" role="tabpanel">
 							<div class="panel-tag" style="font-size: 20px;">
-								<b>BAGIAN IX JARINGAN INDUSTRI</b><br>
+								<b>BAGIAN X JARINGAN INDUSTRI</b><br>
 								<br>
 								<p>Adalah jumlah jaringan industri yang terbentuk dari:</p> <br>
 								<p>Perusahaan yang memiliki keterkaitan bisnis seperti vendor, distributor, cabang/anak peruahaan dan sejenisnya, meliputi: </p> <br>
@@ -582,21 +731,21 @@
 							<form class="needs-validation" id="form9" novalidate enctype="multipart/form-data">
 								<div class="form-group">
 									<label class="form-label" for="jaringanFasilitas">Jumlah perusahaan yang memiliki keterkaitan yang merupakan Penerima Fasilitas Kawasan Berikat / KITE / KITE IKM Tahun <?php echo date('Y')-1?></label>
-									<input type="text" class="form-control" id="jaringanFasilitas" name="IX-jaringanFasilitas" required>
+									<input type="text" class="form-control" id="jaringanFasilitas" name="X-jaringanFasilitas" required>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="detailJaringanFasilitas">Tuliskan Nama perusahaan Terkait </label>
-									<select class="form-control select2 multi-select" id="detailJaringanFasilitas" name="IX-detailJaringanFasilitas[]" multiple="multiple"></select>
+									<select class="form-control select2 multi-select" id="detailJaringanFasilitas" name="X-detailJaringanFasilitas[]" multiple="multiple"></select>
 								</div>
 								<br>
 								<br>
 								<div class="form-group">
 									<label class="form-label" for="jaringanNonFasilitas">Jumlah perusahaan yang memiliki keterkaitan yang merupakan Non penerima Fasilitas Kawasan Berikat / KITE / KITE IKM Tahun <?php echo date('Y')-1?></label>
-									<input type="text" class="form-control" id="jaringanNonFasilitas" name="IX-jaringanNonFasilitas" required>
+									<input type="text" class="form-control" id="jaringanNonFasilitas" name="X-jaringanNonFasilitas" required>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="detailjaringanNonFasilitas">Tuliskan Nama perusahaan Terkait </label>
-									<select class="form-control select2 multi-select" id="detailjaringanNonFasilitas" name="IX-detailjaringanNonFasilitas[]" multiple="multiple"></select>
+									<select class="form-control select2 multi-select" id="detailjaringanNonFasilitas" name="X-detailjaringanNonFasilitas[]" multiple="multiple"></select>
 								</div>
 								<div class="form-group">
 									<label class="form-label">Tenaga Kerja Seluruh Jaringan Industri Non Penerima Fasilitas:</label><br>	
@@ -656,9 +805,9 @@
 													<tbody class="table table-bordered table-striped table-responsive" style="width: 818px; align-content: center;" id="tableDtJrInput">
 														<tr>
 															<td style="width: 5%">NO</td>
-															<td style="width: 35%;"><input type="text" class="form-control" name="IX-dtJr-nama"></td>
-															<td style="width: 35%;"><input type="text" class="form-control npwp-jaringan" name="IX-dtJr-npwp"></td>
-															<td style="width: 25%;"><input type="text" class="form-control" name="IX-dtJr-jumlah"></td>
+															<td style="width: 35%;"><input type="text" class="form-control" name="X-dtJr-nama"></td>
+															<td style="width: 35%;"><input type="text" class="form-control npwp-jaringan" name="X-dtJr-npwp"></td>
+															<td style="width: 25%;"><input type="text" class="form-control" name="X-dtJr-jumlah"></td>
 														</tr>
 													</tbody>
 												</table>
@@ -672,13 +821,13 @@
 								</div>
 							</form>
 							<div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row-reverse">
-								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form9', 'tab-10', '#dagangRumah')" type="button">Berikutnya</button>
-								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-10')" type="button" style="margin-right:15px;">Sebelumnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form9', 'tab-11', '#dagangRumah')" type="button">Berikutnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-11')" type="button" style="margin-right:15px;">Sebelumnya</button>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="tab-11" role="tabpanel">
+						<div class="tab-pane fade" id="tab-12" role="tabpanel">
 							<div class="panel-tag" style="font-size: 20px;">
-								<b>BAGIAN X PELAKU USAHA</b><br>
+								<b>BAGIAN XI PELAKU USAHA</b><br>
 								<p>
 									MERUPAKAN JUMLAH PELAKU USAHA / UNIT USAHA DI TAHUN 2019
 									Dikelompokkan ke dalam kategori industri rumah tangga, kecil, sedang dan besar berdasarkan jumlah tenaga kerja dengan merujuk pada klasifikasi industri pada Surat Keputusan Menteri Perindustrian Indonesia No.19/M/I/1986 sebagai berikut:
@@ -720,80 +869,80 @@
 									<h3>Diisikan dengan Jumlah pelaku usaha / unit usaha dalam jarak 2 km disekitar perusahaan yang muncul karena adanya perusahaan Anda di bidang perdagangan seperti minimarket, toko  kelontong, warung dan sejenisnya.</h3>
 									<br>
 									<label class="form-label">Rumah Tangga</label>
-									<input type="text" class="form-control" id="dagangRumah" name="X-dagangRumah" required>
+									<input type="text" class="form-control" id="dagangRumah" name="XI-dagangRumah" required>
 									<br>
 									<label class="form-label">Kecil</label>
-									<input type="text" class="form-control" id="dagangKecil" name="X-dagangKecil" required>
+									<input type="text" class="form-control" id="dagangKecil" name="XI-dagangKecil" required>
 									<br>
 									<label class="form-label">Sedang</label>
-									<input type="text" class="form-control" id="dagangSedang" name="X-dagangSedang" required>
+									<input type="text" class="form-control" id="dagangSedang" name="XI-dagangSedang" required>
 									<br>
 									<label class="form-label">Besar</label>
-									<input type="text" class="form-control" id="dagangBesar" name="X-dagangBesar" required>
+									<input type="text" class="form-control" id="dagangBesar" name="XI-dagangBesar" required>
 								</div>
 								<div class="form-group">
 									<label class="form-label">Jumlah  pelaku usaha / unit usaha lain dibidang Akomodasi:</label> <br><br>
 									<h3>Diisikan dengan pelaku usaha / unit usaha dalam lingkup kecamatan disekitar perusahaan yang muncul karena adanya perusahaan Anda termasuk hotel, apartemen, kontrakan, kos-kosan dan sejenisnya.</h3>
 									<br>
 									<label class="form-label">Rumah Tangga</label>
-									<input type="text" class="form-control" id="akomodasiRumah" name="X-akomodasiRumah" required>
+									<input type="text" class="form-control" id="akomodasiRumah" name="XI-akomodasiRumah" required>
 									<br>
 									<label class="form-label">Kecil</label>
-									<input type="text" class="form-control" id="akomodasiKecil" name="X-akomodasiKecil" required>
+									<input type="text" class="form-control" id="akomodasiKecil" name="XI-akomodasiKecil" required>
 									<br>
 									<label class="form-label">Sedang</label>
-									<input type="text" class="form-control" id="akomodasiSedang" name="X-akomodasiSedang" required>
+									<input type="text" class="form-control" id="akomodasiSedang" name="XI-akomodasiSedang" required>
 									<br>
 									<label class="form-label">Besar</label>
-									<input type="text" class="form-control" id="akomodasiBesar" name="X-akomodasiBesar" required>
+									<input type="text" class="form-control" id="akomodasiBesar" name="XI-akomodasiBesar" required>
 								</div>
 								<div class="form-group">
 									<label class="form-label">Jumlah pelaku usaha / unit usaha di bidang makanan:</label> <br><br>
 									<h3>Diisikan dengan jumlah pelaku usaha / unit usaha dalam jarak 1 km di sekitar perusahaan yang muncul karena adanya perusahaan Anda di bidang makanan seperti warteg, rumah makan, restoran dan lainnya.</h3>
 									<br>
 									<label class="form-label">Rumah Tangga</label>
-									<input type="text" class="form-control" id="makananRumah" name="X-makananRumah" required>
+									<input type="text" class="form-control" id="makananRumah" name="XI-makananRumah" required>
 									<br>
 									<label class="form-label">Kecil</label>
-									<input type="text" class="form-control" id="makananKecil" name="X-makananKecil" required>
+									<input type="text" class="form-control" id="makananKecil" name="XI-makananKecil" required>
 									<br>
 									<label class="form-label">Sedang</label>
-									<input type="text" class="form-control" id="makananSedang" name="X-makananSedang" required>
+									<input type="text" class="form-control" id="makananSedang" name="XI-makananSedang" required>
 									<br>
 									<label class="form-label">Besar</label>
-									<input type="text" class="form-control" id="makananBesar" name="X-makananBesar" required>
+									<input type="text" class="form-control" id="makananBesar" name="XI-makananBesar" required>
 								</div>
 								<div class="form-group">
 									<label class="form-label">Jumlah pelaku usaha / unit usaha di bidang Transportasi:</label> <br><br>
 									<h3>Diisikan dengan jumlah pelaku usaha / unit usaha yang memiliki rute di sekitar perusahaan yang muncul karena adanya perusahaan Anda seperti ojek, angkot, sewa mobil dan sejenisnya yang beroperasi di sekitar pabrik.</h3>
 									<br>
 									<label class="form-label">Rumah Tangga</label>
-									<input type="text" class="form-control" id="transportRumah" name="X-transportRumah" required>
+									<input type="text" class="form-control" id="transportRumah" name="XI-transportRumah" required>
 									<br>
 									<label class="form-label">Kecil</label>
-									<input type="text" class="form-control" id="transportKecil" name="X-transportKecil" required>
+									<input type="text" class="form-control" id="transportKecil" name="XI-transportKecil" required>
 									<br>
 									<label class="form-label">Sedang</label>
-									<input type="text" class="form-control" id="transportSedang" name="X-transportSedang" required>
+									<input type="text" class="form-control" id="transportSedang" name="XI-transportSedang" required>
 									<br>
 									<label class="form-label">Besar</label>
-									<input type="text" class="form-control" id="transportBesar" name="X-transportBesar" required>
+									<input type="text" class="form-control" id="transportBesar" name="XI-transportBesar" required>
 								</div>
 							</form>
 							<div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row-reverse">
-								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form10', 'tab-11', '#umum1')" type="button">Berikutnya</button>
-								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-11')" type="button" style="margin-right:15px;">Sebelumnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form10', 'tab-12', '#umum1')" type="button">Berikutnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-12')" type="button" style="margin-right:15px;">Sebelumnya</button>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="tab-12" role="tabpanel">
+						<div class="tab-pane fade" id="tab-13" role="tabpanel">
 							<div class="panel-tag" style="font-size: 20px;">
-								<b>BAGIAN XI PERTANYAAN UMUM</b><br>
+								<b>BAGIAN XII PERTANYAAN UMUM</b><br>
 							</div>
 							<br>
 							<form class="needs-validation" id="form11" novalidate enctype="multipart/form-data">
 								<div class="form-group">
 									<label class="form-label" for="umum1">1. Fasilitas KB / KITE / KITE IKM memberikan manfaat yang signifikan bagi perusahaan</label>
-									<select class="form-control select2" name="XI-umum1" required>
+									<select class="form-control select2" name="XII-umum1" required>
 										<option value="Sangat Setuju">Sangat Setuju</option>
 										<option value="Setuju">Setuju</option>
 										<option value="Netral">Netral</option>
@@ -802,7 +951,7 @@
 									</select>
 									<br>
 									<label class="form-label" for="jelasUmum1">Jelaskan Alasan Jawaban anda pada pertanyaan sebelumnya:</label>
-									<textarea class="form-control" rows="3" name="XI-umum1-jelas" required></textarea>
+									<textarea class="form-control" rows="3" name="XII-umum1-jelas" required></textarea>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="umum2">2. Berapa persen efisiensi biaya yang diperoleh perusahaan dari pemanfaatan Fasilitas KB/ KITE/ KITE IKM ?</label>
@@ -812,83 +961,222 @@
 										<tr>
 											<td>a</td>
 											<td style="width: 50%;">a. Biaya produksi (HPP) jika menggunakan fasilitas = </td>
-											<td style="width: 45%;"><input type="text" class="form-control rupiah" name="XI-umum2-a-mask" required></td>
+											<td style="width: 45%;"><input type="text" class="form-control rupiah" name="XII-umum2-a-mask" required></td>
 										</tr>
 										<tr>
 											<td>b</td>
 											<td style="width: 50%;">b. Biaya produksi (HPP) jika tidak menggunakan fasilitas =</td>
-											<td style="width: 45%;"><input type="text" class="form-control rupiah" name="XI-umum2-b-mask" required></td>
+											<td style="width: 45%;"><input type="text" class="form-control rupiah" name="XII-umum2-b-mask" required></td>
 										</tr>
 										<tr>
 											<td>c</td>
 											<td style="width: 50%;">c. Perbandingan (a:b)x100% = </td>
-											<td style="width: 45%;"><input type="text" class="form-control persen" name="XI-umum2-c-mask" required></td>
+											<td style="width: 45%;"><input type="text" class="form-control persen" name="XII-umum2-c-mask" required></td>
 										</tr>
 									</table>
 								</div>
 								<div class="form-group">
-									<label class="form-label" for="umum3">3. Apakah dampak bagi perusahaan jika fasilitas kepabeanan dihilangkan oleh pemerintah? </label>
-									<textarea class="form-control" rows="3" id="umum3" name="XI-umum3" required></textarea>
+									<label class="form-label" for="umum3">3. Apakah dampak bagi perusahaan jika fasilitas kepabeanan dihilangkan oleh pemerintah? (bisa memilih lebih dari satu jawaban)</label>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum3_1" name="XII-umum3[]" value="Persaingan usaha terutama di tingkat international semakin sulit">
+										<label class="custom-control-label" for="umum3_1">Persaingan usaha terutama di tingkat international semakin sulit</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum3_2" name="XII-umum3[]" value="Laba perusahaan menurun">
+										<label class="custom-control-label" for="umum3_2">Laba perusahaan menurun</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum3_3" name="XII-umum3[]" value="Beban produksi meningkat">
+										<label class="custom-control-label" for="umum3_3">Beban produksi meningkat</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum3_4" name="XII-umum3[]" value="Arus barang keluar masuk terhambat">
+										<label class="custom-control-label" for="umum3_4">Arus barang keluar masuk terhambat</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum3_5" name="XII-umum3[]" value="Tidak memberikan dampak bagi bisnis perusahaan">
+										<label class="custom-control-label" for="umum3_5">Tidak memberikan dampak bagi bisnis perusahaan</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum3_6" name="XII-umum3[]" value="Lainnya">
+										<label class="custom-control-label" for="umum3_6">Lainnya</label>
+									</div>
+									<textarea class="form-control" rows="3" id="umum3" name="XII-umum3-input"></textarea>
 								</div>
 								<div class="form-group">
-									<label class="form-label" for="umum4">4. Apakah yang akan dilakukan perusahaan jika fasilitas kepabeanan dihilangkan oleh pemerintah?  </label>
-									<textarea class="form-control" rows="3" id="umum4" name="XI-umum4" required></textarea>
+									<label class="form-label" for="umum4">4. Apakah yang akan dilakukan perusahaan jika fasilitas kepabeanan dihilangkan oleh pemerintah?  (bisa memilih lebih dari satu jawaban)</label>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum4_2" name="XII-umum4[]" value="Perusahaan akan mengurangi jumlah pegawai">
+										<label class="custom-control-label" for="umum4_2">Perusahaan akan mengurangi jumlah pegawai</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum4_3" name="XII-umum4[]" value="Perusahaan menutup usaha">
+										<label class="custom-control-label" for="umum4_3">Perusahaan menutup usaha</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum4_4" name="XII-umum4[]" value="Perusahaan memindahkan usahanya ke negara lain">
+										<label class="custom-control-label" for="umum4_4">Perusahaan memindahkan usahanya ke negara lain</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum4_5" name="XII-umum4[]" value="Perusahaan akan tetap melanjutkan usaha di Indonesia">
+										<label class="custom-control-label" for="umum4_5">Perusahaan akan tetap melanjutkan usaha di Indonesia</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum4_6" name="XII-umum4[]" value="Lainnya">
+										<label class="custom-control-label" for="umum4_6">Lainnya</label>
+									</div>
+									<textarea class="form-control" rows="3" id="umum4" name="XII-umum4-input"></textarea>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="umum5">5. Negara manakah yang akan menjadi pilihan perusahaan untuk memindahkan usaha jika faslitas kepabeanan dihilangkan oleh pemerintah?</label>
-									<select class="form-control select2" name="XI-umum5" required>
+									<select class="form-control select2" name="XII-umum5" required>
 										
 									</select>
 									<br>
 									<label class="form-label">Jelaskan alasan pilihan negara tersebut </label>
-									<textarea class="form-control" rows="3" id="jelasUmum5" name="XI-umum5-jelas" required></textarea>
+									<textarea class="form-control" rows="3" id="jelasUmum5" name="XII-umum5-jelas" required></textarea>
 									<br>
 									<label class="form-label">Apa kelebihan negara tersebut dibandingkan Indonesia?</label>
-									<textarea class="form-control" rows="3" name="XI-umum-5-kelebihan" required></textarea>
+									<textarea class="form-control" rows="3" name="XII-umum-5-kelebihan" required></textarea>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="umum6">6. Apakah perusahaan berencana untuk melakukan ekspansi ke luar Jawa?</label>
-									<select class="form-control select2" name="XI-umum6" required>
+									<select class="form-control select2" name="XII-umum6" required>
 										<option value="Ya">Ya</option>
 										<option value="Tidak">Tidak</option>
 									</select>
 									<br>
-									<label class="form-label">Jelaskan alasan pilihan anda</label>
-									<textarea class="form-control" rows="3" id="jelasUmum6" name="XI-umum6-jelas" required></textarea>
+									<label class="form-label">Jelaskan alasan pilihan anda</label><br>
+									<label class="form-label">Jika Ya, sebutkan alasannya (bisa pilih lebih dari satu):</label><br>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum6_2" name="XII-umum6[]" value="Adanya potensi pasar di luar Jawa">
+										<label class="custom-control-label" for="umum6_2">Adanya potensi pasar di luar Jawa</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum6_3" name="XII-umum6[]" value="Kemudahan memperoleh bahan baku di luar Jawa">
+										<label class="custom-control-label" for="umum6_3">Kemudahan memperoleh bahan baku di luar Jawa</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum6_4" name="XII-umum6[]" value="Kompetitor di luar Jawa masih sedikit">
+										<label class="custom-control-label" for="umum6_4">Kompetitor di luar Jawa masih sedikit</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum6_5" name="XII-umum6[]" value="Akses yang lebih mudah jika perusahaan berada di luar Jawa">
+										<label class="custom-control-label" for="umum6_5">Akses yang lebih mudah jika perusahaan berada di luar Jawa</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum6_6" name="XII-umum6[]" value="Lainnya">
+										<label class="custom-control-label" for="umum6_6">Lainnya</label>
+									</div>
+									<textarea class="form-control" rows="3" id="jelasUmum6" name="XII-umum6-jelas-ya"></textarea>
+									<br>
+									<br>
+									<label class="form-label">Jika Tidak, sebutkan alasannya (bisa pilih lebih dari satu):</label><br>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum6_7" name="XII-umum6[]" value="Perusahaan memang sudah berlokasi di luar Jawa">
+										<label class="custom-control-label" for="umum6_7">Perusahaan memang sudah berlokasi di luar Jawa</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum6_8" name="XII-umum6[]" value="Biaya yang dibutuhkan untuk ekspansi ke luar Jawa sangat besar">
+										<label class="custom-control-label" for="umum6_8">Biaya yang dibutuhkan untuk ekspansi ke luar Jawa sangat besar</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum6_9" name="XII-umum6[]" value="Tidak ada potensi pasar di luar Jawa">
+										<label class="custom-control-label" for="umum6_9">Tidak ada potensi pasar di luar Jawa</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum6_10" name="XII-umum6[]" value="Tidak ada akses yang memadai di luar Jawa">
+										<label class="custom-control-label" for="umum6_100">Tidak ada akses yang memadai di luar Jawa</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum6_11" name="XII-umum6[]" value="Lainnya">
+										<label class="custom-control-label" for="umum6_11">Lainnya</label>
+									</div>
+									<textarea class="form-control" rows="3" id="jelasUmum6" name="XII-umum6-jelas-tidak"></textarea>
 								</div>
 								<div class="form-group">
-									<label class="form-label" for="umum7">7. Menurut Anda, jenis fasilitas kepabeanan apa yang dapat mendorong perusahaan untuk ekspansi ke Luar Jawa?</label>
-									<textarea class="form-control" rows="3" id="umum7" name="XI-umum7" required></textarea>
+									<label class="form-label" for="umum7">7. Menurut Anda, jenis fasilitas kepabeanan apa yang dapat mendorong perusahaan untuk ekspansi ke Luar Jawa? (dapat memilih lebih dari satu jawaban)</label>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum7_1" name="XII-umum7[]" value="Kawasan Berikat">
+										<label class="custom-control-label" for="umum7_1">Kawasan Berikat</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum7_2" name="XII-umum7[]" value="Pusat Logistik Berikat">
+										<label class="custom-control-label" for="umum7_2">Pusat Logistik Berikat</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum7_3" name="XII-umum7[]" value="Gudang Berikat">
+										<label class="custom-control-label" for="umum7_3">Gudang Berikat</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum7_4" name="XII-umum7[]" value="Kemudahan Impor Tujuan Ekspor">
+										<label class="custom-control-label" for="umum7_4">Kemudahan Impor Tujuan Ekspor</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum7_5" name="XII-umum7[]" value="Tidak Ada">
+										<label class="custom-control-label" for="umum7_5">Tidak Ada</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum7_6" name="XII-umum7[]" value="Lainnya">
+										<label class="custom-control-label" for="umum7_6">Lainnya</label>
+									</div>
+									<textarea class="form-control" rows="3" id="umum7" name="XII-umum7-input"></textarea>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="umum8">8. (Khusus Perusahaan KITE Pengembalian) </label>
 									<br>
 									<label class="form-label">a. Berapa persentase scrap/waste atas seluruh hasil produksi?</label>
-									<input class="form-control persen" id="umum8-a" name="XI-umum8-a-mask">
+									<input class="form-control persen" id="umum8-a" name="XII-umum8-a-mask">
 									<label class="form-label">b. Terkait pertanyaan 8a, berapa persentase scrap/waste yang sudah tidak dapat dimanfaatkan/dijual?</label>
-									<input class="form-control persen" id="umum8-b" name="XI-umum8-b-mask">
+									<input class="form-control persen" id="umum8-b" name="XII-umum8-b-mask">
 									<label class="form-label">c. Terkait kondisi pada poin 8b, Apa pendapat Anda apabila atas scrap/waste tersebut mendapat fasilitas pengembalian KITE? Berikan alasannya!</label>
-									<textarea class="form-control" rows="3" id="umum8-c" name="XI-umum8-c"></textarea>
+									<textarea class="form-control" rows="3" id="umum8-c" name="XII-umum8-c"></textarea>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="umum9">9. Kendala apa saja yang dihadapi perusahaan dalam pemanfaatan fasilitas KB atau KITE / KITE IKM?</label>
-									<textarea class="form-control" rows="3" id="umum9" name="XI-umum9" required></textarea>
+									<textarea class="form-control" rows="3" id="umum9" name="XII-umum9" required></textarea>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="umum10">10. Apakah terdapat ketentuan saat ini yang tidak efektif dalam penerapannya di lapangan? Sebutkan!</label>
-									<textarea class="form-control" rows="3" id="umum10" name="XI-umum10" required></textarea>
+									<textarea class="form-control" rows="3" id="umum10" name="XII-umum10" required></textarea>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="umum11">11. Apa saran anda untuk perbaikan Fasilitas KB atau KITE / KITE IKM kedepannya?</label>
-									<textarea class="form-control" rows="3" id="umum11" name="XI-umum11" required></textarea>
+									<textarea class="form-control" rows="3" id="umum11" name="XII-umum11" required></textarea>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="umum12">12. Hal apa yang diperlukan oleh perusahaan saat ini untuk mendukung kinerja perusahaan terutama dalam peningkatan ekspor ? (bisa dipilih lebih dari 1 jawaban)</label>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum12_1" name="XII-umum12[]" value="Penambahan insentif fiskal berupa :">
+										<label class="custom-control-label" for="umum12_1">Penambahan insentif fiskal berupa :</label>
+										<textarea type="text" id="umum12_1-input" name="XII-umum_12-1" style="width: 30%;"></textarea>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum12_2" name="XII-umum12[]" value="Kemudahan perizinan berupa :">
+										<label class="custom-control-label" for="umum12_2">Kemudahan perizinan berupa :</label>
+										<textarea type="text" id="umum12_2-input" name="XII-umum_12-2" style="width: 30%;"></textarea>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum12_3" name="XII-umum12[]" value="Pembiayaan">
+										<label class="custom-control-label" for="umum12_3">Pembiayaan</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum12_4" name="XII-umum12[]" value="Pemasaran di luar negeri">
+										<label class="custom-control-label" for="umum12_4">Pemasaran di luar negeri</label>
+									</div>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="umum12_5" name="XII-umum12[]" value="Lainnya">
+										<label class="custom-control-label" for="umum12_5">Lainnya</label>
+										<textarea type="text" id="umum12_5-input" name="XII-umum_12-5" style="width: 30%;"></textarea>
+									</div>
 								</div>
 							</form>
 							<div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row-reverse">
-								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form11', 'tab-12')" type="button">Berikutnya</button>
-								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-12')" type="button" style="margin-right:15px;">Sebelumnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form11', 'tab-13')" type="button">Berikutnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-13')" type="button" style="margin-right:15px;">Sebelumnya</button>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="tab-13" role="tabpanel">
+						<div class="tab-pane fade" id="tab-14" role="tabpanel">
 							<div class="panel-tag" style="font-size: 20px;">
 								<b>PERMINTAAN FOTO LOKASI PERUSAHAAN</b><br>
 							</div>
@@ -918,10 +1206,10 @@
 											<tr>
 												<td style="width: 40%">
 													<label class="form-label" for="bahanBaku">Foto Gudang Bahan Baku</label>
-													<input type="file" class="form-control form-control-lg" id="bahanBaku" name="foto-bahanBaku" required>
+													<input type="file" accept="image/png, image/jpeg" class="form-control form-control-lg" id="bahanBaku" name="foto-bahanBaku" required>
 												</td>
 												<td style="width: 60%">
-													<img id="foto-bahanBaku" accept="image/png, image/jpeg" style="width: 100%;" src="">
+													<img id="foto-bahanBaku" style="width: 100%;" src="">
 												</td>
 											</tr>
 										</form>
@@ -929,11 +1217,11 @@
 								</table>
 							</div>
 							<div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row-reverse">
-								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form12', 'tab-13')" type="button">Berikutnya</button>
-								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-13')" type="button" style="margin-right:15px;">Sebelumnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form12', 'tab-14')" type="button">Berikutnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-14')" type="button" style="margin-right:15px;">Sebelumnya</button>
 							</div>
 						</div>
-						<div class="tab-pane fade" id="tab-14" role="tabpanel">
+						<div class="tab-pane fade" id="tab-15" role="tabpanel">
 							<div class="panel-tag" style="font-size: 20px;">
 								<b>PERNYATAAN</b><br>
 								<form class="needs-validation" id="form13" novalidate enctype="multipart/form-data">
@@ -944,8 +1232,8 @@
 								</form>
 							</div>
 							<div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row-reverse">
-								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form13', 'tab-14')" type="button" id="submit">Submit</button>
-								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-14')" type="button" style="margin-right:15px;">Sebelumnya</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="formValidate('#form13', 'tab-15')" type="button" id="submit">Submit</button>
+								<button class="btn btn-primary waves-effect waves-themed" onclick="back('tab-15')" type="button" style="margin-right:15px;">Sebelumnya</button>
 							</div>
 						</div>
 					</div>
@@ -985,7 +1273,22 @@
 			}
 		});
 
-		$('[name="XI-umum5"]').select2({
+		$("#kppbcpengawasan").select2({
+			width : '100%',
+			placeholder: 'Pilih Nama Kantor Pengawasan',
+			ajax : {
+				url : "Kuisioner/getRefKantor",
+				dataType : "json",
+				processResults : function(data){
+					console.log(data.results);
+					return{
+					    results: data.results
+					}
+				}
+			}
+		});
+
+		$('[name="XII-umum5"]').select2({
 			width: '100%',
 			placeholder: 'Ketik Nama Negara yang Diinginkan',
 			minimumInputLength: 3,
@@ -1237,7 +1540,6 @@ $("#tampakDepan, #bahanBaku, #lineProduksi").change(function() {
 
 function formValidate(form, tab, fokus){
 	var activeTab = tab;
-	// alert(activeTab);
 	switch (activeTab) {
 		case "tab-1":
 		nextTab = "tab-2";
@@ -1291,14 +1593,17 @@ function formValidate(form, tab, fokus){
 		nextTab = "tab-14";
 		previousTab = "tab-12";
 		break;
+		case "tab-14":
+		nextTab = "tab-15";
+		previousTab = "tab-13";
+		break;
 		default:
 		nextTab = null;
-		previousTab = "tab-13"
+		previousTab = "tab-14"
 		break;
 	}
-	// alert(nextTab);
 
-	if ($(form)[0].checkValidity() === false) {
+	if (false) {
 		// if (false) {
 			play = document.getElementById('notification');
 			$(form).addClass('was-validated');
@@ -1308,8 +1613,8 @@ function formValidate(form, tab, fokus){
 		} else {
 			if (nextTab != null) {
 				switch (tab) {
-					case 'tab-10':
-					var jumlahNonFasilitas = parseInt($('[name="IX-jaringanNonFasilitas"]').val());
+					case 'tab-11':
+					var jumlahNonFasilitas = parseInt($('[name="X-jaringanNonFasilitas"]').val());
 					var jumlahTabel = $('#tableDtJr > tbody > tr').length;
 				// console.log(jumlahTabel);
 
@@ -1330,14 +1635,14 @@ function formValidate(form, tab, fokus){
 				}
 				console.log([jumlahNonFasilitas,jumlahTabel]);
 				break;
-				case 'tab-13':
+				case 'tab-14':
 				var fileSize = [];
 				$.each($('input[type="file"]'), function(index, val) {
 					fileSize.push(val.files[0].size);
 					console.log(val.files[0].size);
 				});
 				console.log(fileSize);
-				if (fileSize[0] > 2097152 && fileSize[1] > 2097152 && fileSize[2] > 2097152 ) {
+				if (fileSize[0] < 2097152 && fileSize[1] < 2097152 && fileSize[2] < 2097152 ) {
 					play = document.getElementById('notification');
 					toastr.success('Lanjut Ke Bagian Berikutnya','Sukses');
 					play.play();
@@ -1383,19 +1688,15 @@ function formValidate(form, tab, fokus){
 
 			var devisaEkspor = $('input[name="III-devisaEkspor-mask"]').inputmask('unmaskedvalue');
 			data.append('III-devisaEkspor',devisaEkspor);
-
 			var devisaImpor = $('input[name="III-devisaImpor-mask"]').inputmask('unmaskedvalue');
 			data.append('III-devisaImpor',devisaImpor);
-
 			var nilaiFasilitas = $('input[name="III-nilaiFasilitas-mask"]').inputmask('unmaskedvalue');
 			data.append('III-nilaiFasilitas',nilaiFasilitas);
-
 			var persenBbLokal = $('input[name="III-persenBbLokal-mask"]').inputmask('unmaskedvalue');
 			data.append('III-persenBbLokal',persenBbLokal/100);
 
 			var penambahanInvestasi = $('input[name="V-penambahanInvestasi-mask"]').inputmask('unmaskedvalue');
 			data.append('V-penambahanInvestasi',penambahanInvestasi);
-
 			var totalInvestasi = $('input[name="V-totalInvestasi-mask"]').inputmask('unmaskedvalue');
 			data.append('V-totalInvestasi',totalInvestasi);
 
@@ -1405,37 +1706,72 @@ function formValidate(form, tab, fokus){
 			var pph = $('input[name="VII-pphBadan-mask"]').inputmask('unmaskedvalue');
 			data.append('VII-pphBadan',pph);
 
-			var pajakDaerah = $('input[name="VIII-pajakDaerah-mask"]').inputmask('unmaskedvalue');
-			data.append('VIII-pajakDaerah',pajakDaerah);
+			var pph21Y1 = $('input[name="VIII-pph21Y1-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph21Y1',pph21Y1);
+			var pph21Y0 = $('input[name="VIII-pph21Y0-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph21Y0',pph21Y0);
+			var pph22Y1 = $('input[name="VIII-pph22Y1-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph22Y1',pph22Y1);
+			var pph22Y0 = $('input[name="VIII-pph22Y0-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph22Y0',pph22Y0);
+			var pph22Y1nonImpor = $('input[name="VIII-pph22Y1nonImpor-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph22Y1nonImpor',pph22Y1nonImpor);
+			var pph22Y0nonImpor = $('input[name="VIII-pph22Y0nonImpor-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph22Y0nonImpor',pph22Y0nonImpor);
+			var pph23Y1 = $('input[name="VIII-pph23Y1-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph2231',pph23Y1);
+			var pph23Y0 = $('input[name="VIII-pph23Y0-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph23Y0',pph23Y0);
+			var pph26Y1 = $('input[name="VIII-pph26Y1-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph26Y1',pph);
+			var pph26Y0 = $('input[name="VIII-pph26Y0-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph26Y0',pph);
+			var pph42Y1 = $('input[name="VIII-pph42Y1-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph42Y1',pph);
+			var pph42Y0 = $('input[name="VIII-pph42Y0-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pph26Y0',pph);
+			var ppnMasukan1 = $('input[name="VIII-ppnMasukan1-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-ppnMasukan1',pph);
+			var ppnMasukan0 = $('input[name="VIII-ppnMasukan0-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-ppnMasukan0',pph);
+			var ppnKeluaran1 = $('input[name="VIII-ppnKeluaran1-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-ppnKeluaran1',pph);
+			var ppnKeluaran0 = $('input[name="VIII-ppnKeluaran0-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-ppnKeluaran0',pph);
+			var ppnSelisih1 = $('input[name="VIII-ppnSelisih1-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-ppnSelisih1',pph);
+			var ppnSelisih0 = $('input[name="VIII-ppnSelisih0-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-ppnSelisih0',pph);
+			var pbb1 = $('input[name="VIII-pbb1-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pbb1',pph);
+			var pbb0 = $('input[name="VIII-pbb0-mask"]').inputmask('unmaskedvalue');
+			data.append('VIII-pbb0',pph);
 
-			var bebanUpah = $('input[name="VIII-bebanUpah-mask"]').inputmask('unmaskedvalue');
-			data.append('VIII-bebanUpah', bebanUpah);
 
-			var depresiasi = $('input[name="VIII-depresiasi-mask"]').inputmask('unmaskedvalue');
-			data.append('VIII-depresiasi',depresiasi);
+			var pajakDaerah = $('input[name="IX-pajakDaerah-mask"]').inputmask('unmaskedvalue');
+			data.append('IX-pajakDaerah',pajakDaerah);
+			var bebanUpah = $('input[name="IX-bebanUpah-mask"]').inputmask('unmaskedvalue');
+			data.append('IX-bebanUpah', bebanUpah);
+			var depresiasi = $('input[name="IX-depresiasi-mask"]').inputmask('unmaskedvalue');
+			data.append('IX-depresiasi',depresiasi);
+			var pajakTidakLangsung = $('input[name="IX-pajakTidakLangsung-mask"]').inputmask('unmaskedvalue');
+			data.append('IX-pajakTidakLangsung',pajakTidakLangsung);
 
-			var pajakTidakLangsung = $('input[name="VIII-pajakTidakLangsung-mask"]').inputmask('unmaskedvalue');
-			data.append('VIII-pajakTidakLangsung',pajakTidakLangsung);
+			var umum2_a = $('input[name="XII-umum2-a-mask"]').inputmask('unmaskedvalue');
+			data.append('XII-umum2-a',umum2_a);
+			var umum2_b = $('input[name="XII-umum2-b-mask"]').inputmask('unmaskedvalue');
+			data.append('XII-umum2-b',umum2_b);
+			var umum2_c = $('input[name="XII-umum2-c-mask"]').inputmask('unmaskedvalue');
+			data.append('XII-umum2-c',umum2_c/100);
+			var umum8_a = $('input[name="XII-umum8-a-mask"]').inputmask('unmaskedvalue');
+			data.append('XII-umum8-a',umum8_a/100);
+			var umum8_b = $('input[name="XII-umum8-b-mask"]').inputmask('unmaskedvalue');
+			data.append('XII-umum8-b',umum8_b/100);
 
-			var umum2_a = $('input[name="XI-umum2-a-mask"]').inputmask('unmaskedvalue');
-			data.append('XI-umum2-a',umum2_a);
-
-			var umum2_b = $('input[name="XI-umum2-b-mask"]').inputmask('unmaskedvalue');
-			data.append('XI-umum2-b',umum2_b);
-
-			var umum2_c = $('input[name="XI-umum2-c-mask"]').inputmask('unmaskedvalue');
-			data.append('XI-umum2-c',umum2_c/100);
-
-			var umum8_a = $('input[name="XI-umum8-a-mask"]').inputmask('unmaskedvalue');
-			data.append('XI-umum8-a',umum8_a/100);
-
-			var umum8_b = $('input[name="XI-umum8-b-mask"]').inputmask('unmaskedvalue');
-			data.append('XI-umum8-b',umum8_b/100);
-
-			data.append('IX-jaringanSeri',JSON.stringify(jaringanSeri));
-			data.append('IX-jaringanNama',JSON.stringify(jaringanNama));
-			data.append('IX-jaringanNpwp',JSON.stringify(jaringanNpwp));
-			data.append('IX-jaringanJumlah',JSON.stringify(jaringanJumlah));
+			data.append('X-jaringanSeri',JSON.stringify(jaringanSeri));
+			data.append('X-jaringanNama',JSON.stringify(jaringanNama));
+			data.append('X-jaringanNpwp',JSON.stringify(jaringanNpwp));
+			data.append('X-jaringanJumlah',JSON.stringify(jaringanJumlah));
 
 			$.each($('input[type="file"]'), function(index, val) {
 				data.append($(this).attr('name'), val.files[0]);
@@ -1479,13 +1815,13 @@ function formValidate(form, tab, fokus){
 	}
 }
 
-$('[name="XI-umum2-b-mask"]').focusout(function(event) {
-	var value1 = $('[name="XI-umum2-a-mask"]').inputmask('unmaskedvalue');
-	var value2 = $('[name="XI-umum2-b-mask"]').inputmask('unmaskedvalue');
+$('[name="XII-umum2-b-mask"]').focusout(function(event) {
+	var value1 = $('[name="XII-umum2-a-mask"]').inputmask('unmaskedvalue');
+	var value2 = $('[name="XII-umum2-b-mask"]').inputmask('unmaskedvalue');
 
 	var value3 = value1/value2*100;
 
-	$('[name="XI-umum2-c-mask"]').val(value3);
+	$('[name="XII-umum2-c-mask"]').val(value3);
 });
 
 function back(tab){
@@ -1544,9 +1880,13 @@ function back(tab){
 			nextTab = "tab-14";
 			previousTab = "tab-12";
 			break;
+			case "tab-14":
+			nextTab = "tab-15";
+			previousTab = "tab-13";
+			break;
 			default:
 			nextTab = null;
-			previousTab = "tab-13"
+			previousTab = "tab-14"
 			break;
 		}
 
@@ -1560,9 +1900,9 @@ function back(tab){
 		var rowCount = $('#tableDtJr > tbody > tr').length;
 
 		var nextRow = rowCount +1;
-		var nama = $('[name="IX-dtJr-nama"]').val();
-		var npwp = $('[name="IX-dtJr-npwp"]').val();
-		var jumlah = $('[name="IX-dtJr-jumlah"]').val();
+		var nama = $('[name="X-dtJr-nama"]').val();
+		var npwp = $('[name="X-dtJr-npwp"]').val();
+		var jumlah = $('[name="X-dtJr-jumlah"]').val();
 
 		if (nama !== "" && npwp !== "" && jumlah !== "") {
 			jaringanSeri[rowCount] = nextRow;
@@ -1577,9 +1917,9 @@ function back(tab){
 				+'<td>'+jumlah+'</td>'
 				+'</tr');
 
-			var nama = $('[name="IX-dtJr-nama"]').val("");
-			var npwp = $('[name="IX-dtJr-npwp"]').val("");
-			var jumlah = $('[name="IX-dtJr-jumlah"]').val("");
+			var nama = $('[name="X-dtJr-nama"]').val("");
+			var npwp = $('[name="X-dtJr-npwp"]').val("");
+			var jumlah = $('[name="X-dtJr-jumlah"]').val("");
 			console.log(jaringanNama);
 		} else {
 			play = document.getElementById('notification');
