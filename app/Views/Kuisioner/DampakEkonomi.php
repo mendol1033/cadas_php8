@@ -735,7 +735,7 @@
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="detailJaringanFasilitas">Tuliskan Nama perusahaan Terkait </label>
-									<select class="form-control select2 multi-select" id="detailJaringanFasilitas" name="X-detailJaringanFasilitas[]" multiple="multiple"></select>
+									<select class="form-control select2 multi-select" id="detailjaringanFasilitas" name="X-detailjaringanFasilitas[]" multiple="multiple"></select>
 								</div>
 								<br>
 								<br>
@@ -1037,11 +1037,11 @@
 									<textarea class="form-control" rows="3" id="jelasUmum5" name="XII-umum5-jelas" required></textarea>
 									<br>
 									<label class="form-label">Apa kelebihan negara tersebut dibandingkan Indonesia?</label>
-									<textarea class="form-control" rows="3" name="XII-umum-5-kelebihan" required></textarea>
+									<textarea class="form-control" rows="3" name="XII-umum5-kelebihan" required></textarea>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="umum6">6. Apakah perusahaan berencana untuk melakukan ekspansi ke luar Jawa?</label>
-									<select class="form-control select2" name="XII-umum6" required>
+									<select class="form-control select2" name="XII-umum6-select" required>
 										<option value="Ya">Ya</option>
 										<option value="Tidak">Tidak</option>
 									</select>
@@ -1147,27 +1147,27 @@
 								<div class="form-group">
 									<label class="form-label" for="umum12">12. Hal apa yang diperlukan oleh perusahaan saat ini untuk mendukung kinerja perusahaan terutama dalam peningkatan ekspor ? (bisa dipilih lebih dari 1 jawaban)</label>
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="umum12_1" name="XII-umum12[]" value="Penambahan insentif fiskal berupa :">
+										<input type="checkbox" class="custom-control-input" id="umum12_1" name="XII-umum12[]" value="0">
 										<label class="custom-control-label" for="umum12_1">Penambahan insentif fiskal berupa :</label>
-										<textarea type="text" id="umum12_1-input" name="XII-umum_12-1" style="width: 30%;"></textarea>
+										<textarea type="text" id="umum12_1-input" name="XII-umum12-1" style="width: 30%;"></textarea>
 									</div>
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="umum12_2" name="XII-umum12[]" value="Kemudahan perizinan berupa :">
+										<input type="checkbox" class="custom-control-input" id="umum12_2" name="XII-umum12[]" value="1">
 										<label class="custom-control-label" for="umum12_2">Kemudahan perizinan berupa :</label>
-										<textarea type="text" id="umum12_2-input" name="XII-umum_12-2" style="width: 30%;"></textarea>
+										<textarea type="text" id="umum12_2-input" name="XII-umum12-2" style="width: 30%;"></textarea>
 									</div>
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="umum12_3" name="XII-umum12[]" value="Pembiayaan">
+										<input type="checkbox" class="custom-control-input" id="umum12_3" name="XII-umum12[]" value="2">
 										<label class="custom-control-label" for="umum12_3">Pembiayaan</label>
 									</div>
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="umum12_4" name="XII-umum12[]" value="Pemasaran di luar negeri">
+										<input type="checkbox" class="custom-control-input" id="umum12_4" name="XII-umum12[]" value="3">
 										<label class="custom-control-label" for="umum12_4">Pemasaran di luar negeri</label>
 									</div>
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" class="custom-control-input" id="umum12_5" name="XII-umum12[]" value="Lainnya">
+										<input type="checkbox" class="custom-control-input" id="umum12_5" name="XII-umum12[]" value="4">
 										<label class="custom-control-label" for="umum12_5">Lainnya</label>
-										<textarea type="text" id="umum12_5-input" name="XII-umum_12-5" style="width: 30%;"></textarea>
+										<textarea type="text" id="umum12_5-input" name="XII-umum12-5" style="width: 30%;"></textarea>
 									</div>
 								</div>
 							</form>
@@ -1276,9 +1276,15 @@
 		$("#kppbcpengawasan").select2({
 			width : '100%',
 			placeholder: 'Pilih Nama Kantor Pengawasan',
+			minimumInputLength: 3,
 			ajax : {
 				url : "Kuisioner/getRefKantor",
 				dataType : "json",
+				data: function(params=0){
+					return{
+						search: params.term
+					}
+				},
 				processResults : function(data){
 					console.log(data.results);
 					return{
@@ -1603,7 +1609,7 @@ function formValidate(form, tab, fokus){
 		break;
 	}
 
-	if (false) {
+	if ($(form)[0].checkValidity() === false) {
 		// if (false) {
 			play = document.getElementById('notification');
 			$(form).addClass('was-validated');
@@ -1614,11 +1620,43 @@ function formValidate(form, tab, fokus){
 			if (nextTab != null) {
 				switch (tab) {
 					case 'tab-11':
+					var jumlahFasilitas = parseInt($('[name="X-jaringanFasilitas"]').val());
 					var jumlahNonFasilitas = parseInt($('[name="X-jaringanNonFasilitas"]').val());
 					var jumlahTabel = $('#tableDtJr > tbody > tr').length;
-				// console.log(jumlahTabel);
+					var jumlahDetailNonFasilitas = $('#detailjaringanNonFasilitas').select2('val');
+					var jumlahDetailFasilitas = $('#detailjaringanFasilitas').select2('val');
 
-				if (jumlahNonFasilitas == jumlahTabel) {
+					if (jumlahFasilitas != jumlahDetailFasilitas.length) {
+						play = document.getElementById('notification');
+						toastr.error('Jumlah Nama Perusahaan Terkait Fasilitas Tidak Sama dengan Total Perusahaan','Gagal');
+						play.play();
+						delete play;
+						status1 = false;
+					} else {
+						status1 = true;
+					}
+					if (jumlahNonFasilitas != jumlahDetailNonFasilitas.length) {
+						play = document.getElementById('notification');
+						toastr.error('Jumlah Nama Perusahaan Terkait Non Fasilitas Tidak Sama dengan Total Perusahaan','Gagal');
+						play.play();
+						delete play;
+						status2 = false;
+					} else {
+						status2 = true;
+					}
+
+
+					if (jumlahNonFasilitas != jumlahTabel) {
+						play = document.getElementById('notification');
+						toastr.error('Lengkapi Data Tenaga Kerja Jaringan Non Fasilitas Sesuai dengan Jumlah Perusahaan','Gagal');
+						play.play();
+						delete play;
+						status3 = false;
+					} else {
+						status3 = true;
+					}
+
+				if (status1 && status2 && status3) {
 					play = document.getElementById('notification');
 					toastr.success('Lanjut Ke Bagian Berikutnya','Sukses');
 					play.play();
@@ -1629,11 +1667,11 @@ function formValidate(form, tab, fokus){
 					$("#"+nextTab).addClass('active show');
 				} else {
 					play = document.getElementById('notification');
-					toastr.error('Lengkapi Data Tenaga Kerja Jaringan Non Fasilitas Sesuai dengan Jumlah Perusahaan','Gagal');
+					toastr.error('Periksa kembali pengisian data pada bagian ini','Gagal');
 					play.play();
 					delete play;
 				}
-				console.log([jumlahNonFasilitas,jumlahTabel]);
+				console.log([jumlahDetailNonFasilitas,jumlahDetailFasilitas]);
 				break;
 				case 'tab-14':
 				var fileSize = [];
@@ -1719,7 +1757,7 @@ function formValidate(form, tab, fokus){
 			var pph22Y0nonImpor = $('input[name="VIII-pph22Y0nonImpor-mask"]').inputmask('unmaskedvalue');
 			data.append('VIII-pph22Y0nonImpor',pph22Y0nonImpor);
 			var pph23Y1 = $('input[name="VIII-pph23Y1-mask"]').inputmask('unmaskedvalue');
-			data.append('VIII-pph2231',pph23Y1);
+			data.append('VIII-pph23Y1',pph23Y1);
 			var pph23Y0 = $('input[name="VIII-pph23Y0-mask"]').inputmask('unmaskedvalue');
 			data.append('VIII-pph23Y0',pph23Y0);
 			var pph26Y1 = $('input[name="VIII-pph26Y1-mask"]').inputmask('unmaskedvalue');
@@ -1729,7 +1767,7 @@ function formValidate(form, tab, fokus){
 			var pph42Y1 = $('input[name="VIII-pph42Y1-mask"]').inputmask('unmaskedvalue');
 			data.append('VIII-pph42Y1',pph);
 			var pph42Y0 = $('input[name="VIII-pph42Y0-mask"]').inputmask('unmaskedvalue');
-			data.append('VIII-pph26Y0',pph);
+			data.append('VIII-pph42Y0',pph);
 			var ppnMasukan1 = $('input[name="VIII-ppnMasukan1-mask"]').inputmask('unmaskedvalue');
 			data.append('VIII-ppnMasukan1',pph);
 			var ppnMasukan0 = $('input[name="VIII-ppnMasukan0-mask"]').inputmask('unmaskedvalue');
@@ -1797,6 +1835,7 @@ function formValidate(form, tab, fokus){
 						toastr.error(d.pesan,'Gagal');
 						play.play();
 						delete play;
+						console.log(d);
 					}
 					
 				}

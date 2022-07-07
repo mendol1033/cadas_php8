@@ -211,7 +211,7 @@ class Database extends Config
         'hostname' => 'localhost',
         'username' => 'admincadas',
         'password' => 'Nimda#123cadas',
-        'database' => 'kuisioner',
+        'database' => 'kuisioner_kb',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,

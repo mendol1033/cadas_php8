@@ -41,6 +41,9 @@ class KuisionerModel extends Model
 	public function getRefKantor(){
 		$builder = $this->cadas->table('referensi_kantor_pabean');
 		$builder->select('URAIAN_KANTOR');
+		if ($_GET['search'] != 0) {
+			$builder->like('URAIAN_KANTOR', $_GET['search']);
+		}
 		$query = $builder->get();
 		$data = $query->getResultArray();
 
@@ -146,6 +149,7 @@ class KuisionerModel extends Model
 		$this->kuisioner->table('master')->insert($dataMaster);
 
 		$ID_MASTER = $this->kuisioner->insertID();
+		// $ID_MASTER = 1;
 
 		// INSERT TABLE FASILITAS
 		$dataFasilitas = array();
@@ -186,10 +190,12 @@ class KuisionerModel extends Model
 			'PAJAK_TIDAK_LANGSUNG' => $_POST['IX-pajakTidakLangsung']
 		];
 
-		if ($_POST['VII-alasanPphBadan'] === "Lainnya") {
-			$dataProfil['ALASAN_PPH_BADAN'] = $_POST['VII-alasanPphBadan-input'];
-		} else {
-			$dataProfil['ALASAN_PPH_BADAN'] = $_POST['VII-alasanPphBadan'];
+		if ($_POST['VII-pphBadan'] == 0) {
+			if ($_POST['VII-alasanPphBadan'] === "Lainnya") {
+				$dataProfil['ALASAN_PPH_BADAN'] = $_POST['VII-alasanPphBadan-input'];
+			} else {
+				$dataProfil['ALASAN_PPH_BADAN'] = $_POST['VII-alasanPphBadan'];
+			}
 		}
 
 		$this->kuisioner->table('profil_perusahaan')->insert($dataProfil);
@@ -285,7 +291,7 @@ class KuisionerModel extends Model
 			'TOTAL_INVESTASI' => $_POST['V-totalInvestasi'],
 			'BARANG_MODAL_DISEWA' => $_POST['V-mesinSewa']
 		];
-		$this->kuisioner->table('investasi')->insert($dataInvestasi);
+		// $this->kuisioner->table('investasi')->insert($dataInvestasi);
 
 		// INSERT TABLE DETAIL INVESTASI
 		$buildInvest = $this->kuisioner->table('detail_investasi');
@@ -322,8 +328,8 @@ class KuisionerModel extends Model
 		$this->kuisioner->table('jaringan_industri')->insert($jaringanIndustri);
 
 		$jaringanFasilitas = [];
-		if (isset($_POST['X-detailJaringanFasilitas'])) {
-			foreach ($_POST['X-detailJaringanFasilitas'] as $key=>$value) {
+		if (isset($_POST['X-detailjaringanFasilitas'])) {
+			foreach ($_POST['X-detailjaringanFasilitas'] as $key=>$value) {
 				$jaringanFasilitas[] = [
 					'ID_MASTER' => $ID_MASTER,
 					'KODE' => 'F',
@@ -387,6 +393,91 @@ class KuisionerModel extends Model
 		$this->kuisioner->table('pelaku_usaha')->insert($dataPelakuUsaha);
 
 		// INSERT TABLE PERTANYAAN UMUM
+		$umum3 = "";
+		$umum4 = "";
+		$umum7 = "";
+		$umum12 = "";
+		$umum6Jelas = "";
+
+		for ($i = 0; $i < count($_POST['XII-umum3']); $i++) {
+			if ($_POST['XII-umum3'][$i] == "Lainnya") {
+				$umum3 .= "Lainnya: ".$_POST['XII-umum3-input'];
+			} else {
+				$umum3 .= $_POST['XII-umum3'][$i];
+			}
+
+			if ($i != (count($_POST['XII-umum3'])-1)) {
+				$umum3 .= ", ";
+			}
+		}
+
+		for ($i = 0; $i < count($_POST['XII-umum4']); $i++) {
+			if ($_POST['XII-umum4'][$i] == "Lainnya") {
+				$umum4 .= "Lainnya: ".$_POST['XII-umum4-input'];
+			} else {
+				$umum4 .= $_POST['XII-umum4'][$i];
+			}
+
+			if ($i != (count($_POST['XII-umum4'])-1)) {
+				$umum4 .= ", ";
+			}
+		}
+
+		for ($i = 0; $i < count($_POST['XII-umum7']); $i++) {
+			if ($_POST['XII-umum7'][$i] == "Lainnya") {
+				$umum7 .= "Lainnya: ".$_POST['XII-umum7-input'];
+			} else {
+				$umum7 .= $_POST['XII-umum7'][$i];
+			}
+
+			if ($i != (count($_POST['XII-umum7'])-1)) {
+				$umum7 .= ", ";
+			}
+		}
+
+		for ($i = 0; $i < count($_POST['XII-umum12']); $i++) {
+			switch ($_POST['XII-umum12'][$i]) {
+				case 0:
+					$umum12 .= "Penambahan insentif fiskal berupa : ".$_POST['XII-umum12-1'].", ";
+					break;
+				case 1:
+					$umum12 .= "Kemudahan perizinan berupa : ".$_POST['XII-umum12-2'].", ";
+					break;
+				case 2:
+					$umum12 .= "Pembiayaan".", ";
+					break;
+				case 3:
+					$umum12 .= "Pemasaran di luar negeri".", ";
+					break;
+				
+				default:
+					$umum12 .= "Lainnya: ".$_POST['XII-umum12-5'];
+					break;
+			}
+		}
+
+		if ($_POST['XII-umum6-select'] == "Ya") {
+			for ($i = 0; $i < count($_POST['XII-umum6']) ; $i++) {
+				$umum6Jelas .= $_POST['XII-umum6'][$i];
+
+				if ($_POST['XII-umum6'][$i] == "Lainnya") {
+					$umum6Jelas .= ", Lainnya: ".$_POST['XII-umum6-jelas-ya'];
+				} else {
+					$umum6Jelas .= ", ";
+				}
+			}	
+		} else {
+			for ($i = 0; $i < count($_POST['XII-umum6']) ; $i++) {
+				$umum6Jelas .= $_POST['XII-umum6'][$i];
+
+				if ($_POST['XII-umum6'][$i] == "Lainnya") {
+					$umum6Jelas .= ", Lainnya: ".$_POST['XII-umum6-jelas-tidak'];
+				} else {
+					$umum6Jelas .= ", ";
+				}
+			}	
+		}
+
 		$dataUmum = [
 			'ID_MASTER' => $ID_MASTER,
 			'UMUM_1' => $_POST['XII-umum1'],
@@ -394,33 +485,61 @@ class KuisionerModel extends Model
 			'UMUM_2_A' => $_POST['XII-umum2-a'],
 			'UMUM_2_B' => $_POST['XII-umum2-b'],
 			'UMUM_2_C' => $_POST['XII-umum2-c'],
-			'UMUM_3' => $_POST['XII-umum3'],
-			'UMUM_4' => $_POST['XII-umum4'],
+			'UMUM_3' => $umum3,
+			'UMUM_4' => $umum4,
 			'UMUM_5_A' => $_POST['XII-umum5'],
 			'UMUM_5_B' => $_POST['XII-umum5-jelas'],
-			'UMUM_5_C' => $_POST['XII-umum-5-kelebihan'],
-			'UMUM_6_A' => $_POST['XII-umum6'],
-			'UMUM_6_B' => $_POST['XII-umum6-jelas'],
-			'UMUM_7' => $_POST['XII-umum7'],
+			'UMUM_5_C' => $_POST['XII-umum5-kelebihan'],
+			'UMUM_6_A' => $_POST['XII-umum6-select'],
+			'UMUM_6_B' => $umum6Jelas,
+			'UMUM_7' => $umum7,
 			'UMUM_9' => $_POST['XII-umum9'],
 			'UMUM_10' => $_POST['XII-umum10'],
-			'UMUM_11' => $_POST['XII-umum11']
+			'UMUM_11' => $_POST['XII-umum11'],
+			'UMUM_12' => $umum12
 		];
+
 		if (!empty($_POST['XI-umum8-a'])) {
 			$dataUmum['UMUM_8_A'] = $_POST['XII-umum8-a'];
 			$dataUmum['UMUM_8_B'] = $_POST['XII-umum8-b'];
 			$dataUmum['UMUM_8_C'] = $_POST['XII-umum8-c'];
 		}
 
+		$this->kuisioner->table('umum')->insert($dataUmum);
+
 		// INSERT TABLE PERPAJAKAN
 		$dataPerpajakan = [
 			'ID_MASTER' => $ID_MASTER,
-			'PPh21Y1' => $_POST['VIII-PPh21Y1']
+			'PPh21Y1' => $_POST['VIII-pph21Y1'],
+			'PPh21Y0' => $_POST['VIII-pph21Y0'],
+			'PPh22Y1' => $_POST['VIII-pph22Y1'],
+			'PPh22Y0' => $_POST['VIII-pph22Y0'],
+			'PPh22Y1_NON_IMPOR' => $_POST['VIII-pph22Y1nonImpor'],
+			'PPh22Y0_NON_IMPOR' => $_POST['VIII-pph22Y0nonImpor'],
+			'PPh23Y1' => $_POST['VIII-pph23Y1'],
+			'PPh23Y0' => $_POST['VIII-pph23Y0'],
+			'PPh26Y1' => $_POST['VIII-pph26Y1'],
+			'PPh26Y0' => $_POST['VIII-pph26Y0'],
+			'PPh42Y1' => $_POST['VIII-pph42Y1'],
+			'PPh42Y0' => $_POST['VIII-pph42Y0'],
+			'PPN_MASUKAN1' => $_POST['VIII-ppnMasukan1'],
+			'PPN_MASUKAN0' => $_POST['VIII-ppnMasukan0'],
+			'PPN_KELUARAN1' => $_POST['VIII-ppnKeluaran1'],
+			'PPN_KELUARAN0' => $_POST['VIII-ppnKeluaran0'],
+			'PPN_SELISIH1' => $_POST['VIII-ppnSelisih1'],
+			'PPN_SELISIH0' => $_POST['VIII-ppnSelisih0'],
+			'PBB1' => $_POST['VIII-pbb1'],
+			'PBB0' => $_POST['VIII-pbb0'],
+			
 		];
-		$this->kuisioner->table('umum')->insert($dataUmum);
 
+		$this->kuisioner->table('perpajakan')->insert($dataPerpajakan);
 
+		$count = count($fileData);
 		if (!is_null($fileData)) {
+			for ($i = 0; $i < count($fileData); $i++) {
+				$fileData[$i]['ID_MASTER'] = $ID_MASTER;
+			}
 			$this->kuisioner->table('foto')->insertBatch($fileData);
 		}
 
@@ -430,6 +549,7 @@ class KuisionerModel extends Model
 		} else {
 			$this->kuisioner->transCommit();
 			return "sukses";
+			// return [$count,$dataMaster, $dataProfil, $dataUmum, $dataTKJaringan, $dataPerpajakan, $fileData];
 		}
 	}
 
