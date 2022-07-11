@@ -584,7 +584,7 @@ class Monitoring extends BaseController
 			$templateProcessor->setValue('kesimpulan', $headerLaporan['kesimpulan']);
 			$templateProcessor->setValue('nama', $headerLaporan['NamaPegawai']);
 
-			for ($i = 1; $i < count($isiLaporan)+1; $i++)
+			for ($i = 0; $i < count($isiLaporan); $i++)
 			{
 				$templateProcessor->setValue('ket' . $isiLaporan[$i]['item'], $isiLaporan[$i]['keterangan']);
 			}
