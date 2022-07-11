@@ -714,7 +714,7 @@
 		$('.tanggal').datepicker({
 			format: 'yyyy-mm-dd',
 			todayHighLight: true,
-			orientation: "top right"
+			orientation: "bottom right"
 		});
 
 		CKEDITOR.replace('laporan1');
@@ -828,8 +828,18 @@
 				"ajax" : {
 					"url" : "Monitoring/datatableListMonumPengawasan",
 					"type" : "POST",
+					"data" : function(d){
+						d.tanggalAwal = $('[name="tanggalMulai"]').val();
+						d.tanggalAkhir = $('[name="tanggalAkhir"]').val();
+					}
 				},
 			});
+	});
+
+	$('#cari').on('click', function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		table.ajax.reload(null,true);
 	});
 
 	function hidden (a){

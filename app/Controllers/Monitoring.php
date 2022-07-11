@@ -345,6 +345,17 @@ class Monitoring extends BaseController
 		];
 		$sort      = ['tanggalLaporan' => 'desc'];
 		$filter    = [];
+		if (!empty($_POST['tanggalAwal'])) {
+			$filter['list']['tanggalLaporan >='] = $_POST['tanggalAwal'];
+			$filter['countFilter']['tanggalLaporan >='] = $_POST['tanggalAwal'];
+			$filter['countAll']['tanggalLaporan >='] = $_POST['tanggalAwal'];
+		}
+
+		if (!empty($_POST['tanggalAkhir'])) {
+			$filter['list']['tanggalLaporan <='] = $_POST['tanggalAkhir'];
+			$filter['countFilter']['tanggalLaporan <='] = $_POST['tanggalAkhir'];
+			$filter['countAll']['tanggalLaporan <='] = $_POST['tanggalAkhir'];
+		}
 
 		$list = $this->datatable->GetDataTable($basisData, $tabel, $order, $search, $sort, $filter);
 		$data = [];
@@ -588,7 +599,6 @@ class Monitoring extends BaseController
 			{
 				$ket = \Soundasleep\Html2Text::convert($isiLaporan[$i]['keterangan']);
 				$templateProcessor->setValue('ket' . $isiLaporan[$i]['item'], $ket);
-				$keter[] = $ket;
 			}
 
 			$fileName = 'Laporan_Moncer_' . $headerLaporan['idPerusahaan'] . '_' . date('d-m-Y', strtotime($headerLaporan['tanggalLaporan']));
@@ -613,7 +623,7 @@ class Monitoring extends BaseController
 			}
 			else
 			{
-				echo json_encode(['success', $pdfFile, $fileName, $keter]);
+				echo json_encode(['success', $pdfFile, $fileName]);
 			}
 		}
 	}
