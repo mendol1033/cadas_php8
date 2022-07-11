@@ -587,7 +587,7 @@ class Monitoring extends BaseController
 			for ($i = 0; $i < count($isiLaporan); $i++)
 			{
 				$ket = \Soundasleep\Html2Text::convert($isiLaporan[$i]['keterangan']);
-				$templateProcessor->setValue('ket' . $isiLaporan[$i]['item'], $isiLaporan[$i]['keterangan']);
+				$templateProcessor->setValue('ket' . $isiLaporan[$i]['item'], $ket);
 				$keter[] = $ket;
 			}
 
