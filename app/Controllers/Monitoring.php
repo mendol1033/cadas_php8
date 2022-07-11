@@ -586,7 +586,9 @@ class Monitoring extends BaseController
 
 			for ($i = 0; $i < count($isiLaporan); $i++)
 			{
+				$ket = \Soundasleep\Html2Text::convert($isiLaporan[$i]['keterangan']);
 				$templateProcessor->setValue('ket' . $isiLaporan[$i]['item'], $isiLaporan[$i]['keterangan']);
+				$keter[] = $ket;
 			}
 
 			$fileName = 'Laporan_Moncer_' . $headerLaporan['idPerusahaan'] . '_' . date('d-m-Y', strtotime($headerLaporan['tanggalLaporan']));
@@ -611,7 +613,7 @@ class Monitoring extends BaseController
 			}
 			else
 			{
-				echo json_encode(['success', $pdfFile, $fileName]);
+				echo json_encode(['success', $pdfFile, $fileName, $keter]);
 			}
 		}
 	}
