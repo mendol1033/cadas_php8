@@ -71,12 +71,13 @@ class AksesModel extends Model
 		$this->cadas->transBegin();
 
 		$dataCctv = [
+			'ID_STAKEHOLDERS' => $_POST['ID_STAKEHOLDERS'],
 			'TIPE_AKSES' => $_POST['cctv'],
 			'JENIS_AKSES' => $_POST['cctvJenis'],
-			'ID_STAKEHOLDERS' => $_POST['nama'],
+			'APLIKASI_AKSES' => $_POST['cctvAplikasi'],
+			'NAMA_APLIKASI' => $_POST['cctvNamaAplikasi'],
 			'PROTOCOL' => $_POST['cctvProtocol'],
 			'ALAMAT_AKSES' => $_POST['cctvAkses'],
-			'APLIKASI_AKSES' => $_POST['cctvAplikasi'],
 			'USERNAME' => $_POST['cctvUsername'],
 			'PASSWORD' => $_POST['cctvPassword'],
 			'JENIS_CCTV' => $_POST['cctvJenisCctv'],
@@ -87,12 +88,13 @@ class AksesModel extends Model
 		];
 
 		$dataIt = [
+			'ID_STAKEHOLDERS' => $_POST['ID_STAKEHOLDERS'],
 			'TIPE_AKSES' => $_POST['it'],
 			'JENIS_AKSES' => $_POST['itJenis'],
-			'ID_STAKEHOLDERS' => $_POST['nama'],
+			'APLIKASI_AKSES' => $_POST['itAplikasi'],
+			'NAMA_APLIKASI' => $_POST['itNamaAplikasi'],
 			'PROTOCOL' => $_POST['itProtocol'],
 			'ALAMAT_AKSES' => $_POST['itAkses'],
-			'APLIKASI_AKSES' => $_POST['itAplikasi'],
 			'USERNAME' => $_POST['itUsername'],
 			'PASSWORD' => $_POST['itPassword'],
 			'PROVIDER_IT_INVENTORY' => $_POST['itProvider'],
@@ -103,12 +105,13 @@ class AksesModel extends Model
 		];
 
 		$dataSeal = [
+			'ID_STAKEHOLDERS' => $_POST['ID_STAKEHOLDERS'],
 			'TIPE_AKSES' => $_POST['seal'],
 			'JENIS_AKSES' => $_POST['sealJenis'],
-			'ID_STAKEHOLDERS' => $_POST['nama'],
+			'APLIKASI_AKSES' => $_POST['sealAplikasi'],
+			'NAMA_APLIKASI' => $_POST['sealNamaAplikasi'],
 			'PROTOCOL' => $_POST['sealProtocol'],
 			'ALAMAT_AKSES' => $_POST['sealAkses'],
-			'APLIKASI_AKSES' => $_POST['sealAplikasi'],
 			'USERNAME' => $_POST['sealUsername'],
 			'PASSWORD' => $_POST['sealPassword'],
 			'PROVIDER_E_SEAL' => $_POST['sealProvider'],
@@ -122,7 +125,7 @@ class AksesModel extends Model
 		$builder->insert($dataCctv);
 		$builder->insert($dataIt);
 
-		if (!empty($_GET['sealAkses'])) {
+		if ($_POST['jenisFasilitas'] == "Pusat Logistik Berikat") {
 			$builder->insert($dataSeal);
 		}
 

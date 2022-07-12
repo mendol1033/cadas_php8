@@ -115,14 +115,14 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" id="http" name="cctvProtocol" value="http://" class="custom-control-input" checked>
-                                                            <label class="custom-control-label" for="http">http://</label>
+                                                            <input type="radio" id="httpcctv" name="cctvProtocol" value="http://" class="custom-control-input" checked>
+                                                            <label class="custom-control-label" for="httpcctv">http://</label>
                                                         </div>
                                                     </div>
                                                     <div class="input-group-text">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" id="https" name="cctvProtocol" value="https://" class="custom-control-input">
-                                                            <label class="custom-control-label" for="https">https://</label>
+                                                            <input type="radio" id="httpscctv" name="cctvProtocol" value="https://" class="custom-control-input">
+                                                            <label class="custom-control-label" for="httpscctv">https://</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -209,7 +209,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label" for="itNamaAplikasi">Nama Aplikasi</label>
-                                            <select class="form-control" id="itNamaAplikasi" name="cctvNamaAplikasi" required>
+                                            <select class="form-control" id="itNamaAplikasi" name="itNamaAplikasi" required>
                                                 
                                             </select>
                                             <div class="invalid-feedback">
@@ -222,14 +222,14 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" id="http" name="itProtocol" value="http://" class="custom-control-input" checked>
-                                                            <label class="custom-control-label" for="http">http://</label>
+                                                            <input type="radio" id="httpit" name="itProtocol" value="http://" class="custom-control-input" checked>
+                                                            <label class="custom-control-label" for="httpit">http://</label>
                                                         </div>
                                                     </div>
                                                     <div class="input-group-text">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" id="https" name="itProtocol" value="https://" class="custom-control-input">
-                                                            <label class="custom-control-label" for="https">https://</label>
+                                                            <input type="radio" id="httpsit" name="itProtocol" value="https://" class="custom-control-input">
+                                                            <label class="custom-control-label" for="httpsit">https://</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -315,7 +315,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label" for="sealNamaAplikasi">Nama Aplikasi</label>
-                                            <select class="form-control" id="sealNamaAplikasi" name="cctvNamaAplikasi">
+                                            <select class="form-control" id="sealNamaAplikasi" name="sealNamaAplikasi">
                                                 
                                             </select>
                                             <div class="invalid-feedback">
@@ -328,14 +328,14 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" id="http" name="sealProtocol" value="http://" class="custom-control-input" checked>
-                                                            <label class="custom-control-label" for="http">http://</label>
+                                                            <input type="radio" id="httpseal" name="sealProtocol" value="http://" class="custom-control-input" checked>
+                                                            <label class="custom-control-label" for="httpseal">http://</label>
                                                         </div>
                                                     </div>
                                                     <div class="input-group-text">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" id="https" name="sealProtocol" value="https://" class="custom-control-input">
-                                                            <label class="custom-control-label" for="https">https://</label>
+                                                            <input type="radio" id="httpsseal" name="sealProtocol" value="https://" class="custom-control-input">
+                                                            <label class="custom-control-label" for="httpsseal">https://</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -400,6 +400,7 @@
 </div>
 </div>   
 <script type="text/javascript">
+    var dataStake;
     $(document).ready(function() {
         $(':input').inputmask();
         $('.select2').select2({
@@ -411,7 +412,7 @@
             allowClear: true,
             placeholder: 'Input Nama Aplikasi Yang Digunakan',
             ajax: {
-                url: 'Akses/getReferensi?jenis=1&column=APLIKASI_AKSES',
+                url: 'Akses/getReferensi?jenis=1&column=NAMA_APLIKASI',
                 dataType: 'JSON',
                 data: function(params){
                     return{
@@ -419,13 +420,13 @@
                     }
                 },
                 processResults: function(d){
-                    if (typeof d.data !== 'undefined') {
+                    if (d.data != null) {
                         var results = [];
 
                         $.each(d.data, function(index, val) {
                              results.push({
-                                id: val.APLIKASI_AKSES,
-                                text: val.APLIKASI_AKSES
+                                id: val.NAMA_APLIKASI,
+                                text: val.NAMA_APLIKASI
                              })
                         });
                         return{
@@ -444,7 +445,7 @@
             allowClear: true,
             placeholder: 'Input Nama Aplikasi Yang Digunakan',
             ajax: {
-                url: 'Akses/getReferensi?jenis=2&column=APLIKASI_AKSES',
+                url: 'Akses/getReferensi?jenis=2&column=NAMA_APLIKASI',
                 dataType: 'JSON',
                 data: function(params){
                     return{
@@ -452,13 +453,13 @@
                     }
                 },
                 processResults: function(d){
-                    if (typeof d.data !== 'undefined') {
+                    if (d.data != null) {
                         var results = [];
 
                         $.each(d.data, function(index, val) {
                              results.push({
-                                id: val.APLIKASI_AKSES,
-                                text: val.APLIKASI_AKSES
+                                id: val.NAMA_APLIKASI,
+                                text: val.NAMA_APLIKASI
                              })
                         });
                         return{
@@ -477,7 +478,7 @@
             allowClear: true,
             placeholder: 'Input Nama Aplikasi Yang Digunakan',
             ajax: {
-                url: 'Akses/getReferensi?jenis=3&column=APLIKASI_AKSES',
+                url: 'Akses/getReferensi?jenis=3&column=NAMA_APLIKASI',
                 dataType: 'JSON',
                 data: function(params){
                     return{
@@ -485,13 +486,13 @@
                     }
                 },
                 processResults: function(d){
-                    if (typeof d.data !== 'undefined') {
+                    if (d.data != null) {
                         var results = [];
 
                         $.each(d.data, function(index, val) {
                              results.push({
-                                id: val.APLIKASI_AKSES,
-                                text: val.APLIKASI_AKSES
+                                id: val.NAMA_APLIKASI,
+                                text: val.NAMA_APLIKASI 
                              })
                         });
                         return{
@@ -548,6 +549,7 @@
             dataType: 'JSON',
             data: {ID: val[0].value},
             success: function(d){
+                dataStake = d;
                 getJnsTpb(d.FASILITAS);
             }
         })
@@ -599,7 +601,10 @@
                 while (!(ent = formValues.next()).done) {
                     data.append(`${ent.value[0]}`, ent.value[1]);
                 }
+                
             }
+            data.append("ID_STAKEHOLDERS", dataStake.ID);
+            data.append("jenisFasilitas", dataStake.NAMA_FASILITAS);
             $.ajax({
                 url: 'Akses/ajaxAdd',
                 type: 'POST',
