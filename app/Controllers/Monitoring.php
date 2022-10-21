@@ -589,10 +589,11 @@ class Monitoring extends BaseController
 		{
 			// \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
 			$templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor($template);
+			$ketKesimpulan = \Soundasleep\Html2Text::convert($headerLaporan['kesimpulan']);
 			$templateProcessor->setValue('nama_perusahaan', $headerLaporan['nama_perusahaan']);
 			$templateProcessor->setValue('alamat', $headerLaporan['alamat']);
 			$templateProcessor->setValue('tanggal', date('d-m-Y', strtotime($headerLaporan['tanggalLaporan'])));
-			$templateProcessor->setValue('kesimpulan', $headerLaporan['kesimpulan']);
+			$templateProcessor->setValue('kesimpulan', $ketKesimpulan);
 			$templateProcessor->setValue('nama', $headerLaporan['NamaPegawai']);
 
 			for ($i = 0; $i < count($isiLaporan); $i++)
