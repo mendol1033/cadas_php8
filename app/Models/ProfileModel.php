@@ -28,13 +28,23 @@ class ProfileModel extends Model
     public function getValidasi(){
     	$skep = substr($_POST['skep-mask'],4);
     	$builder = $this->db->table('profil_resiko_tpb');
-    	$builder->where(['NPWP' => $_POST['npwp'], 'NOMOR_SKEP' => $skep]);
-    	$data = $builder->get()->getResultArray();
+    	$builder->where(['NPWP' => $_POST['npwp'], 'NOMOR_SKEP' => $skep, 'TAHUN' => $_POST['tahun'], 'SEMESTER' => $_POST['semester']]);
+    	$dataProfil = $builder->get()->getResultArray();
 
-    	if (count($data) === 1) {
-    		return ['status' => 'success', 'data' => $data];
+        if (count($dataProfil) < 1) {
+            $builder = $this->db->table('profil_resiko_tpb');
+            $builder->select('NOMOR_SKEP, TANGGAL_SKEP');
+            $builder->where(['NPWP' => $_POST['npwp'], 'TAHUN' => $_POST['tahun'], 'SEMESTER' => $_POST['semester']]);
+            $dataSKEP = $builder->get()->getResultArray();
+        }
+    	if (count($dataProfil) === 1) {
+    		return ['status' => 'success', 'data' => $dataProfil];
     	} else {
-    		return ['status' => 'failed'];
+            if ($dataSKEP > 0) {
+                return ['status' => 'failed', 'data' => $dataSKEP];
+            } else {
+                return ['status' => 'failed'];
+            }
     	}
     }
 

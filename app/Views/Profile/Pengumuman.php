@@ -28,6 +28,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 	<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon-32x32.png">
 	<link rel="mask-icon" href="assets/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
 	<!-- Optional: page related CSS-->
+	<link rel="stylesheet" media="screen, print" href="assets/css/formplugins/select2/select2.bundle.css">
 	<link rel="stylesheet" media="screen, print" href="assets/css/page-login-alt.css">
 	<link rel="stylesheet" media="screen, print" href="assets/css/notifications/toastr/toastr.css">
 	<link rel="stylesheet" media="screen, print" href="assets/css/notifications/sweetalert2/sweetalert2.bundle.css">
@@ -130,6 +131,39 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 												</div>
 											</td>
 											<td><input type="text" class="form-control" id="hp" name="hp" placeholder="No Handphone Yang Terhubung Dengan Whatsapp" required></td>
+										</tr>
+										<tr>
+											<td style="width: 25%;">
+												<div class="input-group">
+													<div class="input-group-prepend">
+														<span class="input-group-text">TAHUN</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<select class="form-control select2" id="tahun" name="tahun" placeholder="Tahun Penetapan Profil" required>
+													<?php
+													$year = date('Y');
+													for ($i = 2022; $i <= $year; $i++) {
+														echo '<option value="'.$i.'">'.$i.'</option>';
+													}?>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td style="width: 25%;">
+												<div class="input-group">
+													<div class="input-group-prepend">
+														<span class="input-group-text">SEMESTER</span>
+													</div>
+												</div>
+											</td>
+											<td>
+												<select class="form-control select2" id="semester" name="semester" placeholder="Semester Pentapan Profil" required>
+													<option value="1">Semester 1</option>
+													<option value="2">Semester 2</option>
+												</select>
+											</td>
 										</tr>
 										<tr>
 											<td colspan="2">
@@ -338,6 +372,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 	</audio>
 	<script src="assets/js/vendors.bundle.js"></script>
 	<script src="assets/js/app.bundle.js"></script>
+	<script src="assets/js/formplugins/select2/select2.bundle.js"></script>
 	<script src="assets/js/formplugins/inputmask/inputmask.bundle.js"></script>
 	<script src="assets/js/notifications/toastr/toastr.js"></script>  
 	<script src="assets/js/notifications/sweetalert2/sweetalert2.bundle.js"></script>
@@ -345,6 +380,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('[name="npwp-mask"]').inputmask({mask: "99.999.999.9-999.999", gready: false});
+			$('.select').select2();
 		});
 
 		$("#submit").on('click', function(event) {
@@ -409,7 +445,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 										case 'K':
 										$('#SKOR').addClass('bg-warning-500');
 										$("#greet").html('PERUSAHAAN ANDA MENDAPATKAN PENILAIAN KATEGORI LAYANAN <b class="text-warning">KUNING</b>');
-										$("#greet_content").html('TERDAPAT 4 KOMPONEN PENILIAN KATEGORI LAYANAN YANG DAPAT AND TINGKATKAN <br> <br> <ol><li>KUALITAS LAPORAN DAN KETEPATAN PENYAMPAIAN LAPORAN DAMPAK EKONOMI</li><li>INTEGRITAS DAN RESPONSIBILITY PENANGGUNG JAWAB TEMPAT PENIMBUNAN BERIKAT</li><li>KEIKUTSERTAAN DALAM ASOSIASI TEMPAT PENIMBUNAN BERIKAT</li><li>PENDAYAGUNAAN CCTV, IT INVENTORY DAN KUALITAS SISTEM PENGENDALIAN INTERNAL SERTA KELAYAKAN FISIK GEDUNG TEMPAT PENIMBUNAN BERIKAT</li></ol> <br> HARAP MENGHUBUNGI KEPALA HANGGAR / KEPALA SEKSI YANG MEMBAWAHI PERUSAHAAN ANDA UNTUK MENDAPATAKN BIMBINGAN PERBAIKAN NILAI KATEGORI LAYANAN');
+										$("#greet_content").html('TERDAPAT 4 KOMPONEN PENILIAN KATEGORI LAYANAN YANG DAPAT ANDA TINGKATKAN <br> <br> <ol><li>KUALITAS LAPORAN DAN KETEPATAN PENYAMPAIAN LAPORAN DAMPAK EKONOMI</li><li>INTEGRITAS DAN RESPONSIBILITY PENANGGUNG JAWAB TEMPAT PENIMBUNAN BERIKAT</li><li>KEIKUTSERTAAN DALAM ASOSIASI TEMPAT PENIMBUNAN BERIKAT</li><li>PENDAYAGUNAAN CCTV, IT INVENTORY DAN KUALITAS SISTEM PENGENDALIAN INTERNAL SERTA KELAYAKAN FISIK GEDUNG TEMPAT PENIMBUNAN BERIKAT</li></ol> <br> HARAP MENGHUBUNGI KEPALA HANGGAR / KEPALA SEKSI YANG MEMBAWAHI PERUSAHAAN ANDA UNTUK MENDAPATAKN BIMBINGAN PERBAIKAN NILAI KATEGORI LAYANAN');
 										break;
 
 										default:
@@ -421,31 +457,48 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 									$(".modal-title").text('SKORING PROFIL PERIODE TAHUN '+d.data.TAHUN+" SEMESTER "+d.data.SEMESTER);
 									$("#modal").modal('show');
 								} else {
-									swalWithBootstrapButtons.fire(
-										"Telah Terjadi Kesalahan!",
-										d.data,
-										"error"
-										);
+									if (d.status == "failed") {
+										swalWithBootstrapButtons.fire(
+											"Telah Terjadi Kesalahan!",
+											d.data,
+											"error"
+											);
+									} else {
+										skep = "";
+										i = 0;
+										$.each(d.data, function(index, val) {
+											 i++;
+											 skep += i + ". " +val.NOMOR_SKEP+ ' tanggal ' + val.TANGGAL_SKEP;
+											 skep += '<br>';
+										});
+										console.log
+										swalWithBootstrapButtons.fire(
+											"Nomor SKEP yang anda masukkan salah!",
+											'Nomor SKEP yang terdaftar adalah ' + '<br>' + skep,
+											"error"
+											);
+									}
+									
 								}
 								play.play();
 								delete play;
 							}
 						})
-}
-else if (
+					}
+					else if (
 						 // Read more about handling dismissals
 						 result.dismiss === Swal.DismissReason.cancel
 						 )
-{
-	swalWithBootstrapButtons.fire(
-		"Proses Validasi Formulir Dibatalkan",
-		"Data Lembar Pengumpulan dan Penilaian",
-		"error"
-		);
-}
-}); 
-}
-});
+					{
+						swalWithBootstrapButtons.fire(
+							"Proses Validasi Formulir Dibatalkan",
+							"Data Lembar Pengumpulan dan Penilaian",
+							"error"
+							);
+					}
+				}); 
+			}
+		});
 
 $("#modal").on('hide.bs.modal', function(event) {
 	event.preventDefault();

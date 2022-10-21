@@ -118,6 +118,15 @@ class Dokumen extends BaseController
 				case 'impor_fasilitas':
 				$data = $this->uploadImpor('fasilitas');
 				break;
+				case 'impor_dokap':
+				$data = $this->uploadImpor('dokap');
+				break;
+				case 'impor_status':
+				$data = $this->uploadImpor('status');
+				break;
+				case 'cdp_activity':
+				$data = $this->uploadImpor('cdp_activity');
+				break;
 				case 'ekspor_header':
 				$data = $this->uploadEkspor('header');
 				break;
@@ -795,48 +804,48 @@ class Dokumen extends BaseController
 					foreach ($columnName as $key=>$value) {
 						switch ($value) {
 							case "BMADBY":
-								$BMADBY = $key;
-								break;
+							$BMADBY = $key;
+							break;
 
 							case "BMBY":
-								$BMBY = $key;
-								break;
+							$BMBY = $key;
+							break;
 
 							case "BMTPBY":
-								$BMTPBY = $key;
-								break;
+							$BMTPBY = $key;
+							break;
 
 							case "BMTPSBY":
-								$BMTPSBY = $key;
-								break;
+							$BMTPSBY = $key;
+							break;
 
 							case "BUNGA":
-								$BUNGA = $key;
-								break;
+							$BUNGA = $key;
+							break;
 
 							case "DENDA":
-								$DENDA = $key;
-								break;
+							$DENDA = $key;
+							break;
 
 							case "PPHBY":
-								$PPHBY = $key;
-								break;
+							$PPHBY = $key;
+							break;
 							
 							case "PPNBY":
-								$PPNBY = $key;
-								break;
+							$PPNBY = $key;
+							break;
 
 							case "PPNBMBY":
-								$PPNBMBY = $key;
-								break;
+							$PPNBMBY = $key;
+							break;
 
 							case "BMPBY":
-								$BMPBY = $key;
-								break;	
+							$BMPBY = $key;
+							break;	
 
 							default:
 								// code...
-								break;
+							break;
 						}
 					}
 
@@ -897,6 +906,78 @@ class Dokumen extends BaseController
 							'PERIODE_BULAN' => 'Y' . date('y', strtotime($dataArray[$i][3])) . 'M' . date('m', strtotime($dataArray[$i][3])) . '-' . date('F', strtotime($dataArray[$i][3])),
 							'SIGN'          => $sign[$dataArray[$i][5]]['CP'],
 							'RISK'			=> $sign[$dataArray[$i][5]]['RISK'],
+						];
+					}
+				}
+				elseif ($type === 'dokap') {
+					for ($i = 1; $i < $lastRow; $i++){
+						if (array_key_exists($dataArray[$i][6], $sign)){
+							$data[] = [
+								'NOMOR_AJU'        => $dataArray[$i][0],
+								'NOMOR_PIB'        => $dataArray[$i][1],
+								'TANGGAL_PIB'       => $dataArray[$i][3]."-".$dataArray[$i][4]."-".$dataArray[$i][5],
+								'NPWP'			=> $dataArray[$i][6],
+								'NAMA_IMPORTIR' => $dataArray[$i][7],
+								'KODE_DOK'		=> $dataArray[$i][8],
+								'URAIAN_DOK'	=> $dataArray[$i][9],
+								'NOMOR_DOK'		=> $dataArray[$i][10],
+								'TANGGAL_DOK'	=> $dataArray[$i][12]."-".$dataArray[$i][13]."-".$dataArray[$i][14],
+								'SIGN'          => $sign[$dataArray[$i][6]]['CP'],
+								'RISK'          => $sign[$dataArray[$i][6]]['RISK'],
+								'PERIODE'       => 'Y' . date('y', strtotime($dataArray[$i][2])) . 'M' . date('m', strtotime($dataArray[$i][2])) . 'W' . date('W', strtotime($dataArray[$i][2])),
+								'PERIODE_BULAN' => 'Y' . date('y', strtotime($dataArray[$i][2])) . 'M' . date('m', strtotime($dataArray[$i][2])) . '-' . date('F', strtotime($dataArray[$i][2])),
+							];
+						} else {
+							if (!array_key_exists($dataArray[$i][6], $missingSign)) {
+								$missingSign[$dataArray[$i][6]] = [
+									'NPWP' => $dataArray[$i][6],
+									'NamaImportir' => $dataArray[$i][7]
+								];
+							}
+						}
+					}
+				}
+				elseif ($type === 'status') {
+					for ($i = 1; $i < $lastRow; $i++){
+						if ($dataArray[$i][8] != null) {
+							$waktuSelesai = $dataArray[$i][8];
+						} else {
+							$waktuSelesai = $dataArray[$i][7];
+						}
+						$data[] = [
+							'NO_AJU'        => $dataArray[$i][2],
+							'NO_PIB'        => $dataArray[$i][1],
+							'TGL_PIB'       => date('Y-m-d',  strtotime($dataArray[$i][0])),
+							'KODE_JALUR'	=> $dataArray[$i][3],
+							'RULESET'		=> $dataArray[$i][4],
+							'KODE_PROSES'	=> $dataArray[$i][5],
+							'URAIAN_PROSES'	=> $dataArray[$i][6],
+							'WAKTU_MULAI'	=> date('Y-m-d H:i:s', strtotime($dataArray[$i][7])),
+							'WAKTU_SELESAI'	=> date('Y-m-d H:i:s', strtotime($waktuSelesai)),
+							'NIP_MULAI'		=> $dataArray[$i][9],
+							'NIP_SELESAI'	=> $dataArray[$i][10]
+						];
+					}
+				}
+				elseif ($type === 'cdp_activity') {
+					for ($i = 1; $i < $lastRow; $i++){
+						$data[] = [
+							'NOMOR_BC11'		=> $dataArray[$i][1],
+							'TANGGAL_BC11'		=> $dataArray[$i][2],
+							'NOMOR_SP3BE'		=> $dataArray[$i][3],
+							'TANGGAL_SP3BE'		=> $dataArray[$i][4],
+							'WAKTU_GATE_IN'		=> date('Y-m-d H:i:s', strtotime($dataArray[$i][5])),
+							'WAKTU_GATE_OUT'	=> date('Y-m-d H:i:s', strtotime($dataArray[$i][6])),
+							'CONSIGNE'			=> $dataArray[$i][7],
+							'NOMOR_BL'			=> $dataArray[$i][8],
+							'TANGGAL_BL'		=> date('Y-m-d', strtotime($dataArray[$i][9])),
+							'NOMOR_CONTAINER'	=> $dataArray[$i][10],
+							'UKURAN_CONTAINER'	=> $dataArray[$i][11],
+							'TIPE_CONTAINER'	=> $dataArray[$i][12],
+							'SHIPPING_LINE'		=> $dataArray[$i][13],
+							'TPS_ASAL' 			=> $dataArray[$i][14],
+							'JENIS'				=> $dataArray[$i][15],
+							'TANGGAL_FILE'		=> $_POST['tanggal'],
 						];
 					}
 				}

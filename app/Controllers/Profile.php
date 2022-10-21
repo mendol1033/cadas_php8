@@ -26,7 +26,12 @@ class Profile extends Controller
 				$data['data'] = $validasi['data'][0];
 				$this->model->postDataExim();
 			} else {
-				$data['data'] = 'Data NPWP dan SKEP IZIN TPB yang Anda masukkan salah';
+				if (!empty($validasi['data'])) {
+					$data['status'] = 'SKEP';
+					$data['data'] = $validasi['data'];
+				} else {
+					$data['data'] = 'Data NPWP dan SKEP IZIN TPB yang Anda masukkan salah';
+				}
 			}
 
 			echo json_encode($data);

@@ -160,6 +160,23 @@ class Peloro extends BaseController
 			],
 		];
 
+		$atensi = [
+			'appCode'  => 6,
+			'appTitle' => 'Atensi',
+			'link'     => '#',
+			'appIcon'  => 'fal fa-file-check',
+			'subMenu'  => [
+				[
+					'title' => 'Impor',
+					'link'  => 'atensi/impor',
+				],
+				[
+					'title' => 'Fasilitas',
+					'link'  => 'atensi/fasilitas',
+				],
+			],
+		];
+
 		$menu = [
 			$dashboard,
 			$stakholders,
@@ -167,6 +184,7 @@ class Peloro extends BaseController
 			$akses,
 			$profil,
 			$administrasi,
+			$atensi
 		];
 
 		return $menu;

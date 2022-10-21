@@ -29,13 +29,20 @@
 									<option value="impor_header">DATA HEADER IMPOR</option>
 									<option value="impor_detail">DATA DETAIL IMPOR</option>
 									<option value="impor_sptnp">DATA SPTNP IMPOR</option>
+									<option value="impor_dokap">DATA DOKUMEN PELENGKAP IMPOR</option>
+									<option value="impor_status">DATA STATUS DOKUMEN IMPOR</option>
+									<option value="cdp_activity">DATA AKTIVITAS CDP</option>
 									<option value="impor_fasilitas">DATA FASILITAS IMPOR</option>
 									<option value="ekspor_header">DATA HEADER EKSPOR</option>
 									<option value="ekspor_detail">DATA DETAIL EKSPOR</option>
 								</select>
 							</div>
+							<div class="form-group sr-only" id="tanggal_cdp_data">
+								<label class="form-label" for="tanggal_cdp_data">TANGGAL DATA</label>
+								<input class="form-control tanggal" type="text" name="tanggal" id="tanggal">
+							</div>
 							<div class="form-group">
-								<label class="form-label" for="dataExcel">FILE CSV</label>
+								<label class="form-label" for="dataExcel" id="label_dataExcel">FILE CSV</label>
 								<div class="input-group">
 									<div class="custom-file">
 										<input type="file" class="custom-file-input" id="dataExcel" name="dataExcel[]" multiple required>
@@ -78,10 +85,28 @@
 <script type="text/javascript">
 	var formValid = [];
 	$(document).ready(function() {
+		var selected;
 		$('.select2').select2({
 			width: '100%'
 		});
 		// getDataMonitoring();
+		$("#jenisData").on('select2:select', function(event) {
+			event.preventDefault();
+			selected = $(event.currentTarget).find("option:selected").val();
+			if (selected == "cdp_activity") {
+				$("#tanggal_cdp_data").removeClass('sr-only');
+				$("#tamggal").attr('required','required');
+			} else {
+				$("#tanggal_cdp_data").addClass('sr-only');
+				$("#tamggal").removeAttr('required');
+			}
+		});
+
+		$('.tanggal').datepicker({
+			format: 'yyyy-mm-dd',
+			todayHighLight: true,
+			orientation: "bottom right"
+		});
 	});
 
 	$('[name="dataExcel[]"').on('change', function(event) {

@@ -127,25 +127,33 @@ class DokumenModel extends Model
 
 		foreach ($datas as $keyD => $data)
 		{
-			$arrayChunk = array_chunk($data, 300);
 
-			foreach ($arrayChunk as $key => $value)
-			{
-				if ($type === 'header')
-				{
-					$this->dbpib->table('PIB_HEADER')->insertBatch($value);
+			if ($type === 'cdp_activity') {
+				$query = $this->dbpib->table('CDP_ACTIVITY');
+				$query->where('YEAR(TANGGAL_FILE)', date('Y', strtotime($_POST['tanggal'])));
+				$query->where('MONTH(TANGGAL_FILE)', date('m', (int)strtotime($_POST['tanggal'])));
+				$query->delete();
+
+				$arrayChunk = array_chunk($data, 300);
+				foreach ($arrayChunk as $key => $value) {
+					$this->dbpib->table('CDP_ACTIVITY')->insertBatch($value);
 				}
-				else if ($type === 'detail')
-				{
-					$this->dbpib->table('PIB_DETAIL')->insertBatch($value);
-				}
-				elseif ($type === 'sptnp')
-				{
-					$this->dbpib->table('PIB_SPTNP')->insertBatch($value);
-				}
-				else
-				{
-					$this->dbpib->table('PIB_FAS')->insertBatch($value);
+			} else {
+				$arrayChunk = array_chunk($data, 300);
+				foreach ($arrayChunk as $key => $value){
+					if ($type === 'header') {
+						$this->dbpib->table('PIB_HEADER')->insertBatch($value);
+					} else if ($type === 'detail') {
+						$this->dbpib->table('PIB_DETAIL')->insertBatch($value);
+					} elseif ($type === 'sptnp') {
+						$this->dbpib->table('PIB_SPTNP')->insertBatch($value);
+					} elseif ($type === 'dokap') {
+						$this->dbpib->table('PIB_DOKAP')->insertBatch($value);
+					} elseif ($type === 'fasilitas') {
+						$this->dbpib->table('PIB_FAS')->insertBatch($value);
+					} else {
+						$this->dbpib->table('PIB_STATUS')->insertBatch($value);
+					}
 				}
 			}
 		}
