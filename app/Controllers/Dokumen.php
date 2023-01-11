@@ -157,6 +157,14 @@ class Dokumen extends BaseController
 		echo json_encode($pesan);
 	}
 
+	private function convert_text_to_float($value){
+		if (is_null($value)) {
+			return 0;
+		} else {
+			return floatval(str_replace(',','',$value))
+		}
+	}
+
 	public function uploadTpb($type)
 	{
 		$files        = $this->request->getFiles();
@@ -190,7 +198,6 @@ class Dokumen extends BaseController
 			{
 				for ($i = 1; $i < $lastRow; $i++)
 				{	
-
 					$data[] = [
 						'ID_HEADER'  => (int)$dataArray[$i][0],
 						'KODE_DOKUMEN'  => (int)$dataArray[$i][1],
@@ -238,26 +245,43 @@ class Dokumen extends BaseController
 						'NOMOR_POLISI' => $dataArray[$i][43],
 						'JUMLAH_BARANG' => (int)$dataArray[$i][44],
 						'JUMLAH_KEMASAN' => (int)$dataArray[$i][45],
+						'BRUTO_HEADER' => convert_text_to_float($dataArray[$i][46]),
+						'NETTO_BARANG' => convert_text_to_float($dataArray[$i][47]),
 						'KODE_CARA_BAYAR' => $dataArray[$i][48],
 						'KODE_JENIS_NILAI' => $dataArray[$i][49],
 						'KODE_VALUTA' => $dataArray[$i][50],
+						'NDPBM_REF' => convert_text_to_float( $dataArray[$i][51]),
+						'CIF' => convert_text_to_float( $dataArray[$i][52]),
+						'CIF_RUPIAH' => convert_text_to_float( $dataArray[$i][53]),
+						'FOB' => convert_text_to_float( $dataArray[$i][54]),
+						'FREIGHT' => convert_text_to_float( $dataArray[$i][55]),
+						'ASURANSI' => convert_text_to_float( $dataArray[$i][56]),
+						'HARGA_PENYERAHAN_BRG' => convert_text_to_float( $dataArray[$i][57]),
+						'HARGA_PENYERAHAN_HDR' => convert_text_to_float( $dataArray[$i][58]),
+						'TOTAL_NILAI_JAMINAN' => convert_text_to_float( $dataArray[$i][59]),
+						'NILAI_INCOTERM' => $dataArray[$i][60],
+						'NILAI_DEVISA_USD' => convert_text_to_float( $dataArray[$i][61]),
+						'NILAI_DEVISA_IDR' => convert_text_to_float( $dataArray[$i][62]),
+						'BM_NILAI_FASILITAS' => convert_text_to_float( $dataArray[$i][63]),
+						'PPN_NILAI_FASILITAS' => convert_text_to_float( $dataArray[$i][64]),
+						'PPH_NILAI_FASILITAS' => convert_text_to_float( $dataArray[$i][65]),
+						'PPNBM_NILAI_FASILITAS' => convert_text_to_float( $dataArray[$i][66]),
+						'BM_NILAI_BAYAR' => convert_text_to_float( $dataArray[$i][67]),
+						'PPN_NILAI_BAYAR' => convert_text_to_float( $dataArray[$i][68]),
+						'PPH_NILAI_BAYAR' => convert_text_to_float( $dataArray[$i][69]),
+						'PPNBM_NILAI_BAYAR' => convert_text_to_float( $dataArray[$i][70]),
 						'KATEGORI_LAYANAN' => (int)$dataArray[$i][71],
 						'KODE_JALUR' => $dataArray[$i][72],
 						'KODE_PROSES' => $dataArray[$i][73],
 						'URAIAN_PROSES' => $dataArray[$i][74],
 						'KODE_PROSES_PERBAIKAN' => $dataArray[$i][75],
 						'URAIAN_PROSES_PERBAIKAN' => $dataArray[$i][76],
+						'PERSENTASE_IMPOR' => convert_text_to_float( $dataArray[$i][77]),
+						'BMKITE_NILAI_FASILITAS' => convert_text_to_float( $dataArray[$i][78]),
+						'BMKITE_NILAI_BAYAR' => convert_text_to_float( $dataArray[$i][79]),
 						'PERIODE'                                            => 'Y' . date('y', strtotime($dataArray[$i][13])) . 'M' . date('m', strtotime($dataArray[$i][13])) . 'W' . date('W', strtotime($dataArray[$i][13])),
 						'PERIODE_BULAN'                                      => 'Y' . date('y', strtotime($dataArray[$i][13])) . 'M' . date('m', strtotime($dataArray[$i][13])) . '-' . date('F', strtotime($dataArray[$i][13])),
 					];
-					$numeric_data = ['BRUTO_HEADER' => 46,'NETTO_BARANG' => 47,'NDPBM_REF' => 51,'CIF' => 52,'CIF_RUPIAH' => 53,'FOB' => 54,'FREIGHT' => 55,'ASURANSI' => 56,'HARGA_PENYERAHAN_BRG' => 57,'HARGA_PENYERAHAN_HDR' => 58,'TOTAL_NILAI_JAMINAN' => 59,'NILAI_INCOTERM' => 60,'NILAI_DEVISA_USD' => 61,'NILAI_DEVISA_IDR' => 62,'BM_NILAI_FASILITAS' => 63,'PPN_NILAI_FASILITAS' => 64,'PPH_NILAI_FASILITAS' => 65,'PPNBM_NILAI_FASILITAS' => 66,'BM_NILAI_BAYAR' => 67,'PPN_NILAI_BAYAR' => 68,'PPH_NILAI_BAYAR' => 69,'PPNBM_NILAI_BAYAR' => 70,'PERSENTASE_IMPOR' => 77,'BMKITE_NILAI_FASILITAS' => 78,'BMKITE_NILAI_BAYAR' => 79];
-					foreach ($numeric_data as $key => $value) {
-						if (is_null($dataArray[$i][$value])) {
-							$data[$key] = 0;
-						} else {
-							$data[$key] = floatval(str_replace(',','',$dataArray[$i][$value]));
-						}
-					}
 				}
 			}
 			else
@@ -282,36 +306,36 @@ class Dokumen extends BaseController
 						'KODE_KEMASAN' => $dataArray[$i][14],
 						'JUMLAH_KEMASAN' => (int)$dataArray[$i][15],
 						'KODE_SATUAN' => $dataArray[$i][16],
-						'JUMLAH_SATUAN' => floatval(str_replace(',', '', $dataArray[$i][17])),
-						'NETTO_BARANG' => floatval(str_replace(',', '', $dataArray[$i][18])),
-						'CIF' => floatval(str_replace(',', '', $dataArray[$i][19])),
-						'CIF_RUPIAH' => floatval(str_replace(',', '', $dataArray[$i][20])),
-						'FOB' => floatval(str_replace(',', '', $dataArray[$i][21])),
-						'FREIGHT' => floatval(str_replace(',', '', $dataArray[$i][22])),
-						'ASURANSI' => floatval(str_replace(',', '', $dataArray[$i][23])),
-						'HARGA_PENYERAHAN_BRG' => floatval(str_replace(',', '', $dataArray[$i][24])),
+						'JUMLAH_SATUAN' => convert_text_to_float( $dataArray[$i][17]),
+						'NETTO_BARANG' => convert_text_to_float( $dataArray[$i][18]),
+						'CIF' => convert_text_to_float( $dataArray[$i][19]),
+						'CIF_RUPIAH' => convert_text_to_float( $dataArray[$i][20]),
+						'FOB' => convert_text_to_float( $dataArray[$i][21]),
+						'FREIGHT' => convert_text_to_float( $dataArray[$i][22]),
+						'ASURANSI' => convert_text_to_float( $dataArray[$i][23]),
+						'HARGA_PENYERAHAN_BRG' => convert_text_to_float( $dataArray[$i][24]),
 						'BM_JENIS_PUNGUTAN' => $dataArray[$i][25],
-						'BM_TARIF' => floatval(str_replace(',', '', $dataArray[$i][26])),
-						'BM_NILAI_FASILITAS' => floatval(str_replace(',', '', $dataArray[$i][27])),
-						'BM_NILAI_BAYAR' => floatval(str_replace(',', '', $dataArray[$i][28])),
+						'BM_TARIF' => convert_text_to_float( $dataArray[$i][26]),
+						'BM_NILAI_FASILITAS' => convert_text_to_float( $dataArray[$i][27]),
+						'BM_NILAI_BAYAR' => convert_text_to_float( $dataArray[$i][28]),
 						'PPN_JENIS_PUNGUTAN' => $dataArray[$i][29],
-						'PPN_TARIF' => floatval(str_replace(',', '', $dataArray[$i][30])),
-						'PPN_NILAI_FASILITAS' => floatval(str_replace(',', '', $dataArray[$i][31])),
-						'PPN_NILAI_BAYAR' => floatval(str_replace(',', '', $dataArray[$i][32])),
+						'PPN_TARIF' => convert_text_to_float( $dataArray[$i][30]),
+						'PPN_NILAI_FASILITAS' => convert_text_to_float( $dataArray[$i][31]),
+						'PPN_NILAI_BAYAR' => convert_text_to_float( $dataArray[$i][32]),
 						'PPH_JENIS_PUNGUTAN' => $dataArray[$i][33],
-						'PPH_TARIF' => floatval(str_replace(',', '', $dataArray[$i][34])),
-						'PPH_NILAI_FASILITAS' => floatval(str_replace(',', '', $dataArray[$i][35])),
-						'PPH_NILAI_BAYAR' => floatval(str_replace(',', '', $dataArray[$i][36])),
+						'PPH_TARIF' => convert_text_to_float( $dataArray[$i][34]),
+						'PPH_NILAI_FASILITAS' => convert_text_to_float( $dataArray[$i][35]),
+						'PPH_NILAI_BAYAR' => convert_text_to_float( $dataArray[$i][36]),
 						'PPNBM_JENIS_PUNGUTAN' => $dataArray[$i][37],
-						'PPNBM_TARIF' => floatval(str_replace(',', '', $dataArray[$i][38])),
-						'PPNBM_NILAI_FASILITAS' => floatval(str_replace(',', '', $dataArray[$i][39])),
-						'PPNBM_NILAI_BAYAR' => floatval(str_replace(',', '', $dataArray[$i][40])),
-						'NILAI_DEVISA_USD' => floatval(str_replace(',', '', $dataArray[$i][41])),
-						'NILAI_DEVISA_IDR' => floatval(str_replace(',', '', $dataArray[$i][42])),
+						'PPNBM_TARIF' => convert_text_to_float( $dataArray[$i][38]),
+						'PPNBM_NILAI_FASILITAS' => convert_text_to_float( $dataArray[$i][39]),
+						'PPNBM_NILAI_BAYAR' => convert_text_to_float( $dataArray[$i][40]),
+						'NILAI_DEVISA_USD' => convert_text_to_float( $dataArray[$i][41]),
+						'NILAI_DEVISA_IDR' => convert_text_to_float( $dataArray[$i][42]),
 						'BMKITE_JENIS_PUNGUTAN' => $dataArray[$i][43],
-						'BMKITE_TARIF' => floatval(str_replace(',', '', $dataArray[$i][44])),
-						'BMKITE_NILAI_FASILITAS' => floatval(str_replace(',', '', $dataArray[$i][45])),
-						'BMKITE_NILAI_BAYAR' => floatval(str_replace(',', '', $dataArray[$i][46])),
+						'BMKITE_TARIF' => convert_text_to_float( $dataArray[$i][44]),
+						'BMKITE_NILAI_FASILITAS' => convert_text_to_float( $dataArray[$i][45]),
+						'BMKITE_NILAI_BAYAR' => convert_text_to_float( $dataArray[$i][46]),
 						'NOMOR_DAFTAR' => $dataArray[$i][47],
 						'TANGGAL_DAFTAR' => date('Y-m-d', strtotime($dataArray[$i][48])),
 						'ID_PENGUSAHA' => $dataArray[$i][49],
