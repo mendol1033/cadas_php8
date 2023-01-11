@@ -119,6 +119,14 @@ class DokumenModel extends Model
 			return true;
 		}
 	}
+	
+	public function convert_text_to_float($value){
+		if (is_null($value)) {
+			return 0;
+		} else {
+			return floatval(str_replace(',','',$value));
+		}
+	}
 
 	public function insertPIB($type, $datas)
 	{
