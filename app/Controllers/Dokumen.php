@@ -189,7 +189,8 @@ class Dokumen extends BaseController
 			if ($type === 'header')
 			{
 				for ($i = 1; $i < $lastRow; $i++)
-				{
+				{	
+
 					$data[] = [
 						'ID_HEADER'  => (int)$dataArray[$i][0],
 						'KODE_DOKUMEN'  => (int)$dataArray[$i][1],
@@ -237,43 +238,26 @@ class Dokumen extends BaseController
 						'NOMOR_POLISI' => $dataArray[$i][43],
 						'JUMLAH_BARANG' => (int)$dataArray[$i][44],
 						'JUMLAH_KEMASAN' => (int)$dataArray[$i][45],
-						'BRUTO_HEADER' => floatval(str_replace(',', '', $dataArray[$i][46])),
-						'NETTO_BARANG' => floatval($dataArray[$i][47]),
 						'KODE_CARA_BAYAR' => $dataArray[$i][48],
 						'KODE_JENIS_NILAI' => $dataArray[$i][49],
 						'KODE_VALUTA' => $dataArray[$i][50],
-						'NDPBM_REF' => floatval(str_replace(',', '', $dataArray[$i][51])),
-						'CIF' => floatval(str_replace(',', '', $dataArray[$i][52])),
-						'CIF_RUPIAH' => floatval(str_replace(',', '', $dataArray[$i][53])),
-						'FOB' => floatval(str_replace(',', '', $dataArray[$i][54])),
-						'FREIGHT' => floatval(str_replace(',', '', $dataArray[$i][55])),
-						'ASURANSI' => floatval(str_replace(',', '', $dataArray[$i][56])),
-						'HARGA_PENYERAHAN_BRG' => floatval(str_replace(',', '', $dataArray[$i][57])),
-						'HARGA_PENYERAHAN_HDR' => floatval(str_replace(',', '', $dataArray[$i][58])),
-						'TOTAL_NILAI_JAMINAN' => floatval(str_replace(',', '', $dataArray[$i][59])),
-						'NILAI_INCOTERM' => $dataArray[$i][60],
-						'NILAI_DEVISA_USD' => floatval(str_replace(',', '', $dataArray[$i][61])),
-						'NILAI_DEVISA_IDR' => floatval(str_replace(',', '', $dataArray[$i][62])),
-						'BM_NILAI_FASILITAS' => floatval(str_replace(',', '', $dataArray[$i][63])),
-						'PPN_NILAI_FASILITAS' => floatval(str_replace(',', '', $dataArray[$i][64])),
-						'PPH_NILAI_FASILITAS' => floatval(str_replace(',', '', $dataArray[$i][65])),
-						'PPNBM_NILAI_FASILITAS' => floatval(str_replace(',', '', $dataArray[$i][66])),
-						'BM_NILAI_BAYAR' => floatval(str_replace(',', '', $dataArray[$i][67])),
-						'PPN_NILAI_BAYAR' => floatval(str_replace(',', '', $dataArray[$i][68])),
-						'PPH_NILAI_BAYAR' => floatval(str_replace(',', '', $dataArray[$i][69])),
-						'PPNBM_NILAI_BAYAR' => floatval(str_replace(',', '', $dataArray[$i][70])),
 						'KATEGORI_LAYANAN' => (int)$dataArray[$i][71],
 						'KODE_JALUR' => $dataArray[$i][72],
 						'KODE_PROSES' => $dataArray[$i][73],
 						'URAIAN_PROSES' => $dataArray[$i][74],
 						'KODE_PROSES_PERBAIKAN' => $dataArray[$i][75],
 						'URAIAN_PROSES_PERBAIKAN' => $dataArray[$i][76],
-						'PERSENTASE_IMPOR' => floatval(str_replace(',', '', $dataArray[$i][77])),
-						'BMKITE_NILAI_FASILITAS' => floatval(str_replace(',', '', $dataArray[$i][78])),
-						'BMKITE_NILAI_BAYAR' => floatval(str_replace(',', '', $dataArray[$i][79])),
 						'PERIODE'                                            => 'Y' . date('y', strtotime($dataArray[$i][13])) . 'M' . date('m', strtotime($dataArray[$i][13])) . 'W' . date('W', strtotime($dataArray[$i][13])),
 						'PERIODE_BULAN'                                      => 'Y' . date('y', strtotime($dataArray[$i][13])) . 'M' . date('m', strtotime($dataArray[$i][13])) . '-' . date('F', strtotime($dataArray[$i][13])),
 					];
+					$numeric_data = ['BRUTO_HEADER' => 46,'NETTO_BARANG' => 47,'NDPBM_REF' => 51,'CIF' => 52,'CIF_RUPIAH' => 53,'FOB' => 54,'FREIGHT' => 55,'ASURANSI' => 56,'HARGA_PENYERAHAN_BRG' => 57,'HARGA_PENYERAHAN_HDR' => 58,'TOTAL_NILAI_JAMINAN' => 59,'NILAI_INCOTERM' => 60,'NILAI_DEVISA_USD' => 61,'NILAI_DEVISA_IDR' => 62,'BM_NILAI_FASILITAS' => 63,'PPN_NILAI_FASILITAS' => 64,'PPH_NILAI_FASILITAS' => 65,'PPNBM_NILAI_FASILITAS' => 66,'BM_NILAI_BAYAR' => 67,'PPN_NILAI_BAYAR' => 68,'PPH_NILAI_BAYAR' => 69,'PPNBM_NILAI_BAYAR' => 70,'PERSENTASE_IMPOR' => 77,'BMKITE_NILAI_FASILITAS' => 78,'BMKITE_NILAI_BAYAR' => 79];
+					foreach ($numeric_data as $key => $value) {
+						if (is_null($dataArray[$i][$value])) {
+							$data[$key] = 0;
+						} else {
+							$data[$key] = floatval(str_replace(',','',$dataArray[$i][$value]));
+						}
+					}
 				}
 			}
 			else
