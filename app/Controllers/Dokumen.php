@@ -157,6 +157,14 @@ class Dokumen extends BaseController
 		echo json_encode($pesan);
 	}
 
+	private function convert_text_to_time($value){
+		if (is_null($value)) {
+			return null;
+		} else {
+			return strtotime($value);
+		}
+	}
+
 	public function uploadTpb($type)
 	{
 		$files        = $this->request->getFiles();
@@ -204,11 +212,11 @@ class Dokumen extends BaseController
 						'LOKASI_TUJUAN' => (int)$dataArray[$i][10],
 						'NOMOR_AJU' => $dataArray[$i][11],
 						'NOMOR_DAFTAR' => $dataArray[$i][12],
-						'TANGGAL_DAFTAR' => date('Y-m-d', strtotime($dataArray[$i][13])),
+						'TANGGAL_DAFTAR' => date('Y-m-d', $this->convert_text_to_time($dataArray[$i][13])),
 						'ID_HANGGAR' => (int)$dataArray[$i][14],
 						'NOMOR_BC11' => $dataArray[$i][15],
 						'POS_BC11' => $dataArray[$i][16],
-						'TANGGAL_BC11' => date('Y-m-d', strtotime($dataArray[$i][17])),
+						'TANGGAL_BC11' => date('Y-m-d', $this->convert_text_to_time($dataArray[$i][17])),
 						'ID_PENGUSAHA' => $dataArray[$i][18],
 						'NAMA_PENGUSAHA' => $dataArray[$i][19],
 						'NOMOR_IJIN_TPB' => $dataArray[$i][20],
@@ -271,8 +279,8 @@ class Dokumen extends BaseController
 						'PERSENTASE_IMPOR' => $this->model->convert_text_to_float($dataArray[$i][77]),
 						'BMKITE_NILAI_FASILITAS' => $this->model->convert_text_to_float($dataArray[$i][78]),
 						'BMKITE_NILAI_BAYAR' => $this->model->convert_text_to_float($dataArray[$i][79]),
-						'PERIODE'                                            => 'Y' . date('y', strtotime($dataArray[$i][13])) . 'M' . date('m', strtotime($dataArray[$i][13])) . 'W' . date('W', strtotime($dataArray[$i][13])),
-						'PERIODE_BULAN'                                      => 'Y' . date('y', strtotime($dataArray[$i][13])) . 'M' . date('m', strtotime($dataArray[$i][13])) . '-' . date('F', strtotime($dataArray[$i][13])),
+						'PERIODE'                                            => 'Y' . date('y', $this->convert_text_to_time($dataArray[$i][13])) . 'M' . date('m', $this->convert_text_to_time($dataArray[$i][13])) . 'W' . date('W', $this->convert_text_to_time($dataArray[$i][13])),
+						'PERIODE_BULAN'                                      => 'Y' . date('y', $this->convert_text_to_time($dataArray[$i][13])) . 'M' . date('m', $this->convert_text_to_time($dataArray[$i][13])) . '-' . date('F', $this->convert_text_to_time($dataArray[$i][13])),
 					];
 				}
 			}
@@ -329,14 +337,14 @@ class Dokumen extends BaseController
 						'BMKITE_NILAI_FASILITAS' => $this->model->convert_text_to_float($dataArray[$i][45]),
 						'BMKITE_NILAI_BAYAR' => $this->model->convert_text_to_float($dataArray[$i][46]),
 						'NOMOR_DAFTAR' => $dataArray[$i][47],
-						'TANGGAL_DAFTAR' => date('Y-m-d', strtotime($dataArray[$i][48])),
+						'TANGGAL_DAFTAR' => date('Y-m-d', $this->convert_text_to_time($dataArray[$i][48])),
 						'ID_PENGUSAHA' => $dataArray[$i][49],
 						'NAMA_PENGUSAHA' => $dataArray[$i][50],
 						'ID_PENERIMA' => $dataArray[$i][51],
 						'NAMA_PENERIMA' => $dataArray[$i][52],
 						'KOMODITI'=> $komoditi[substr($dataArray[$i][5], 0, 8)],
-						'PERIODE' => 'Y' . date('y', strtotime($dataArray[$i][48])) . 'M' . date('m', strtotime($dataArray[$i][48])) . 'W' . date('W', strtotime($dataArray[$i][48])),
-						'PERIODE_BULAN' => 'Y' . date('y', strtotime($dataArray[$i][48])) . 'M' . date('m', strtotime($dataArray[$i][48])) . '-' . date('F', strtotime($dataArray[$i][48])),
+						'PERIODE' => 'Y' . date('y', $this->convert_text_to_time($dataArray[$i][48])) . 'M' . date('m', $this->convert_text_to_time($dataArray[$i][48])) . 'W' . date('W', $this->convert_text_to_time($dataArray[$i][48])),
+						'PERIODE_BULAN' => 'Y' . date('y', $this->convert_text_to_time($dataArray[$i][48])) . 'M' . date('m', $this->convert_text_to_time($dataArray[$i][48])) . '-' . date('F', $this->convert_text_to_time($dataArray[$i][48])),
 						'ID_IMPORTIR' => $dataArray[$i][53],
 						'NAMA_IMPORTIR' => $dataArray[$i][54],
 						'KODE_DOKUMEN' => $dataArray[$i][55],
