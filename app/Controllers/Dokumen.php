@@ -161,7 +161,7 @@ class Dokumen extends BaseController
 		if (is_null($value)) {
 			return 0;
 		} else {
-			return floatval(str_replace(',','',$value))
+			return floatval(str_replace(',','',$value));
 		}
 	}
 
