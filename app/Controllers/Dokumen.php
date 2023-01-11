@@ -165,6 +165,15 @@ class Dokumen extends BaseController
 		}
 	}
 
+	private function komoditi_barang($value){
+		$komoditi     = $this->model->getRefKomoditi();
+		if (array_key_exists($value, $komoditi)) {
+			return $komoditi[$value];
+		} else {
+			return 'Komoditi Tidak Ditemukan';
+		}
+	}
+
 	public function uploadTpb($type)
 	{
 		$files        = $this->request->getFiles();
@@ -342,7 +351,7 @@ class Dokumen extends BaseController
 						'NAMA_PENGUSAHA' => $dataArray[$i][50],
 						'ID_PENERIMA' => $dataArray[$i][51],
 						'NAMA_PENERIMA' => $dataArray[$i][52],
-						'KOMODITI'=> $komoditi[substr($dataArray[$i][5], 0, 8)],
+						'KOMODITI'=> $this->komoditi_barang(substr($dataArray[$i][5], 0, 8)),
 						'PERIODE' => 'Y' . date('y', $this->convert_text_to_time($dataArray[$i][48])) . 'M' . date('m', $this->convert_text_to_time($dataArray[$i][48])) . 'W' . date('W', $this->convert_text_to_time($dataArray[$i][48])),
 						'PERIODE_BULAN' => 'Y' . date('y', $this->convert_text_to_time($dataArray[$i][48])) . 'M' . date('m', $this->convert_text_to_time($dataArray[$i][48])) . '-' . date('F', $this->convert_text_to_time($dataArray[$i][48])),
 						'ID_IMPORTIR' => $dataArray[$i][53],
