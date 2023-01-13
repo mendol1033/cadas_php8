@@ -178,14 +178,14 @@ class DokumenModel extends Model
 		}
 	}
 
-	public function monitoringUpload()
+	public function monitoringUpload($kode, $tahun)
 	{
-		$sql  = 'SELECT * FROM DATA_HEADER';
-		$sqld = 'SELECT * FROM DATA_DETAIL';
+		$sql  = 'SELECT YEAR(TANGGAL_DAFTAR) AS TAHUN, MONTH(TANGGAL_DAFTAR) AS BULAN, COUNT(NOMOR_DAFTAR) AS JUMLAH_DOKUMEN FROM TPB_HEADER WHERE YEAR(TANGGAL_DAFTAR) = ? AND KODE_DOKUMEN = ? GROUP BY YEAR(TANGGAL_DAFTAR), MONTH(TANGGAL_DAFTAR)';
+		$sqld = 'SELECT YEAR(TANGGAL_DAFTAR) AS TAHUN, MONTH(TANGGAL_DAFTAR) AS BULAN, COUNT(NOMOR_DAFTAR) AS JUMLAH_DOKUMEN FROM TPB_DETAIL WHERE YEAR(TANGGAL_DAFTAR) = ? AND KODE_DOKUMEN= ? GROUP BY YEAR(TANGGAL_DAFTAR), MONTH(TANGGAL_DAFTAR)';
 
 		$data = [
-			'HEADER' => $this->dbtpb->query($sql)->getResultArray(),
-			'DETAIL' => $this->dbtpb->query($sqld)->getResultArray(),
+			'HEADER' => $this->dbtpb->query($sql, [$tahun, $kode])->getResultArray(),
+			'DETAIL' => $this->dbtpb->query($sqld, [$tahun, $kode])->getResultArray(),
 		];
 
 		return $data;

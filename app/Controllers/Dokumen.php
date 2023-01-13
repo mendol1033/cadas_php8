@@ -288,8 +288,8 @@ class Dokumen extends BaseController
 						'PERSENTASE_IMPOR' => $this->model->convert_text_to_float($dataArray[$i][77]),
 						'BMKITE_NILAI_FASILITAS' => $this->model->convert_text_to_float($dataArray[$i][78]),
 						'BMKITE_NILAI_BAYAR' => $this->model->convert_text_to_float($dataArray[$i][79]),
-						'PERIODE'                                            => 'Y' . date('y', $this->convert_text_to_time($dataArray[$i][13])) . 'M' . date('m', $this->convert_text_to_time($dataArray[$i][13])) . 'W' . date('W', $this->convert_text_to_time($dataArray[$i][13])),
-						'PERIODE_BULAN'                                      => 'Y' . date('y', $this->convert_text_to_time($dataArray[$i][13])) . 'M' . date('m', $this->convert_text_to_time($dataArray[$i][13])) . '-' . date('F', $this->convert_text_to_time($dataArray[$i][13])),
+						'PERIODE' => 'Y' . date('y', $this->convert_text_to_time($dataArray[$i][13])) . 'M' . date('m', $this->convert_text_to_time($dataArray[$i][13])) . 'W' . date('W', $this->convert_text_to_time($dataArray[$i][13])),
+						'PERIODE_BULAN' => 'Y' . date('y', $this->convert_text_to_time($dataArray[$i][13])) . 'M' . date('m', $this->convert_text_to_time($dataArray[$i][13])) . '-' . date('F', $this->convert_text_to_time($dataArray[$i][13])),
 					];
 				}
 			}
@@ -492,8 +492,8 @@ class Dokumen extends BaseController
 						'PERSENTASE_IMPOR' => floatval(str_replace(',', '', $dataArray[$i][77])),
 						'BMKITE_NILAI_FASILITAS' => floatval(str_replace(',', '', $dataArray[$i][78])),
 						'BMKITE_NILAI_BAYAR' => floatval(str_replace(',', '', $dataArray[$i][79])),
-						'PERIODE'                                            => 'Y' . date('y', strtotime($dataArray[$i][13])) . 'M' . date('m', strtotime($dataArray[$i][13])) . 'W' . date('W', strtotime($dataArray[$i][13])),
-						'PERIODE_BULAN'                                      => 'Y' . date('y', strtotime($dataArray[$i][13])) . 'M' . date('m', strtotime($dataArray[$i][13])) . '-' . date('F', strtotime($dataArray[$i][13])),
+						'PERIODE' => 'Y' . date('y', strtotime($dataArray[$i][13])) . 'M' . date('m', strtotime($dataArray[$i][13])) . 'W' . date('W', strtotime($dataArray[$i][13])),
+						'PERIODE_BULAN' => 'Y' . date('y', strtotime($dataArray[$i][13])) . 'M' . date('m', strtotime($dataArray[$i][13])) . '-' . date('F', strtotime($dataArray[$i][13])),
 					];
 				}
 			}
@@ -1041,7 +1041,9 @@ class Dokumen extends BaseController
 	{
 		if (! empty($_GET))
 		{
-			$data = $this->model->monitoringUpload();
+			$kode = (int)$_GET['kode'];
+			$tahun = (int)$_GET['tahun'];
+			$data = $this->model->monitoringUpload($kode, $tahun);
 
 			echo json_encode($data);
 		}
