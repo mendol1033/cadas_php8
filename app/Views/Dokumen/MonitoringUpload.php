@@ -110,9 +110,25 @@
 			data: {hak: <?php echo $_SESSION['GrupMenu']?>, kode:kode, tahun: tahun},
 			success: function(d){
 				$("#tableHeader > tbody").empty();
-				for (var i = 0; i < d.HEADER.length; i++) {
-					$("#tableHeader > tbody").append('<tr><td>'+d.HEADER[i].TAHUN+'</td>'+'<td>'+d.HEADER[i].BULAN+'</td>'+'<td>'+d.HEADER[i].JUMLAH_DOKUMEN+'</td>'+'<td>'+d.DETAIL[i].JUMLAH_DOKUMEN+'</td></tr>');
+				if (d.HEADER.length > 0) {
+					for (var i = 0; i < d.HEADER.length; i++) {
+						if (d.DETAIL[i] != undefined) {
+							$("#tableHeader > tbody").append('<tr><td>'+d.HEADER[i].TAHUN+'</td>'+'<td>'+d.HEADER[i].BULAN+'</td>'+'<td>'+d.HEADER[i].JUMLAH_DOKUMEN+'</td>'+'<td>'+d.DETAIL[i].JUMLAH_DOKUMEN+'</td></tr>');
+						} else {
+							$("#tableHeader > tbody").append('<tr><td>'+d.HEADER[i].TAHUN+'</td>'+'<td>'+d.HEADER[i].BULAN+'</td>'+'<td>'+d.HEADER[i].JUMLAH_DOKUMEN+'</td>'+'<td>0</td></tr>');
+						}
+						
+					}
+				} else {
+					if (d.DETAIL.length > 0) {
+						for (var i = 0; i < d.DETAIL.length; i++) {
+							$("#tableHeader > tbody").append('<tr><td>'+d.DETAIL[i].TAHUN+'</td>'+'<td>'+d.DETAIL[i].BULAN+'</td>'+'<td>0</td>'+'<td>'+d.DETAIL[i].JUMLAH_DOKUMEN+'</td></tr>');
+						}
+					} else {
+						alert('DATA TIDAK DITEMUKAN');
+					}
 				}
+				
 			}
 		})		
 	}
