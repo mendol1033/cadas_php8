@@ -120,6 +120,72 @@ class StakeholdersModel extends Model
 
     public function addStakholders(){
         $this->cadas->transBegin();
+        
+        if ($_POST['lokasi'] == 8) {
+            $lokasi = 1;
+        } else {
+            $lokasi = 2;
+        }
+
+        switch ($_POST['jns-tpb']) {
+            case 2:
+                $id_tpb = 1;
+                break;
+            case 1:
+                $id_tpb = 2;
+                break;
+            case 10:
+                $id_tpb = 3;
+                break;
+            case 15:
+                $id_tpb = 4;
+                break;
+            case 16:
+                $id_tpb = 5;
+                break;
+            case 17:
+                $id_tpb = 6;
+                break;
+            case 18:
+                $id_tpb = 7;
+                break;
+            case 19:
+                $id_tpb = 8;
+                break;
+            case 20:
+                $id_tpb = 9;
+                break;
+            default:
+                $id_tpb = 0;
+                break;
+        }
+        
+
+        $data_perusahaan = [
+            'NPWP' => $_POST['npwp'],
+            'nama_perusahaan' => $_POST['namaPerusahaan'],
+            'telepon' => $_POST['telepon'],
+            'fax' => $_POST['fax'],
+            'alamat' => $_POST['alamat'],
+            'provinsi' => "00.00",
+            'kota' => "00.00",
+            'kecamatan' => "00.00",
+            'kelurahan' => "00.00",
+            'kode_pos' => "00.00",
+            'id_tpb' => $id_tpb,
+            'id_hanggar' => 1,
+            'lokasi_tpb' => $lokasi,
+            'ijin_kelola_tpb' => $_POST['skep'],
+            'latitude' => $_POST['latitude'],
+            'longitude' => $_POST['longitude'],
+            'directory_file' => "",
+            'status' => $_POST['status'],
+            'profil_resiko' => $_POST['profil'],
+            'foto_perusahaan' => ""            
+            ]
+
+        $this->cadas->table('tb_perusahaan')->insert($data_perusahaan);
+        $id_perusahaan = $this->cadas->insertID();
 
         $data = [
             'ID_NIB' => $_POST['idNib'],
@@ -140,6 +206,7 @@ class StakeholdersModel extends Model
             'LOKASI' => $_POST['lokasi'],
             'LONGITUDE' => $_POST['longitude'],
             'LATITUDE' => $_POST['latitude'],
+            'ID_PERUSAHAAN' => $id_perusahaan,
             'PTGS_REKAM' => $_SESSION['NipUser']
         ];
 

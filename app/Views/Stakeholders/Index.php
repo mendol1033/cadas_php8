@@ -75,6 +75,26 @@
                         <div class="row form-group">
                             <div class="col-xl-6">
                                 <div class="form-group">
+                                    <label class="form-label" for="fasilitas">Nomor Telepon</label>
+                                    <input type="text" class="form-control" id="telepon" name="telepon">
+                                    <div class="invalid-feedback">
+                                        Kolom Jenis Fasilitas Harus Diisi.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="form-group">
+                                    <label class="form-label" for="jns-tpb">Nomor Fax</label>
+                                    <input type="text" class="form-control" id="fax" name="fax">
+                                    <div class="invalid-feedback">
+                                        Kolom Jenis TPB Harus Diisi.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-xl-6">
+                                <div class="form-group">
                                     <label class="form-label" for="fasilitas">Jenis Fasilitas</label>
                                     <select class="form-control select2" id="fasilitas" name="fasilitas" required>
                                         <?php foreach ($options['fasTPB'] as $key => $value) { ?>
