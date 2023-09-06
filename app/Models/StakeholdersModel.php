@@ -182,7 +182,7 @@ class StakeholdersModel extends Model
             'status' => $_POST['status'],
             'profil_resiko' => $_POST['profil'],
             'foto_perusahaan' => ""            
-            ]
+        ];
 
         $this->cadas->table('tb_perusahaan')->insert($data_perusahaan);
         $id_perusahaan = $this->cadas->insertID();
